@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+.msg{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    height: 50px;
+    width: 100px;
+    background-color: beige;
+    transition: 0.5s;
+    display: none;
+}
+body {
+    /* background-image: url("../img/bg.jpg"); */
+    min-width: 1000px;
+    /* height: 1500px; */
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 475px;
+    background: url('../img/header-bg.png')no-repeat;
+    background-size: 100%;
+    text-align: center;
+}
+
+header .nav-wrapper {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 20px;
+    min-width: 1000px;
+}
+header .nav-wrapper .nav-wrap{
+    width: 100%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+header .nav {
+    height: 50px;
+    width: 600px;
+    min-width: 600px;
+    margin: 0 auto;
+}
+
+header .nav li {
+    font-size: 18px;
+    color: white;
+    line-height: 50px;
+    float: left;
+    height: 50px;
+    width: 120px;
+    position: relative;
+}
+
+header .nav li::after {
+    transition: 0.3s;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    left: 120px;
+    border-bottom: 2px white solid;
+}
+
+header .nav li:hover::after {
+    width: 120px;
+    left: 0px;
+}
+
+header .nav li:hover~li::after {
+    left: 0;
+}
+
+header .user-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 18px;
+    color: white;
+    line-height: 50px;
+    height: 50px;
+    width: 120px;
+    margin-right: 50px;
+    border: 2px white solid;
+    cursor: pointer;
+}
+
+/*************************************这是底部************************************************/
+
+footer{
+    width: 100%;
+    height: 190px;
+    position: absolute;
+    font-size: 18px;
+    bottom: 0;
+    background-color: rgb(191, 191, 191);
+    min-width: 1000px;
+}
+footer ul{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+footer ul li{
+    height: 100%;
+    width: 33.3%;
+    float: left;
+}
+footer ul li.index .main-l,
+footer ul li.index .main-r{
+    margin: 0 15px;
+    display: inline-block;
+}
+
+footer ul li .wrap>div{
+    margin: 20px 0  ; 
+}
+/************************************这是阴影弹窗**********************************************/
+
+div.shadow {
+    z-index: 500;
+    display: none;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.5);
+    min-width: 1000px;
+}
+.shadow .window {
+    margin-top: 200px;
+    display: inline-block;
+    background-color: white;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.3);
+}
+.shadow .window .window-bg {
+    overflow: hidden;
+    position: relative;
+    background: url("../img/blue-b  g.png");
+    padding: 20px;
+    width: 840px;
+    height: 680px;
+    height: 420px;
+    transition: 0.5s;
+}
+.shadow .input-wrapper {
+    width: 760px;
+    height: 340px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+}
+.shadow .register-wrapper {
+    display: none;
+    width: 760px;
+    height: 600px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+}
+.shadow .input-wrap {
+    width: 560px;
+    height: 50px;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+    margin: 0 auto;
+}
+.shadow .input-wrap.code {
+    width: 564px;
+    height: 54px;
+    border: none;
+    margin: 0 auto;
+}
+.shadow .input-wrap.code .code-wrap {
+    width: 330px;
+    height: 50px;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+    float: left;
+}
+.shadow .input-wrap.code .code-img {
+    width: 180px;
+    height: 50px;
+    border: 2px rgba(0, 0, 0, 0.2) solid;
+    float: right;
+}
+.shadow .input-wrap.code input {
+    width: 180px;
+    float: right;
+}
+.shadow .input-wrapper .top,.shadow .register-wrapper .top {
+    margin-top: 60px;
+}
+.shadow .input-wrapper .bottom,.shadow .register-wrapper .bottom {
+    margin-top: 10px;
+}
+.shadow .input-tip {
+    letter-spacing: 4px;
+    font-size: 24px;
+    float: left;
+    height: 50px;
+    width: 140px;
+    text-align: center;
+    line-height: 50px;
+}
+.shadow .split {
+    width: 3px;
+    height: 30px;
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.shadow .input-wrap input {
+    color: rgba(0, 0, 0, 0.5);
+    background: transparent;
+    font-size: 24px;
+    width: 410px;
+    height: 50px;
+    outline: none;
+    text-align: center;
+    border: none;
+}
+.shadow .massage {
+    margin: 5px auto;
+    width: 560px;
+    height: 20px;
+}
+.shadow .massage div {
+    margin-left: 34px;
+    letter-spacing: 2px;
+    float: left;
+}
+.shadow .massage div input {
+    margin: 2px 3px 0 0;
+}
+.shadow .massage a {
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, 0.5);
+    float: right;
+    margin-right: 34px;
+}
+.shadow .massage a:hover {
+    text-decoration: underline;
+}
+.shadow .button {
+    color: white;
+    cursor: pointer;
+    width: 400px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #b3cae6;
+    margin: 20px auto;
+    text-align: center;
+    line-height: 50px;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+.shadow .button:hover {
+    color: #b3cae6;
+    background-color: white;
+}
+.shadow .icon {
+    position: absolute;
+    top: 31px;
+    left: 268px;
+    width: 320px;
+    height: 40px;
+    background: url("../img/tittle.png")no-repeat;
+    background-size: 100%;
+}
+.shadow .ring {
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    width: 80px;
+    height: 251px;
+    background: url("../img/ring.png")no-repeat;
+    background-size: 100%;
+}
