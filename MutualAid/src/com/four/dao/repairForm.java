@@ -15,7 +15,7 @@ public interface repairForm {
 	 * state==true 时，代表以处理完毕的表
 	 * state==false 时，代表未处理的表
 	 */
-	public abstract ArrayList<RepairBean> getRanking(ArrayList<String[]> cardList,int state);
+	public abstract ArrayList<RepairBean> getRanking(ArrayList<String[]> cardList,boolean state);
 	
 	//获得该学生的所有报修申请（包括已近处理完毕的）
 	public abstract ArrayList<String[]> getFromNum(UserLoginBean user);

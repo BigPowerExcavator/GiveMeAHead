@@ -2,55 +2,67 @@
 $(
     $.ajax({
         url: '/MutualAid/GetNewestRepairCard',
-            dataType: 'json',
-            method: 'GET',
-            success: function (data) {
-                $('.fix-shadow .left .bottom').text(`${data.Docm}`);
-                $('.fix-shadow .middle .bottom').text(`${data.content}`);
-                $('.fix-shadow .right .bottom').text(`${data.ranking}`);
-            },
-            error: function () {
-               $('.fix-shadow .left .bottom').text(`无`);
-               $('.fix-shadow .middle .bottom').text(`无`);
-               $('.fix-shadow .right .bottom').text(`无`);
-            }
+        dataType: 'json',
+        method: 'GET',
+        success: function (data) {
+            $('.fix-shadow .left .bottom').text(`${data.Docm}`);
+            $('.fix-shadow .middle .bottom').text(`${data.content}`);
+            $('.fix-shadow .right .bottom').text(`${data.ranking}`);
+        },
+        error: function () {
+            $('.fix-shadow .left .bottom').text(`无`);
+            $('.fix-shadow .middle .bottom').text(`无`);
+            $('.fix-shadow .right .bottom').text(`无`);
+        }
     })
 )
 /********************************z这是登出按钮************************************ */
 $('header .exit-icon').on('click', function () {
-	sessionStorage.setItem('status','no');
-	window.location.href = "index.html";
+    sessionStorage.setItem('status', 'no');
+    window.location.href = "index.html";
 })
 /***************************************这是保修时间的按钮************************ */
 $('.application-shadow .show').on('click', function (e) {
-    $day = $(this).siblings();
-    $day.slideToggle(500);
-    e.stopPropagation();
-    $day.on('click', function (e) {
+        $day = $(this).siblings();
+        $day.slideToggle(500);
         e.stopPropagation();
-    })
-    $(document).on('click', function () {
-        $day.slideUp(700);
-    })
-    $(".application-shadow .day>li div").on('click', function (e) {
-        let day$li = $(this).parent();
-        day$li.attr('id', "show");
-        day$li.siblings().removeAttr('id').find('.time').slideUp(500);
-        day$li.find(".time").slideDown(500).on('click', function (e) {
-            let $target = $(e.target);
-            $target.attr('id', 'show');
-            $target.siblings().removeAttr('id');
-            let time = $target.text();
-            let day = $(this).siblings().text();
-            $('.application-shadow .show').text(`${day}~${time}`);
-            $day.slideUp(700);
-        });
-        e.stopPropagation();
-        $(document).on('click',function(){
+        $day.on('click', function (e) {
+            e.stopPropagation();
+        })
+        $(document).on('click', function () {
             $day.slideUp(700);
         })
-    })
+        $(".application-shadow .day>li>div").on('click', slidedown)
+
+        function slidedown(e) {
+            $this = $(this);
+            $this.unbind();
+            let day$li = $(this).parent();
+            $this.on('click', slideup);
+
+            function slideup() {
+                day$li.find(".time").slideUp(500);
+                $this.unbind();
+                $(".application-shadow .day>li>div").on('click', slidedown);
+            }
+            day$li.attr('id', "show");
+            day$li.siblings().removeAttr('id').find('.time').slideUp(500);
+            day$li.find(".time").slideDown(500).on('click', function (e) {
+                let $target = $(e.target);
+                $target.attr('id', 'show');
+                $target.siblings().removeAttr('id');
+                let time = $target.text();
+                let day = $(this).siblings().text();
+                $('.application-shadow .show').text(`${day}~${time}`);
+                $day.slideUp(700);
+            });
+            e.stopPropagation();
+            $(document).on('click', function () {
+                $day.slideUp(700);
+            })
+        }
 })
+
 /********************************这是保修提交按钮************************************** */
 $('.application-shadow .commit').on('click', function () {
     let $input = $('.application-shadow input');
@@ -141,12 +153,12 @@ $('body').on('click', () => {
     }, 10);
 })
 /******************************这是顶部栏****************************** */
-$("header .index").on('click',function(){
-	window.location.href = "index.html";
+$("header .index").on('click', function () {
+    window.location.href = "index.html";
 })
-$("header .fix").on('click',function(){
-	window.location.href = "fix.html";
+$("header .fix").on('click', function () {
+    window.location.href = "fix.html";
 })
-$("header .userInfo-icon").on('click',function(){
-	window.location.href = "userInfo.html";
+$("header .userInfo-icon").on('click', function () {
+    window.location.href = "userInfo.html";
 })

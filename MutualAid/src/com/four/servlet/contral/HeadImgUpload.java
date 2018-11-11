@@ -1,7 +1,11 @@
 package com.four.servlet.contral;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,9 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
+
 import com.four.dao.impl.recUsers;
 import com.four.javaBean.UserLoginBean;
-import com.four.service.impl.FileUpload;
+import com.four.util.ProduceFileName;
 
 import net.sf.json.JSONObject;
 
@@ -43,27 +53,7 @@ public class HeadImgUpload extends HttpServlet {
 		PrintWriter outPrint = response.getWriter();
 		//存储路径
 		String savePath = request.getServletContext().getRealPath("/img/head");
-		FileUpload upload=new FileUpload();
-		String filename=upload.saveFile(savePath,request);
-		if(filename!=null) {
-			//把路径输入数据库
-			 HttpSession session=request.getSession(false);
-			UserLoginBean user = (UserLoginBean)session.getAttribute("userInfo");
-			if(new recUsers().changeUserHeadImg(savePath + "\\" + filename, user.getStuId())) {
-				System.out.println("文件路径已存入数据库");
-				jsonObject.put("", "");
-			}else {
-				System.out.println("文件路径未能存入数据库");
-				jsonObject.put("", "");
-			}
-		}else {
-			//文件写入错误
-			System.out.println("文件写入错误");
-			jsonObject.put("", "");
-			outPrint.write(jsonObject.toString());
-		}
-		outPrint.write(jsonObject.toString());
-		/*File file = new File(savePath);
+		File file = new File(savePath);
 		//判断上传文件的保存目录是否存在
 		if (!file.exists() && !file.isDirectory()) {
 		System.out.println(savePath+"目录不存在，需要创建");
@@ -104,8 +94,8 @@ public class HeadImgUpload extends HttpServlet {
 					//注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
 					//处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 					filename = filename.substring(filename.lastIndexOf("\\")+1);
-					//使用随机生成的UUID作为文件名
-					filename=new ProduceFileName().getUUID();
+					/*//使用随机生成的UUID作为文件名
+					filename=new ProduceFileName().getUUID();*/
 					//获取item中的上传文件的输入流
 					InputStream in = item.getInputStream();
 					//创建一个文件输出流
@@ -146,7 +136,7 @@ public class HeadImgUpload extends HttpServlet {
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}*/
+		}
 			
 	}
 

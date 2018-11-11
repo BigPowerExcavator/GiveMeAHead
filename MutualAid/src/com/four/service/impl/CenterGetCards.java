@@ -75,10 +75,8 @@ public class CenterGetCards {
 		ArrayList<RepairBean> repairList=new ArrayList<RepairBean>();
 		RepairFormImp repairFormImp=new RepairFormImp();
 		ArrayList<String[]> tempRepairList=repairFormImp.getFromNum(user);
-		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, 1));
-		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, 0));
-		repairList.addAll(new RepairFormImp().getOtherCards(tempRepairList, 2));
-		repairList.addAll(new RepairFormImp().getOtherCards(tempRepairList, 3));
+		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, true));
+		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, false));
 		
 		for(RepairBean card:repairList) {
 			Map<String, String> map=new HashMap<String, String>();
@@ -93,7 +91,7 @@ public class CenterGetCards {
 		return repairCards;		
 	}
 	
-	//返回最新的未处理的RepairCard
+	//返回最新的RepairCard
 	public Map<String, String>getNewestRepairCard(String stuNum){
 		ArrayList<Map<String, String>> repairCards=new ArrayList<Map<String, String>>();
 		ArrayList<RepairBean> repairList=new ArrayList<RepairBean>();
@@ -102,7 +100,7 @@ public class CenterGetCards {
 		user.setStuId(stuNum);
 		ArrayList<String[]> tempRepairList=repairFormImp.getFromNum(user);
 		System.out.println(tempRepairList.toString());
-		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, 0));
+		repairList.addAll(new RepairFormImp().getRanking(tempRepairList, false));
 		for(RepairBean card:repairList) {
 			Map<String, String> mapTemp=new HashMap<String, String>();			
 			mapTemp.put("content", card.getContent());

@@ -154,7 +154,9 @@ public class recUsers implements Users{
 			}
 			if(numUser==0){
 				//可以注册 或  可以修改
-				flag=true;								
+				flag=true;
+				
+				
 			}			
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -198,12 +200,12 @@ public class recUsers implements Users{
 			ps.setString(1, stuNum);
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				map.put("stuNum", rs.getString(1));
-				map.put("dormitory", rs.getString(2));
+				map.put("stuNum",String.valueOf(rs.getInt(1)));
+				map.put("dormitory",rs.getString(2) );
 				map.put("userDomc",rs.getString(2));
 				map.put("trueName",rs.getString(3));
 				map.put("userName",rs.getString(4));
-				map.put("sex", rs.getString(5));
+				map.put("sex",rs.getString(5));
 				map.put("phone",rs.getString(6));
 			}		
 		} catch (SQLException e) {

@@ -55,7 +55,6 @@ public class PersonalCenter extends HttpServlet {
 		HttpSession session=request.getSession(false);
 		UserLoginBean person = (UserLoginBean)session.getAttribute("userInfo");
 		Map<String, String> map =new UserImpl().Personal(person.getStuId());
-		System.out.println(map.get("dormitory"));
 		
 		//发送信息给浏览器
 		JSONObject jsonObject=new JSONObject();

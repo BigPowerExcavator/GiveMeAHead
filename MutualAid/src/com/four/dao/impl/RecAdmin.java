@@ -64,13 +64,12 @@ public class RecAdmin {
 		boolean result=false;
 		try {
 			ct=jdbcUtils.getConnection();
-			String sql="insert into admin(adminNum,truename,passwd,phone,grade)values(?,?,?,?,?)";
+			String sql="insert into admin(adminNum,truename,passwd,phone)values(?,?,?,?)";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, admin.getAdminNum());
 			ps.setString(2, admin.getTrueName());
 			ps.setString(3, admin.getPasswd());
 			ps.setString(4, admin.getPhone());
-			ps.setInt(5, 2);
 			ps.executeUpdate();
 			result=true;
 		} catch (SQLException e) {
@@ -98,5 +97,26 @@ public class RecAdmin {
 		return result;
 	}
 	
-	
+	/*public Map<String, Object> Personal(String adminNum) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			ct=jdbcUtils.getConnection();
+			String sql="select dormitory,trueName,phone from repairForm where stuNum=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, adminNum);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				map.put("userDomc",rs.getString(1));
+				map.put("userName",rs.getString(2));
+				map.put("phone",rs.getString(3));
+			}		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}	
+		return map;
+	}*/
 }

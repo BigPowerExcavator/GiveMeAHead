@@ -10,14 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONObject;
 
 public class JsonReader {
+	
 	public static JSONObject receivePost(HttpServletRequest request) throws IOException, UnsupportedEncodingException {
 		 
 		// 读取请求内容
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(),"utf-8"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(),"UTF-8"));
+		System.out.println("测试1");
 		String line = null;
 		StringBuilder sb = new StringBuilder();
 		while ((line = br.readLine()) != null) {
-			sb.append(line);
+			
+				sb.append(line);
+			
 		}
 		System.out.println(sb);
 		//将json字符串转换为json对象
