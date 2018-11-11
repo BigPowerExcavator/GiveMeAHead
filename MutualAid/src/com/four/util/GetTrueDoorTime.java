@@ -1,5 +1,7 @@
 package com.four.util;
 
+
+//生成真实的日期
 public class GetTrueDoorTime {
 	private String doorNum;
 	private String trueTime="";
