@@ -234,15 +234,14 @@ public class RepairFormImp implements repairForm{
 		return result;
 	}
 	
-	public boolean changeState(String stuNum,String formId,String state) {
+	public boolean changeState(String formId,String state) {
 		Boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="UPDATE repairform set repairState=? where formId=? and stuNum=?";
+			String sql="UPDATE repairform set repairState=? where formId=?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, state);
 			ps.setString(2, formId);
-			ps.setString(3, stuNum);
 			ps.executeUpdate();
 			result=true;
 		} catch (Exception e) {
@@ -258,7 +257,7 @@ public class RepairFormImp implements repairForm{
 		ArrayList<RepairBean> cardList=new ArrayList<RepairBean>();
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="select truename,phone,dormitory,repairTime,content,doorTime from repairform where repairState=?";
+			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState from repairform where repairState=?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, state);
 			rs=ps.executeQuery();
@@ -270,7 +269,7 @@ public class RepairFormImp implements repairForm{
 				repairBean.setRepairDate(new Date(rs.getTimestamp(4).getTime()));
 				repairBean.setContent(rs.getString(5));
 				repairBean.setTime(rs.getString(6));
-				//System.out.println(card[0]+" "+card[1]+" "+card[2]+" "+card[3]);
+				repairBean.setState(rs.getString(7));
 				cardList.add(repairBean);
 			}
 		} catch (Exception e) {

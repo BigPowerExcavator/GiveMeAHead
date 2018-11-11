@@ -2,7 +2,7 @@ package com.four.util;
 
 public class GetTrueDoorTime {
 	private String doorNum;
-	private String trueTime;
+	private String trueTime="";
 	
 	public String getDoorTime(String doorNum) {
 		this.doorNum=doorNum;
@@ -32,7 +32,7 @@ public class GetTrueDoorTime {
 		default:
 			break;
 		}
-		String second=doorNum.substring(1,2);
+		String second=doorNum.substring(1);
 		switch (second) {
 		case "1":
 			trueTime+=" 8:00~10:00";

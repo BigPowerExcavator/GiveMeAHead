@@ -1,4 +1,4 @@
-package com.four.servlet.contral;
+package com.four.servlet.contral.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.four.dao.impl.RepairFormImp;
+import com.four.javaBean.JsonBean;
+import com.four.service.impl.RepairImp;
 import com.four.util.JsonReader;
 
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class ChangeRepairState
+ * Servlet implementation class AdminChangeStateServlet
  */
-@WebServlet("/ChangeRepairState")
-public class ChangeRepairState extends HttpServlet {
+@WebServlet("/AdminChangeStateServlet")
+public class AdminChangeStateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeRepairState() {
+    public AdminChangeStateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,16 +40,30 @@ public class ChangeRepairState extends HttpServlet {
 		response.setContentType("text/json;charset=utf-8");
 		response.setCharacterEncoding("utf-8" );
 		
-		JSONObject json=JsonReader.receivePost(request);
 		PrintWriter out = response.getWriter();
-		String state=(String)json.get("formId");
+		//接受浏览器发来的信息
+		JSONObject json=JsonReader.receivePost(request);
 		String formId=(String)json.get("formId");
-		String id=(String)json.get("id");
+		String state=(String)json.get("state");
+		String afterState=(String)json.get("afterState");
 		JSONObject jsonObject=new JSONObject();
-		if(new RepairFormImp().changeState(id, formId, state)) {
-			jsonObject.put("", "");
-		}else {
-			jsonObject.put("", "");
+		//检查操作规范并修改数据库
+		int result=new RepairImp().checkRepairState(state, afterState, formId);
+		switch (result) {
+		case 0:
+			jsonObject.put("status", "1502");
+			jsonObject.put("result", "数据库连接错误");
+			break;
+		case 1:
+			jsonObject.put("status", "1501");
+			jsonObject.put("result", "修改成功");
+			break;
+		case 2:
+			jsonObject.put("status", "1503");
+			jsonObject.put("result", "操作不规范");
+			break;
+		default:
+			break;
 		}
 		out.write(jsonObject.toString());
 	}
