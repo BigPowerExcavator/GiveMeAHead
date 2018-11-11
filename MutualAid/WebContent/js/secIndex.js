@@ -1,6 +1,7 @@
+
 $(
-    () => {
-        if (sessionStorage.getItem('status') == "yes") {
+    ()=>{
+        if(sessionStorage.getItem('status') == "yes"){
             $login = $('.header .login');
             $register = $('.header .$register');
             $register.remove();
@@ -44,7 +45,6 @@ $('.content-l li').each(function () {
 })
 /******************************这是登录弹出按钮****************************** */
 $('.header .login').on('click', loginWindow)
-
 function loginWindow() {
     clearInterval(timer);
     let $shadow = $('div.shadow');
@@ -91,15 +91,14 @@ function windowUp() {
 
 /*******************************************这是登录按钮******************************/
 $('.input-wrapper .button').on('click', enter);
-let keyEnter = (obj, fn) => {
-    $(obj).on("keyup", function (e) {
-        if (e.which == '13') {
+let keyEnter = (obj,fn)=>{
+	$(obj).on("keyup",function(e){
+		if(e.which == '13' ){
             fn();
-        }
-    })
+		}
+	})
 };
-keyEnter(".input-wrap.bottom input", enter);
-
+keyEnter(".input-wrap.bottom input",enter);
 function enter() {
     let loginId = $('.input-wrapper .top input').val();
     let loginPwd = $('.input-wrapper .bottom input').val();
@@ -121,7 +120,7 @@ function enter() {
                 success: function (data) {
 
                     if (data['status'] == '1001') {
-                        sessionStorage.setItem('status', 'yes');
+                        sessionStorage.setItem('status','yes');
                         layer.msg('登录成功');
                         $('.shadow').hide();
                         windowUp();
@@ -156,9 +155,8 @@ function enter() {
 /**************************************这是注册按钮**********************************/
 
 
-$('.register-wrapper .button').on('click', register);
-keyEnter(".code-wrap input", register)
-
+$('.register-wrapper .button').on('click',register);
+keyEnter(".code-wrap input",register)
 function register() {
     let registerId = $('.register-wrapper .top input').val();
     let $input = $('.register-wrapper .bottom input');
@@ -242,98 +240,27 @@ $('.code-img').on('click', function () {
 
 /******************************这是顶部栏****************************** */
 $(".content .index>div").on('click', indexClick);
-$(".content-r li").eq(0).on('click', indexClick);
-
-function indexClick() {
+$(".content-r li").eq(0).on('click',indexClick);
+function indexClick(){
     window.location.href = "index.html";
 }
 $(".content .fix>div").on('click', fixClick);
-$(".content-r li").eq(1).on('click', fixClick);
-
+$(".content-r li").eq(1).on('click',fixClick);
 function fixClick() {
-    if (sessionStorage.getItem('status') == "yes") {
+    if(sessionStorage.getItem('status') == "yes"){
         window.location.href = "fix.html";
-    } else {
+    }else{
         loginWindow();
     }
 }
-$(".content-r li").eq(2).on('click', unClick);
-$(".content-r li").eq(3).on('click', unClick);
-$(".content-r li").eq(4).on('click', unClick);
-$(".content-r li").eq(5).on('click', unClick);
-$(".content-l li").eq(2).on('click', unClick);
-$(".content-l li").eq(3).on('click', unClick);
-$(".content-l li").eq(4).on('click', unClick);
-$(".content-l li").eq(5).on('click', unClick);
-
-function unClick() {
+$(".content-r li").eq(2).on('click',unClick);
+$(".content-r li").eq(3).on('click',unClick);
+$(".content-r li").eq(4).on('click',unClick);
+$(".content-r li").eq(5).on('click',unClick);
+$(".content-l li").eq(2).on('click',unClick);
+$(".content-l li").eq(3).on('click',unClick);
+$(".content-l li").eq(4).on('click',unClick);
+$(".content-l li").eq(5).on('click',unClick);
+function unClick(){
     layer.msg('很快就开放了哦');
 }
-/*********************这是鼠标盘旋轮播图移动************************ */
-
-// $(".content-r").on('mouseenter', function (e) {
-//     let $target = $(e.target);
-//     draft($(this), $target.children());
-
-// })
-// let draft = (content, element) => {
-//     let preTop = parseInt(element.css('top'));
-//     let preLeft = parseInt(element.css("left"));
-//     content.on('mousemove', function (e) {
-//         let x = parseInt(e.pageX - $(this).offset().left);
-//         let y = parseInt(e.pageY - $(this).offset().top);
-//         let moveX = preLeft + (x - 600) / 50;
-//         let moveY = preTop + (y - 350) / 50;
-//         let move = function (moveX,moveY) {
-//             element.css("left", moveX + "px");
-//             element.css("top", moveY + "px");
-//         }
-//         move(moveX,moveY)
-//     $(".content-r").on('mouseleave',function(){
-//         element.css("left", preLeft + "px");
-//         element.css("top", preTop + "px");
-//     })
-//     });
-// }
-
-// function throttle(method, mustRunDelay, x, y) {
-//     let Timer,
-//         args = arguments,
-//         start;
-//         // console.log(x,y)
-//     return function loop() {
-//         console.log(1)
-//         let self = this;
-//         let now = Date.now();
-//         if (!start) {
-//             start = now;
-//         }
-//         if (timer) {
-//             clearTimeout(Timer);
-//         }
-//         if (now - start >= mustRunDelay) {
-//             console.log(x,y)
-//             method(x,y).apply(self, args);
-//             start = now;
-//         } else {
-//             console.log(x,y)
-//             timer = setTimeout(function () {
-//                 loop.apply(self, args);
-//             }, 50);
-//         }
-//     }
-// }
-// let time = 0;
-// function throttle(method,delay,x,y){
-//     let args = arguments,
-//         self = this;
-//     let now = new Date().getTime();
-//     if(now - time > delay){
-//         time = now;
-//         console.log(time)
-//     }else{
-//         setTimeout(() => {
-//             throttle.apply(self,args);
-//         }, 50);
-//     }
-// }

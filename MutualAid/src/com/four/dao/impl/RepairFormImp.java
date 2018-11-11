@@ -53,20 +53,62 @@ public class RepairFormImp implements repairForm{
 		}
 		return result;
 	}
+	
+	public ArrayList<RepairBean> getOtherCards(ArrayList<String[]> cardList,int state){
+		if(cardList.size()!=0) {
+			ArrayList<RepairBean> repairCard=new ArrayList<RepairBean>();
+			String repairState=state+"";
+			
+			for(int i=0;i<cardList.size();i++) {
+				String[] card=cardList.get(i);
+				if(!card[2].equals(repairState)) {
+					//System.out.println(card[2]+"   "+repairState);
+					continue;
+				}
+				try {
+					ct=C3p0Utils.getConnection();
+					String sql="select stuNum,dormitory,truename,	phone,	content,repairTime,doorTime,repairState ,formId from " + 
+							"	 repairform where repairState=? and stuNum=? and formId=?";
+					ps=ct.prepareStatement(sql);
+					ps.setString(1, repairState);
+					ps.setString(2, card[3]);
+					ps.setString(3, card[0]);
+					rs=ps.executeQuery();
+					if(rs.next()) {
+						RepairBean reBean=new RepairBean();
+						reBean.setStuNum(rs.getString(1));
+						reBean.setDomc(rs.getString(2));
+						reBean.setName(rs.getString(3));
+						reBean.setTel(rs.getString(4));
+						reBean.setContent(rs.getString(5));
+						reBean.setRepairDate(new Date(rs.getTimestamp(6).getTime()));
+						reBean.setTime(rs.getString(7));
+						reBean.setState(rs.getString(8));
+						reBean.setFormId(rs.getString(9));
+						repairCard.add(reBean);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					repairCard=null;
+				}finally {
+					C3p0Utils.close(ct, ps, rs);
+				}
+			}
+			//System.out.println(repairCard.size());
+			return repairCard;
+		}
+		return null;
+	}
 
 	@Override
-	public ArrayList<RepairBean> getRanking(ArrayList<String[]> cardList,boolean state) {
+	public ArrayList<RepairBean> getRanking(ArrayList<String[]> cardList,int state) {
 		/*for(int i=0;i<cardList.size();i++) {
 			System.out.println(cardList.get(i)[2]);
 		}*/
 		if(cardList.size()!=0) {
 			ArrayList<RepairBean> repairCard=new ArrayList<RepairBean>();
-			String repairState;
-			if(state) {
-				repairState="1";
-			}else {
-				repairState="0";
-			}
+			String repairState=state+"";
 			for(int i=0;i<cardList.size();i++) {
 				String[] card=cardList.get(i);
 				if(!card[2].equals(repairState)) {
@@ -144,6 +186,7 @@ public class RepairFormImp implements repairForm{
 		}finally {
 			C3p0Utils.close(ct, ps, rs);
 		}
+		//System.out.println(cardList.size());
 		// TODO Auto-generated method stub
 		return cardList;
 	}
@@ -191,4 +234,50 @@ public class RepairFormImp implements repairForm{
 		return result;
 	}
 	
+	public boolean changeState(String formId,String state) {
+		Boolean result=false;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="UPDATE repairform set repairState=? where formId=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, state);
+			ps.setString(2, formId);
+			ps.executeUpdate();
+			result=true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return result;
+	}
+	
+	public ArrayList<RepairBean> getAllCard(String state){
+		ArrayList<RepairBean> cardList=new ArrayList<RepairBean>();
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState from repairform where repairState=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, state);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				RepairBean repairBean=new RepairBean();
+				repairBean.setName(rs.getString(1));
+				repairBean.setTel(rs.getString(2));
+				repairBean.setDomc(rs.getString(3));
+				repairBean.setRepairDate(new Date(rs.getTimestamp(4).getTime()));
+				repairBean.setContent(rs.getString(5));
+				repairBean.setTime(rs.getString(6));
+				repairBean.setState(rs.getString(7));
+				cardList.add(repairBean);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return cardList;
+	}
 }

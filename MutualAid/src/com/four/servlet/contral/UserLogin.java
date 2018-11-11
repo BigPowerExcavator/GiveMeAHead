@@ -15,6 +15,7 @@ import com.four.javaBean.JsonBean;
 import com.four.javaBean.UserLoginBean;
 import com.four.service.impl.UserImpl;
 import com.four.util.JsonReader;
+import com.lxj.TestSend;
 
 import net.sf.json.JSONObject;
 
@@ -59,7 +60,9 @@ public class UserLogin extends HttpServlet {
 		JSONObject jsonObject=new JSONObject();
 		if(checkUser.checkLogin(user)) {
 			jsonBean.setStatus("1001");
+			//jsonBean.setData(new TestSend().test());
 			jsonObject=JSONObject.fromObject(jsonBean);
+			
 			System.out.println(jsonObject);
 			//jsonObject.put("status", "1001");
 			//如果登录成功，就把用户的学号和密码寸在session中

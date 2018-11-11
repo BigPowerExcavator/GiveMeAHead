@@ -14,6 +14,9 @@ body{
     width:  100%;
     height: 100%;
 }
+input{
+	text-align:left;
+}
 .content-wrap{
     height: 800px;
     width: 1600px;
@@ -191,61 +194,30 @@ body{
 .content-r ul.text li:nth-child(2n){
     color: #fff;
 }
-/******************************轮播背景****************************************/
+/******************************杞挱鑳屾櫙****************************************/
 .content-r .bg li{
     background-size: 100%;
     background-repeat: no-repeat;
-    position: relative;
 }
-.content-r .bg li div{
-    transition: 600ms;
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    box-shadow: 20px 20px 2px rgba(0,0,0,0.2);
-}
-.content-r .bg li:hover .pic{
-    box-shadow: 0px 0px 40px #fff;
-}
-.content-r .bg li div
 .content-r .index-pic{
     background: url("../img/index-pic.png");
 }
-.content-r .index-pic .pic{
-    height: 300px;
-    width: 800px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    background: url("../img/index-div-pic.png") no-repeat;
+.content-r .fix-pic{
+    background: url("../img/fix-pic.png");
 }
-.content-r .fix-pic .pic{
-    top: 150px;
-    left: 260px;
-    background: url("../img/fix-div-pic.png");
+.content-r .help-pic{
+    background: url("../img/help-pic.png");
 }
-.content-r .help-pic .pic{
-    top: 180px;
-    left: 84px;
-    width: 600px;
-    height: 300px;
-    background: url("../img/help-div-pic.png");
+.content-r .exchange-pic{
+    background: url("../img/exchange-pic.png");
 }
-.content-r .exchange-pic .pic{
-    top: 150px;
-    left: 200px;
-    background: url("../img/exchange-div-pic.png");
-}
-.content-r .express-pic .pic{
-    top: 200px;
-    left: 130px;
-    background: url("../img/express-div-pic.png");
+.content-r .express-pic{
+    background: url("../img/express-pic.png");
 }
 .content-r .about-pic{
     background: url("../img/about-pic.png");
 }   
-
-/******************************这是注册登录的*************************************/
+/******************************杩欐槸娉ㄥ唽鐧诲綍鐨�*************************************/
 
 div.shadow {
     z-index: 500;
@@ -382,7 +354,6 @@ div.shadow {
     width: 400px;
     height: 50px;
     border-radius: 5px;
-    border: 2px solid #6b998d;
     background-color: #6b998d;
     margin: 20px auto;
     text-align: center;
