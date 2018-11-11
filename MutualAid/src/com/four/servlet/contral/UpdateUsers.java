@@ -56,6 +56,7 @@ public class UpdateUsers extends HttpServlet {
 		 * 获取修改信息
 		 */
 		JSONObject json=JsonReader.receivePost(request);
+		//System.out.println(json.toString());
 		//获取session中的学号;
 		int stuId=Integer.parseInt(person.getStuId());
 		
@@ -66,8 +67,27 @@ public class UpdateUsers extends HttpServlet {
 			jsonObject.put("changeUser", "false");
 			out.write(jsonObject.toString());
 		}else {
-			if(new recUsers().upadteInfo(stuNum,json.getString("userName"),
-					json.getString("trueName"),json.getString("sex"),json.getString("dormitory"),json.getString("phone"),stuId)) {
+			String dormitory=json.getString("dormitory");
+			if(dormitory.equals("")||dormitory==null) {
+				dormitory=null;
+			}
+			String userName=json.getString("userName");
+			if(userName.equals("")||userName==null) {
+				userName=null;
+			}
+			String trueName=json.getString("trueName");
+			if(trueName.equals("")||trueName==null) {
+				trueName=null;
+			}
+			String sex=json.getString("sex");
+			if(sex.equals("")||sex==null) {
+				sex=null;
+			}
+			String phone=json.getString("phone");
+			if(phone.equals("")||phone==null) {
+				phone=null;
+			}
+			if(new recUsers().upadteInfo(stuNum,userName,trueName,sex,dormitory,phone,stuId)) {
 					jsonObject.put("changeUser", "true");
 					out.write(jsonObject.toString());
 			}else {

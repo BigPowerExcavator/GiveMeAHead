@@ -56,6 +56,7 @@ public class UpdateUserInfo extends HttpServlet {
 		 * 获取修改信息
 		 */
 		JSONObject json=JsonReader.receivePost(request);
+		System.out.println(json.toString());
 		//获取session中的学号;
 		int stuId=Integer.parseInt(person.getStuId());
 		

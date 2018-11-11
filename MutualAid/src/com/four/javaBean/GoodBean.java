@@ -10,10 +10,20 @@ public class GoodBean {
 	private String title;
 	private String time;
 	private String goodsIntro;
+	private String userName;
 	//该属性为商品类型为代号的真实类别
 	private String variety;
 	
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public void setVariety(String variety) {
+		this.variety = variety;
+	}
 	public String getVariety() {
 		switch (goodsType) {
 		case "1":

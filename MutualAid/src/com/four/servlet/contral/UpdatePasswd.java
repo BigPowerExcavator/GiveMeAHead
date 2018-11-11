@@ -61,6 +61,7 @@ public class UpdatePasswd extends HttpServlet {
 		String flag = request.getParameter("flag");
 		int stuNum = Integer.parseInt(user.getStuId());
 		JSONObject jsonObject=new JSONObject();
+		System.out.println(flag);
 		if(flag.equals("true")) {
 			//String newPasswd = json.getString("newPasswd");
 			String newPasswd= request.getParameter("newPasswd");
@@ -79,7 +80,6 @@ public class UpdatePasswd extends HttpServlet {
 				jsonObject.put("state","true");
 				out.write(jsonObject.toString());
 			}else {
-				System.out.println("≤‚ ‘");	
 				jsonObject.put("state", "false");
 				out.write(jsonObject.toString());
 		}
