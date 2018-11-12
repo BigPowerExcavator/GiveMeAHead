@@ -1,0 +1,95 @@
+.fix-bar{
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    display: none;
+}
+.fix-bar>div{
+    height: 100%;
+    width: 25%;
+    box-sizing: border-box;
+    border: 1px solid #a8d2ba;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    float: left;
+    transition: 0.5s;
+}
+.fix-bar>div.hover{
+    background-color: #a8d2ba;
+}
+.card-wrap .state{
+    font-size: 18px;
+    margin-bottom: 30px;
+    width: 880px;
+    height: 300px;
+    cursor: pointer;
+}
+.card-wrap .state .head{
+    color: #ffffff;
+    height: 40px;
+    width: 880px;
+    background-color: #a8d2ba;
+    text-align: center;
+    line-height: 40px;
+}
+.card-wrap .state .body{
+    height: 260px;
+    width: 880px;
+    background-color: #fff;
+}
+.card-wrap .state .top,
+.card-wrap .state .bottom,
+.card-wrap .state .button{
+    width: 740px;
+    margin: 0 auto;
+}
+.card-wrap .state .top::after{
+    display: block;
+    content: "";
+    clear: both;
+}
+.card-wrap .state .top .left,
+.card-wrap .state .top .right{
+    height: 100%;
+    width: 40%;
+    float: left;
+}
+.card-wrap .state .top .left>div,
+.card-wrap .state .top .right>div{
+    margin-top: 20px;
+}
+.card-wrap .state .top .right{
+    float: right;
+}
+.card-wrap .state .bottom{
+    margin-top: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-wrap .state .button{
+    width: 370px;
+    height: 40px;
+    margin-top: 30px;
+}
+.card-wrap .state .button>div{
+    width: 100px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+.card-wrap .state .button-l{
+    float: left;
+    background-color: #a8d2ba;
+}
+.card-wrap .state .button-r{
+    float: right;
+    background-color: #a8d2ba;
+}
+.card-wrap .state .button-m{
+   margin: 0 auto;
+    background-color: #a8d2ba;
+}

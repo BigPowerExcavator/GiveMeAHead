@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>个人中心</title>
     <link rel="stylesheet" href="css/userInfo.css">
+    <link rel="stylesheet" href="css/manager.css">
 
 </head>
 
@@ -51,7 +52,11 @@
                             <div class="domc-r">无</div>
                         </div>
                     </div>
-                    <div class="change-btn">更改信息</div>
+                    <div class="btn-wrap">
+                        <div class="change-btn">更改信息</div>
+                    <div class="change-pwd-btn">更改密码</div>
+                    </div>
+                    
 
                 </div>
             </div>
@@ -92,7 +97,37 @@
                         </li>
                     </ul>
                 </div>
+                <div class="fix-bar">
+                    <div class="">未处理</div>
+                    <div class="">处理中</div>
+                    <div class="">已处理</div>
+                    <div class="">特殊处理</div>
+                </div>
                 <ul class="card-wrap">
+                    <li class="state state0">
+                        <div class="head">处理状态</div>
+                        <div class="body">
+                            <div class="top">
+                                <div class="left">
+                                    <div class="name">报修人：梨花</div>
+                                    <div class="domc">宿舍：13#1012</div>
+                                    <div class="doorTime">上门时间：星期一 8:00~10:00</div>
+                                </div>
+                                <div class="right">
+                                    <div class="id">学号：171543444</div>
+                                    <div class="tel">电话：13060670964</div>
+                                    <div class="date">日期：2018-11-11</div>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                保修内容：我今天打了睡了哈
+                            </div>
+                            <div class="button">
+                                <div class="button-l">添加处理</div>
+                                <div class="button-r">特殊处理</div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
                 <div class="foot">
                     暂无更多内容
@@ -112,7 +147,6 @@
                     <div class="input-wrap">
                         <input type="text">
                     </div>
-
                 </div>
                 <div class="input-wrapper">
                     <div class="tip">昵称</div>
@@ -164,8 +198,44 @@
             </div>
         </div>
     </div>
+    <div class="change-pwd">
+        <div class="window">
+            <div class="head">-更改密码-</div>
+            <div class="body">
+                <div class="input-wrapper">
+                    <div class="tip">原密码</div>
+                    <div class="splite"></div>
+                    <div class="input-wrap">
+                        <input type="text">
+                    </div>
+
+                </div>
+                <div class="input-wrapper">
+                    <div class="tip">新密码</div>
+                    <div class="splite"></div>
+                    <div class="input-wrap">
+                        <input type="text">
+                    </div>
+
+                </div>
+                <div class="input-wrapper">
+                    <div class="tip">新密码</div>
+                    <div class="splite"></div>
+                    <div class="input-wrap">
+                        <input type="text">
+                    </div>
+
+                </div>
+                <div class="button">
+                    提交
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/userInfo.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <!-- <script src="js/userInfo.js"></script> -->
+    <script src="js/manager.js"></script>
 </body>
 
 </html>

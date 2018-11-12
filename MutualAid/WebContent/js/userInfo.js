@@ -11,7 +11,6 @@ $(
 		$('.change input').eq(4).val(data.dormitory);
 		userId = data.stuNum;
 		$.getJSON('url', function (data) {
-
 			let fix = 0,
 				exchange = 0,
 				express = 0,
@@ -73,7 +72,6 @@ $('main .content-r .sum ul').on('click', function (e) {
 	switch (target.className) {
 		case 'all':
 			$('.card-wrap li').show();
-
 			break;
 		case 'fix':
 			$('.card-wrap li').filter('.fix').show()
