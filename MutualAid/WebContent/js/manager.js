@@ -147,27 +147,28 @@ $('.content-r .fix').on('click',function(){
     })
 })
 /*****************************这是处理状态的四个按钮******************** */
-$('.content-r .fix-bar div').eq(0).on('click',function(){   
+$('.content-r .fix-bar div').eq(0).on('click',function(){   //未处理按钮
     $.getJSON('url', {"state":"0"},function (data) {
         cardshow(data);
     })
 })
-$('.content-r .fix-bar div').eq(1).on('click',function(){   
+$('.content-r .fix-bar div').eq(1).on('click',function(){   //处理中按钮
     $.getJSON('url', {"state":"2"},function (data) {
         cardshow(data);
     })
 })
-$('.content-r .fix-bar div').eq(2).on('click',function(){   
+$('.content-r .fix-bar div').eq(2).on('click',function(){   //处理完成
     $.getJSON('url', {"state":"1"},function (data) {
         cardshow(data);
     })
 })
-$('.content-r .fix-bar div').eq(3).on('click',function(){   
+$('.content-r .fix-bar div').eq(3).on('click',function(){   //特殊处理
     $.getJSON('url', {"state":"3"},function (data) {
         cardshow(data);
     })
 })
 /****************************这是对应的按键**************************** */
+
 /*************************记载用户基本信息******************************* */
 $(
     $.getJSON('url', function (data) {
