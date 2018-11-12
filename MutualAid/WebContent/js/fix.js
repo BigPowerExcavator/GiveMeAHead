@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*********************************这是加载我的保修的按钮********************* */
 $(
     $.ajax({
@@ -326,5 +325,4 @@ $("header .fix").on('click', function () {
 })
 $("header .userInfo-icon").on('click', function () {
     window.location.href = "userInfo.html";
->>>>>>> 2611e3ee1b7612d18ee3b9d3b7f2326962eaed1f
 })

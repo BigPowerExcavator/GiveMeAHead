@@ -337,7 +337,6 @@ function unClick() {
 //             throttle.apply(self,args);
 //         }, 50);
 //     }
-=======
 $(
     () => {
         if (sessionStorage.getItem('status') == "yes") {

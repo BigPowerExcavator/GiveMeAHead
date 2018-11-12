@@ -2,8 +2,6 @@ package com.four.servlet.contral.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.four.service.impl.AdminGetCardService;
-import com.four.util.JsonReader;
 
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class AdminCetRepairCards
+ * Servlet implementation class AdminGetCardsCountServlet
  */
-@WebServlet("/AdminCetRepairCards")
-public class AdminCetRepairCards extends HttpServlet {
+@WebServlet("/AdminGetCardsCountServlet")
+public class AdminGetCardsCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCetRepairCards() {
+    public AdminGetCardsCountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,19 +38,9 @@ public class AdminCetRepairCards extends HttpServlet {
 		response.setCharacterEncoding("utf-8" );
 		
 		PrintWriter out = response.getWriter();
-		AdminGetCardService adminGetRepairCard=new AdminGetCardService();
-		ArrayList<Map<String, String>> cards=new ArrayList<Map<String, String>>();
-		JSONObject json=JsonReader.receivePost(request);
-		
-		cards.addAll(adminGetRepairCard.getRepairCards("0"));
-		cards.addAll(adminGetRepairCard.getRepairCards("1"));
-		cards.addAll(adminGetRepairCard.getRepairCards("2"));
-		cards.addAll(adminGetRepairCard.getRepairCards("3"));
-		Map<String,Object> map=adminGetRepairCard.sortAllCards(cards);
 		JSONObject jsonObject=new JSONObject();
-		jsonObject=JSONObject.fromObject(map);
+		jsonObject=JSONObject.fromObject(new AdminGetCardService().getCardsCount());
 		out.write(jsonObject.toString());
-		
 	}
 
 	/**
