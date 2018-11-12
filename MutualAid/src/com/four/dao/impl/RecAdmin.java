@@ -94,6 +94,8 @@ public class RecAdmin {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
 		}
 		return result;
 	}

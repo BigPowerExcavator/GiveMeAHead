@@ -60,7 +60,7 @@ public class UserImpl implements userService{
 	
 	public Map<String, String> Personal(String stuNum){
 		Map<String,String> map = new recUsers().Personal(stuNum);
-		if(map.get("userDomc")==null) {
+		if(map.get("userDomc")==null||map.get("userDomc").equals("")) {
 			map.put("userDomc","…–Œ¥ÃÓ–¥");
 		}
 		return map;
