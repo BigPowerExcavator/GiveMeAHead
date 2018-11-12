@@ -31,6 +31,7 @@ public class AdminGetCardService {
 			map.put("doorTime", new GetTrueDoorTime().getDoorTime(repairBean.getTime())+"");
 			map.put("state", repairBean.getState());
 			map.put("formId", repairBean.getFormId());
+			map.put("userId", repairBean.getStuNum());
 			cards.add(map);
 		}
 		return cards;

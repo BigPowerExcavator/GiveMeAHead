@@ -14,7 +14,7 @@ $('.fix-bar>div').on('click', function () {
 }).eq(0).attr('class', "hover");
 /********************* 加载卡片数目********************************** */
 $(
-    $.getJSON('url', function (data) {
+    $.getJSON('/MutualAid/AdminGetCardsCountServlet', function (data) {
         let {
             allCount: all,
             fixCount: fix,
@@ -148,22 +148,22 @@ $('.content-r .fix').on('click',function(){
 })
 /*****************************这是处理状态的四个按钮******************** */
 $('.content-r .fix-bar div').eq(0).on('click',function(){   
-    $.getJSON('url', {"state":"0"},function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"0"},function (data) {
         cardshow(data);
     })
 })
 $('.content-r .fix-bar div').eq(1).on('click',function(){   
-    $.getJSON('url', {"state":"2"},function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"2"},function (data) {
         cardshow(data);
     })
 })
 $('.content-r .fix-bar div').eq(2).on('click',function(){   
-    $.getJSON('url', {"state":"1"},function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"1"},function (data) {
         cardshow(data);
     })
 })
 $('.content-r .fix-bar div').eq(3).on('click',function(){   
-    $.getJSON('url', {"state":"3"},function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"3"},function (data) {
         cardshow(data);
     })
 })

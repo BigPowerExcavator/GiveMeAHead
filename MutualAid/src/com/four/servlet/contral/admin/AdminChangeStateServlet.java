@@ -49,7 +49,8 @@ public class AdminChangeStateServlet extends HttpServlet {
 		JSONObject jsonObject=new JSONObject();
 		//检查操作规范并修改数据库
 		int result=new RepairImp().checkRepairState(state, afterState, formId);
-		switch (result) {
+		System.out.println(result);
+		/*switch (result) {
 		case 0:
 			jsonObject.put("status", "1502");
 			jsonObject.put("result", "数据库连接错误");
@@ -65,7 +66,7 @@ public class AdminChangeStateServlet extends HttpServlet {
 		default:
 			break;
 		}
-		out.write(jsonObject.toString());
+		out.write(jsonObject.toString());*/
 	}
 
 	/**

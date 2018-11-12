@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.four.javaBean.GoodBean;
@@ -87,12 +88,62 @@ public class RecGoods {
 			ps.setString(8, goodBean.getTime());
 			ps.setString(9, goodBean.getGoodsIntro());
 			ps.setString(10, goodBean.getUserName());
+			ps.executeUpdate();
+			result=true;
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}finally {
 			C3p0Utils.close(ct, ps, rs);
 		}
 		return result;
 	}
 	
+	public boolean writeGoodsCard(GoodBean goodBean) {
+		boolean result=false;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,userName)"
+					+ "values(?,?,?,?,?,?,?,?,?)";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, goodBean.getStuNum());
+			ps.setString(2, goodBean.getGoodsName());
+			ps.setString(3, goodBean.getGoodsImg());
+			ps.setString(4, goodBean.getGoodsType());
+			ps.setString(5, goodBean.getGoodsPrice());
+			ps.setString(6, goodBean.getTitle());
+			@SuppressWarnings("deprecation")
+			Timestamp t = new Timestamp(new Long(goodBean.getTime()));
+			ps.setTimestamp(7, t);
+			ps.setString(8, goodBean.getGoodsIntro());
+			ps.setString(9, goodBean.getUserName());
+			ps.executeUpdate();
+			result=true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return result;
+	}
+	
+	public String[] getGoodsImgs(String goodsId) {
+		String[] url=null;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select goodsImg from idlegoods where goodsId=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, goodsId);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				url=rs.getString(1).split("###");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return url;
+	}
 }

@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿
+
 $(
 	$.getJSON('url', function (data) {
 		$('main .content-l .name-r').html(`${data.userName}`);
@@ -430,8 +429,6 @@ function a(data) {
 }
 a(data);
 
-=======
-﻿
 $(
 	$.getJSON('/MutualAid/PersonalCenter', function (data) {
 		$('main .content-l .name-r').html(`${data.trueName}`);
@@ -864,5 +861,3 @@ function a(data) {
 
 }
 a(data);
-
->>>>>>> 2611e3ee1b7612d18ee3b9d3b7f2326962eaed1f

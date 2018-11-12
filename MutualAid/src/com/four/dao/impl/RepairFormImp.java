@@ -257,7 +257,7 @@ public class RepairFormImp implements repairForm{
 		ArrayList<RepairBean> cardList=new ArrayList<RepairBean>();
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState,formId from repairform where repairState=?";
+			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState,formId,stuNum from repairform where repairState=?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, state);
 			rs=ps.executeQuery();
@@ -271,6 +271,7 @@ public class RepairFormImp implements repairForm{
 				repairBean.setTime(rs.getString(6));
 				repairBean.setState(rs.getString(7));
 				repairBean.setFormId(rs.getString(8));
+				repairBean.setStuNum(rs.getString(9));
 				cardList.add(repairBean);
 			}
 		} catch (Exception e) {

@@ -43,12 +43,10 @@ public class AdminCetRepairCards extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		AdminGetCardService adminGetRepairCard=new AdminGetCardService();
 		ArrayList<Map<String, String>> cards=new ArrayList<Map<String, String>>();
-		JSONObject json=JsonReader.receivePost(request);
-		
-		cards.addAll(adminGetRepairCard.getRepairCards("0"));
-		cards.addAll(adminGetRepairCard.getRepairCards("1"));
-		cards.addAll(adminGetRepairCard.getRepairCards("2"));
-		cards.addAll(adminGetRepairCard.getRepairCards("3"));
+		/*JSONObject json=JsonReader.receivePost(request);
+		String state=json.getString("state");*/
+		String state=request.getParameter("state");
+		cards.addAll(adminGetRepairCard.getRepairCards(state));
 		Map<String,Object> map=adminGetRepairCard.sortAllCards(cards);
 		JSONObject jsonObject=new JSONObject();
 		jsonObject=JSONObject.fromObject(map);

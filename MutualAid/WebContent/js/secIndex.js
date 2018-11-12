@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(
     () => {
         if (sessionStorage.getItem('status') == "yes") {
@@ -675,5 +674,4 @@ function unClick() {
 //             throttle.apply(self,args);
 //         }, 50);
 //     }
->>>>>>> 2611e3ee1b7612d18ee3b9d3b7f2326962eaed1f
 // }
