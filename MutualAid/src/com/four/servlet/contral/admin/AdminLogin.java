@@ -60,10 +60,10 @@ public class AdminLogin extends HttpServlet {
 			//验证成功  把adminNum放入session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("adminInfo",adminNum);
-			jsonObject.put("status", 1001);
+			jsonObject.put("state", "true");
 			out.write(jsonObject.toString());
 		}else {
-			jsonObject.put("status", 1002);
+			jsonObject.put("state", "false");
 			out.write(jsonObject.toString());
 		}
 		

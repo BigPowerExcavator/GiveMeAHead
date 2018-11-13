@@ -51,32 +51,12 @@ addEventListener (clear2,'click',function(){
     input2.value = '';
 });
 function Login(){
-    $.getJSON('/MutualAid/AdminLogin',{"adminNum":input1.value.toString(),'pwd':input2.value.toString()},function(){
-    	window.location.href = "../manager.html"; //这里的路径我不知道要不要加上一级，你试一下
-        alert('done');
+    $.getJSON('/MutualAid/AdminLogin',{"adminNum":input1.value.toString(),'pwd':input2.value.toString()},function(data){
+        if(data['state'] == "true"){ //{"state":"true"}
+            window.location.href = "../manager.html"; 
+        }else{
+            alert('出错了');
+        }
     })
 }
-// addEventListener(newCount,'click',function(){
-//     var index = layer.open({
-//         type: 2,
-//         title:'注册新账号',
-//         content: 'register.html',
-//         maxmin: true
-//       });
-//       layer.full(index);
-// })
-// function Login(){
-//     if(test(input1.value.toString(),input2.value.toString())){
-//         for(var i = 0; i < 20 ; i++){
-//             if(input1.value == sessionStorage.getItem('name'+i) ){
-//                 if(input2.value == sessionStorage.getItem('password'+i)){
-//                     layer.msg('登录成功');
-//                 }else{
-//                     layer.msg('密码错误');
-//                 }
-//                 return ;
-//             }
-//         }
-//         layer.msg('该账号未注册');
-//     }
-// };
+
