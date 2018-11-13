@@ -36,10 +36,19 @@ public class GoodsManageService {
 	public boolean changeGoodCard(GoodBean goodBean) {
 		boolean result=false;
 		if(goodBean!=null) {
-			if(goodBean.getGoodsImg()==null) {
+			if(goodBean.getGoodsImg()==null||goodBean.getGoodsImg().equals("")) {
 				goodBean.setGoodsImg(recGoods.getGoodsImgs(goodBean.getGoodsId()));
 			}
+			result=recGoods.changeGoodsInfo(goodBean);
 		}
 		return result;
+	}
+	
+	public String[] getGoodImgUrl(String goodsId) {
+		String[] url=null;
+		if(goodsId!=null&&!goodsId.equals("")) {
+			url=recGoods.getGoodsImgs(goodsId).split("###");
+		}
+		return url;
 	}
 }
