@@ -14,7 +14,7 @@ $('.fix-bar>div').on('click', function () {
 }).eq(0).attr('class', "hover");
 /********************* 加载卡片数目********************************** */
 $(
-    $.getJSON('url', function (data) {
+    $.getJSON('/MutualAid/AdminGetCardsCountServlet', function (data) {
         let {
             allCount: all,
             fixCount: fix,
@@ -36,17 +36,18 @@ function cardshow(data) {
     $('.card-wrap').html('');
     for (let i = 1; i <= data.count; i++) {
         let card = 'card' + i;
+        let obj = data[card];
         let {
+            dormtory: dormtory,
             date: date,
             userTel: userTel,
             userId: userId,
             doorTime: doorTime,
             userName: userName,
-            dormtory: dormtory,
             content: content,
             formId: formId,
-            state: state
-        } = data[card];
+            state:state
+        } = obj;
         date = parseInt(date);
         let year = new Date(date).getFullYear();
         let month = new Date(date).getMonth() + 1;
@@ -67,46 +68,18 @@ function cardshow(data) {
                 text = `<li class="state state${state}" name="${formId}"><div class="head">处理状态</div><div class="body"><div class="top"><div class="left"><div class="name">报修人：${userName}</div><div class="domc">宿舍：${dormtory}</div><div class="doorTime">上门时间：${doorTime}</div></div><div class="right"><div class="id">学号：${userId}</div><div class="tel">电话：${userTel}</div><div class="date">日期：${date}</div></div></div><div class="bottom">${content}</div><div class="button"><div class="button-m handle">完成处理</div></div></div></li>`
                 break;
         }
-
+        
         $('.card-wrap').append(text);
-        stateButton(state);
 
     }
-}
- /****************************这是对应的按键的方法**************************** */
- function stateButton(state){
-    let url = 'url'; //因为都是同一个url，所以你改这个就好了哈
-    $($(`.card-wrap .state${state}`).on('click', function (e) {
-        $this = $(this);
-        let $target = $(e.target);
-        let name = $this.attr('name');
-        console.log($target.attr('class'));
-        let  hide = function(after){
-            $.getJSON(url,{"formId":`${name}`,"state":`${state}`,"afterState":`${after}`});
-           $this.slideUp(500);
-           setTimeout(() => {
-               $this.remove();
-           }, 500);
-        }
-        if($target.attr('class') == "button-l add"){
-            hide("2");
-        }else if($target.attr('class') == "button-r special"){
-            hide("3");
-        }else if($target.attr('class') == "button-l handle"){
-            hide("1");
-        }else if($target.attr('class') == "button-m handle"){
-            hide("1");
-        }
-        e.stopPropagation();
-    }))
 }
 /****************************这是页面刚开始加载卡片*************************** */
 $(
     $.getJSON('url', function (data) {
         data = {
             "card1": {
-                "date": "1541313848000",
                 "dormtory": " 1234#55",
+                "date": "1541313848000",
                 "userTel": "13060670964",
                 "doorTime": '星期一 8:00~10:00',
                 "userId": "173441",
@@ -151,106 +124,49 @@ $(
             "count": "4"
         }
         cardshow(data);
-    })
+        })
 )
 /****************************这是页面加载未处理的卡片 ***********************/
-$('.content-r .fix').on('click', function () {
+$('.content-r .fix').on('click',function(){
     $.getJSON('url', {"state":"0"},function (data) {
-    // let data = {
-    //     "card1": {
-    //         "dormtory": " 1234#55",
-    //         "date": "1541313848000",
-    //         "userTel": "13060670964",
-    //         "doorTime": '星期一 8:00~10:00',
-    //         "userId": "173441",
-    //         "userName": 'jiayu',
-    //         "content": "我要修灯泡",
-    //         "formId": "123",
-    //         "state": "0"
-    //     },
-    //     "count": "4"
-    // }
-    cardshow(data);
+    //     data = {
+    //         "card1": {
+    //             "dormtory": " 1234#55",
+    //             "date": "1541313848000",
+    //             "userTel": "13060670964",
+    //             "doorTime": '星期一 8:00~10:00',
+    //             "userId": "173441",
+    //             "userName": 'jiayu',
+    //             "content": "我要修灯泡",
+    //             "formId": "123",
+    //             "state": "0"
+    //         },
+    //         "count": "4"
+    //     }
+        cardshow(data);
     })
 })
 /*****************************这是处理状态的四个按钮******************** */
-$('.content-r .fix-bar div').eq(0).on('click', function () { //未处理按钮
-    $.getJSON('url', {"state":"0"},function (data) {
-    // let data = {
-    //     "card1": {
-    //         "dormtory": " 1234#55",
-    //         "date": "1541313848000",
-    //         "userTel": "13060670964",
-    //         "doorTime": '星期一 8:00~10:00',
-    //         "userId": "173441",
-    //         "userName": 'jiayu',
-    //         "content": "我要修灯泡",
-    //         "formId": "123",
-    //         "state": "0"
-    //     },
-    //     "count": "4"
-    // }
-    cardshow(data);
+$('.content-r .fix-bar div').eq(0).on('click',function(){   
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"0"},function (data) {
+        cardshow(data);
+    })
 })
+$('.content-r .fix-bar div').eq(1).on('click',function(){   
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"2"},function (data) {
+        cardshow(data);
+    })
 })
-$('.content-r .fix-bar div').eq(1).on('click', function () { //处理中按钮
-    $.getJSON('url', {"state":"2"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "2"
-        //     },
-        //     "count": "4"
-        // }
-    cardshow(data);
+$('.content-r .fix-bar div').eq(2).on('click',function(){   
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"1"},function (data) {
+        cardshow(data);
+    })
 })
+$('.content-r .fix-bar div').eq(3).on('click',function(){   
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"3"},function (data) {
+        cardshow(data);
+    })
 })
-$('.content-r .fix-bar div').eq(2).on('click', function () { //处理完成
-    $.getJSON('url', {"state":"1"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "1"
-        //     },
-        //     "count": "4"
-        // }
-    cardshow(data);
-})
-})
-$('.content-r .fix-bar div').eq(3).on('click', function () { //特殊处理
-    $.getJSON('url', {"state":"3"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "3"
-        //     },
-        //     "count": "4"
-        // }
-    cardshow(data);
-})
-})
-
 /*************************记载用户基本信息******************************* */
 $(
     $.getJSON('url', function (data) {

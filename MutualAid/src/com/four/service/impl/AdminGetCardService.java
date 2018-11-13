@@ -10,7 +10,7 @@ import com.four.dao.impl.RepairFormImp;
 import com.four.javaBean.RepairBean;
 import com.four.util.GetTrueDoorTime;
 
-public class AdminGetRepairCard {
+public class AdminGetCardService {
 	
 	private RepairFormImp repairFormImp=new RepairFormImp();
 	private ArrayList<Map<String, String>> cards;
@@ -30,6 +30,8 @@ public class AdminGetRepairCard {
 			//System.out.println(repairBean.getTime());
 			map.put("doorTime", new GetTrueDoorTime().getDoorTime(repairBean.getTime())+"");
 			map.put("state", repairBean.getState());
+			map.put("formId", repairBean.getFormId());
+			map.put("userId", repairBean.getStuNum());
 			cards.add(map);
 		}
 		return cards;
@@ -60,4 +62,20 @@ public class AdminGetRepairCard {
 		return map;
 	}
 	
+	public Map<String , Integer> getCardsCount(){
+		Map<String , Integer> map=new HashMap<String , Integer>();
+		RepairFormImp repairFormImp=new RepairFormImp();
+		int fixCount=repairFormImp.getRepairCardsCount("0")+repairFormImp.getRepairCardsCount("1")+
+				repairFormImp.getRepairCardsCount("2")+repairFormImp.getRepairCardsCount("3");
+		int exchangeCount=0;
+		int expressCount=0;
+		int helpCount=0;
+		int allCount=fixCount+exchangeCount+expressCount+helpCount;
+		map.put("allCount", allCount);
+		map.put("exchangeCount", exchangeCount);
+		map.put("expressCount", expressCount);
+		map.put("fixCount", fixCount);
+		map.put("helpCount", helpCount);
+		return map;
+	}
 }

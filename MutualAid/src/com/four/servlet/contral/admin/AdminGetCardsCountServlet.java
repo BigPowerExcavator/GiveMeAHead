@@ -9,24 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.four.dao.impl.RepairFormImp;
-import com.four.javaBean.JsonBean;
-import com.four.service.impl.RepairImp;
-import com.four.util.JsonReader;
+import com.four.service.impl.AdminGetCardService;
 
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class AdminChangeStateServlet
+ * Servlet implementation class AdminGetCardsCountServlet
  */
-@WebServlet("/AdminChangeStateServlet")
-public class AdminChangeStateServlet extends HttpServlet {
+@WebServlet("/AdminGetCardsCountServlet")
+public class AdminGetCardsCountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminChangeStateServlet() {
+    public AdminGetCardsCountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,32 +38,9 @@ public class AdminChangeStateServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8" );
 		
 		PrintWriter out = response.getWriter();
-		//接受浏览器发来的信息
-		JSONObject json=JsonReader.receivePost(request);
-		String formId=(String)json.get("formId");
-		String state=(String)json.get("state");
-		String afterState=(String)json.get("afterState");
 		JSONObject jsonObject=new JSONObject();
-		//检查操作规范并修改数据库
-		int result=new RepairImp().checkRepairState(state, afterState, formId);
-		System.out.println(result);
-		/*switch (result) {
-		case 0:
-			jsonObject.put("status", "1502");
-			jsonObject.put("result", "数据库连接错误");
-			break;
-		case 1:
-			jsonObject.put("status", "1501");
-			jsonObject.put("result", "修改成功");
-			break;
-		case 2:
-			jsonObject.put("status", "1503");
-			jsonObject.put("result", "操作不规范");
-			break;
-		default:
-			break;
-		}
-		out.write(jsonObject.toString());*/
+		jsonObject=JSONObject.fromObject(new AdminGetCardService().getCardsCount());
+		out.write(jsonObject.toString());
 	}
 
 	/**

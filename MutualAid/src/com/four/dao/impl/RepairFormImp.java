@@ -257,7 +257,7 @@ public class RepairFormImp implements repairForm{
 		ArrayList<RepairBean> cardList=new ArrayList<RepairBean>();
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState from repairform where repairState=?";
+			String sql="select truename,phone,dormitory,repairTime,content,doorTime,repairState,formId,stuNum from repairform where repairState=?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, state);
 			rs=ps.executeQuery();
@@ -270,6 +270,8 @@ public class RepairFormImp implements repairForm{
 				repairBean.setContent(rs.getString(5));
 				repairBean.setTime(rs.getString(6));
 				repairBean.setState(rs.getString(7));
+				repairBean.setFormId(rs.getString(8));
+				repairBean.setStuNum(rs.getString(9));
 				cardList.add(repairBean);
 			}
 		} catch (Exception e) {
@@ -279,5 +281,26 @@ public class RepairFormImp implements repairForm{
 			C3p0Utils.close(ct, ps, rs);
 		}
 		return cardList;
+	}
+	
+	public int getRepairCardsCount(String state) {
+		int count=0;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select count(*) from repairform where repairState=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, state);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				count=rs.getInt(1);
+			}			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			count=-1;
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return count;
 	}
 }

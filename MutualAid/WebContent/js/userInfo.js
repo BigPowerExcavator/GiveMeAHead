@@ -1,4 +1,5 @@
-﻿﻿$(
+﻿﻿
+$(
 	$.getJSON('/MutualAid/PersonalCenter', function (data) {
 		$('main .content-l .name-r').html(`${data.trueName}`);
 		$('main .content-l .tel-r').html(`${data.phone}`);
@@ -430,4 +431,3 @@ function a(data) {
 
 }
 a(data);
-

@@ -1,3 +1,4 @@
+
 $(
     () => {
         if (sessionStorage.getItem('status') == "yes") {
@@ -269,71 +270,3 @@ $(".content-l li").eq(5).on('click', unClick);
 function unClick() {
     layer.msg('很快就开放了哦');
 }
-/*********************这是鼠标盘旋轮播图移动************************ */
-
-// $(".content-r").on('mouseenter', function (e) {
-//     let $target = $(e.target);
-//     draft($(this), $target.children());
-
-// })
-// let draft = (content, element) => {
-//     let preTop = parseInt(element.css('top'));
-//     let preLeft = parseInt(element.css("left"));
-//     content.on('mousemove', function (e) {
-//         let x = parseInt(e.pageX - $(this).offset().left);
-//         let y = parseInt(e.pageY - $(this).offset().top);
-//         let moveX = preLeft + (x - 600) / 50;
-//         let moveY = preTop + (y - 350) / 50;
-//         let move = function (moveX,moveY) {
-//             element.css("left", moveX + "px");
-//             element.css("top", moveY + "px");
-//         }
-//         move(moveX,moveY)
-//     $(".content-r").on('mouseleave',function(){
-//         element.css("left", preLeft + "px");
-//         element.css("top", preTop + "px");
-//     })
-//     });
-// }
-
-// function throttle(method, mustRunDelay, x, y) {
-//     let Timer,
-//         args = arguments,
-//         start;
-//         // console.log(x,y)
-//     return function loop() {
-//         console.log(1)
-//         let self = this;
-//         let now = Date.now();
-//         if (!start) {
-//             start = now;
-//         }
-//         if (timer) {
-//             clearTimeout(Timer);
-//         }
-//         if (now - start >= mustRunDelay) {
-//             console.log(x,y)
-//             method(x,y).apply(self, args);
-//             start = now;
-//         } else {
-//             console.log(x,y)
-//             timer = setTimeout(function () {
-//                 loop.apply(self, args);
-//             }, 50);
-//         }
-//     }
-// }
-// let time = 0;
-// function throttle(method,delay,x,y){
-//     let args = arguments,
-//         self = this;
-//     let now = new Date().getTime();
-//     if(now - time > delay){
-//         time = now;
-//         console.log(time)
-//     }else{
-//         setTimeout(() => {
-//             throttle.apply(self,args);
-//         }, 50);
-//     }
-// }
