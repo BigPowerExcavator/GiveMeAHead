@@ -36,6 +36,8 @@ function cardshow(data) {
     $('.card-wrap').html('');
     for (let i = 1; i <= data.count; i++) {
         let card = 'card' + i;
+        let obj = data[card];
+        console.log(obj)
         let {
             date: date,
             userTel: userTel,
@@ -92,10 +94,6 @@ function cardshow(data) {
             hide("2");
         }else if($target.attr('class') == "button-r special"){
             hide("3");
-        }else if($target.attr('class') == "button-l handle"){
-            hide("1");
-        }else if($target.attr('class') == "button-m handle"){
-            hide("1");
         }
         e.stopPropagation();
     }))
@@ -155,101 +153,101 @@ $(
 )
 /****************************这是页面加载未处理的卡片 ***********************/
 $('.content-r .fix').on('click', function () {
-    $.getJSON('url', {"state":"0"},function (data) {
-    // let data = {
-    //     "card1": {
-    //         "dormtory": " 1234#55",
-    //         "date": "1541313848000",
-    //         "userTel": "13060670964",
-    //         "doorTime": '星期一 8:00~10:00',
-    //         "userId": "173441",
-    //         "userName": 'jiayu',
-    //         "content": "我要修灯泡",
-    //         "formId": "123",
-    //         "state": "0"
-    //     },
-    //     "count": "4"
-    // }
+    // $.getJSON('url', {"state":"0"},function (data) {
+    let data = {
+        "card1": {
+            "dormtory": " 1234#55",
+            "date": "1541313848000",
+            "userTel": "13060670964",
+            "doorTime": '星期一 8:00~10:00',
+            "userId": "173441",
+            "userName": 'jiayu',
+            "content": "我要修灯泡",
+            "formId": "123",
+            "state": "0"
+        },
+        "count": "4"
+    }
     cardshow(data);
-    })
+    // })
 })
 /*****************************这是处理状态的四个按钮******************** */
 $('.content-r .fix-bar div').eq(0).on('click', function () { //未处理按钮
-    $.getJSON('url', {"state":"0"},function (data) {
-    // let data = {
-    //     "card1": {
-    //         "dormtory": " 1234#55",
-    //         "date": "1541313848000",
-    //         "userTel": "13060670964",
-    //         "doorTime": '星期一 8:00~10:00',
-    //         "userId": "173441",
-    //         "userName": 'jiayu',
-    //         "content": "我要修灯泡",
-    //         "formId": "123",
-    //         "state": "0"
-    //     },
-    //     "count": "4"
-    // }
+    // $.getJSON('url', {"state":"0"},function (data) {
+    let data = {
+        "card1": {
+            "dormtory": " 1234#55",
+            "date": "1541313848000",
+            "userTel": "13060670964",
+            "doorTime": '星期一 8:00~10:00',
+            "userId": "173441",
+            "userName": 'jiayu',
+            "content": "我要修灯泡",
+            "formId": "123",
+            "state": "0"
+        },
+        "count": "4"
+    }
     cardshow(data);
 })
-})
+// })
 $('.content-r .fix-bar div').eq(1).on('click', function () { //处理中按钮
-    $.getJSON('url', {"state":"2"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "2"
-        //     },
-        //     "count": "4"
-        // }
+    // $.getJSON('url', {"state":"2"},function (data) {
+        let data = {
+            "card1": {
+                "dormtory": " 1234#55",
+                "date": "1541313848000",
+                "userTel": "13060670964",
+                "doorTime": '星期一 8:00~10:00',
+                "userId": "173441",
+                "userName": 'jiayu',
+                "content": "我要修灯泡",
+                "formId": "123",
+                "state": "0"
+            },
+            "count": "4"
+        }
     cardshow(data);
 })
-})
+// })
 $('.content-r .fix-bar div').eq(2).on('click', function () { //处理完成
-    $.getJSON('url', {"state":"1"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "1"
-        //     },
-        //     "count": "4"
-        // }
+    // $.getJSON('url', {"state":"1"},function (data) {
+        let data = {
+            "card1": {
+                "dormtory": " 1234#55",
+                "date": "1541313848000",
+                "userTel": "13060670964",
+                "doorTime": '星期一 8:00~10:00',
+                "userId": "173441",
+                "userName": 'jiayu',
+                "content": "我要修灯泡",
+                "formId": "123",
+                "state": "0"
+            },
+            "count": "4"
+        }
     cardshow(data);
 })
-})
+// })
 $('.content-r .fix-bar div').eq(3).on('click', function () { //特殊处理
-    $.getJSON('url', {"state":"3"},function (data) {
-        // let data = {
-        //     "card1": {
-        //         "dormtory": " 1234#55",
-        //         "date": "1541313848000",
-        //         "userTel": "13060670964",
-        //         "doorTime": '星期一 8:00~10:00',
-        //         "userId": "173441",
-        //         "userName": 'jiayu',
-        //         "content": "我要修灯泡",
-        //         "formId": "123",
-        //         "state": "3"
-        //     },
-        //     "count": "4"
-        // }
+    // $.getJSON('url', {"state":"3"},function (data) {
+        let data = {
+            "card1": {
+                "dormtory": " 1234#55",
+                "date": "1541313848000",
+                "userTel": "13060670964",
+                "doorTime": '星期一 8:00~10:00',
+                "userId": "173441",
+                "userName": 'jiayu',
+                "content": "我要修灯泡",
+                "formId": "123",
+                "state": "0"
+            },
+            "count": "4"
+        }
     cardshow(data);
 })
-})
+// })
 
 /*************************记载用户基本信息******************************* */
 $(
