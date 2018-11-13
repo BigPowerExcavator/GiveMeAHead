@@ -48,8 +48,14 @@ public class AdminCenter extends HttpServlet {
 		 * 获取session,从而获得个人用户信息
 		 */
 		HttpSession session=request.getSession(false);
-		String adminNum = (String) session.getAttribute("adminInfo");
-		Map<String, Object> map =new RecAdmin().getAdminInfo(adminNum);
+		/**
+		 * 调式用
+		 * 记得把“1008”改为adminNm
+		 * 
+		 */
+		//String adminNum = (String) session.getAttribute("adminInfo");
+		
+		Map<String, Object> map =new RecAdmin().getAdminInfo("1008");
 		
 		//发送信息给浏览器
 		JSONObject jsonObject=new JSONObject();

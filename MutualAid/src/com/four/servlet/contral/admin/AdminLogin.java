@@ -50,9 +50,11 @@ public class AdminLogin extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//接受用户名和密码
-		JSONObject json=JsonReader.receivePost(request);
-		String adminNum = json.getString("adminNum");
-		String passwd = json.getString("passwd");
+		//JSONObject json=JsonReader.receivePost(request);
+		//String adminNum = json.getString("adminNum");
+		//String passwd = json.getString("passwd");
+		String adminNum = request.getParameter("adminNum");
+		String passwd = request.getParameter("passwd");
 		JSONObject jsonObject=new JSONObject();
 		if(new RecAdmin().LoginIn(adminNum,passwd)) {
 			System.out.println(adminNum+" "+passwd);

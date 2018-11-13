@@ -62,16 +62,15 @@ public class RecAdmin implements admin {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			ct = jdbcUtils.getConnection();
-			String sql = "select adminNum,grade,trueName,adminName,sex,phone from admin where adminNum=?";
+			String sql = "select adminNum,trueName,adminName,sex,phone from admin where adminNum=?";
 			ps = ct.prepareStatement(sql);
 			ps.setString(1, adminNum);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				int index = 0;
 				map.put("adminNum", String.valueOf(rs.getInt(++index)));
-				map.put("grade", rs.getString(++index));
 				map.put("trueName", rs.getString(++index));
-				map.put("userName", rs.getString(++index));
+				map.put("adminName", rs.getString(++index));
 				map.put("sex", rs.getString(++index));
 				map.put("phone", rs.getString(++index));
 			}
@@ -111,19 +110,18 @@ public class RecAdmin implements admin {
 	}
 
 	@Override
-	public boolean upadteAdminInfo(String adminNum, String userName, String trueName, String sex, String grade,
+	public boolean upadteAdminInfo(String adminNum, String userName, String trueName, String sex,
 			String phone, String adminId) {
 		boolean flag = false;
 		try {
 			ct = jdbcUtils.getConnection();
-			String sql = "update admin set adminNum=?, adminName=?,trueName=?,sex=?,grade=?,phone=? where adminNum=?";
+			String sql = "update admin set adminNum=?, adminName=?,trueName=?,sex=?,phone=? where adminNum=?";
 			ps = ct.prepareStatement(sql);
 			int index = 0;
 			ps.setString(++index, adminNum);
 			ps.setString(++index, userName);
 			ps.setString(++index, trueName);
 			ps.setString(++index, sex);
-			ps.setString(++index, grade);
 			ps.setString(++index, phone);
 			ps.setString(++index, adminId);
 			int num = ps.executeUpdate();

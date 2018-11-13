@@ -13,7 +13,7 @@ public interface admin {
 	public abstract boolean ProveAdmin(String adminNum);
 
 	// 修改用户信息
-	public abstract boolean upadteAdminInfo(String adminNum, String userName, String trueName, String sex, String grade,
+	public abstract boolean upadteAdminInfo(String adminNum, String userName, String trueName, String sex,
 			String phone, String adminId);
 
 	// 修改密码

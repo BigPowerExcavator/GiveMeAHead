@@ -70,7 +70,7 @@ public class UpdateAdminInfo extends HttpServlet {
 			jsonObject.put("changeAdmin", "false");
 			out.write(jsonObject.toString());
 		} else {
-			if (new RecAdmin().upadteAdminInfo(adminNum, adminName, trueName, sex, grade, phone, adminId)) {
+			if (new RecAdmin().upadteAdminInfo(adminNum, adminName, trueName, sex,phone, adminId)) {
 				jsonObject.put("changeAdmin", "true");
 				out.write(jsonObject.toString());
 			} else {

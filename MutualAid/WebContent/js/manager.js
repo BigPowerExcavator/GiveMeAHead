@@ -169,12 +169,12 @@ $('.content-r .fix-bar div').eq(3).on('click',function(){
 })
 /*************************记载用户基本信息******************************* */
 $(
-    $.getJSON('url', function (data) {
-        $('main .content-l .name-r').html(`${data.userName}`);
+    $.getJSON('/MutualAid/AdminCenter', function (data) {
+        $('main .content-l .name-r').html(`${data.adminName}`);
         $('main .content-l .tel-r').html(`${data.phone}`);
-        $('main .content-l .domc-r').html(`${data.dormitory}`);
-        $('.change input').eq(0).val(data.stuNum);
-        $('.change input').eq(1).val(data.userName);
+        $('main .content-l .domc-r').html(`${data.adminNum}`);
+        $('.change input').eq(0).val(data.adminNum);
+        $('.change input').eq(1).val(data.adminName);
         $('.change input').eq(2).val(data.trueName);
         $('.change input').eq(3).val(data.phone);
         $('.change input').eq(4).val(data.dormitory);
