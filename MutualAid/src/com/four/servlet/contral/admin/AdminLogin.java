@@ -54,10 +54,9 @@ public class AdminLogin extends HttpServlet {
 		//String adminNum = json.getString("adminNum");
 		//String passwd = json.getString("passwd");
 		String adminNum = request.getParameter("adminNum");
-		String passwd = request.getParameter("passwd");
+		String passwd = request.getParameter("pwd");
 		JSONObject jsonObject=new JSONObject();
 		if(new RecAdmin().LoginIn(adminNum,passwd)) {
-			System.out.println(adminNum+" "+passwd);
 			//验证成功  把adminNum放入session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("adminInfo",adminNum);

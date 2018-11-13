@@ -53,9 +53,9 @@ public class AdminCenter extends HttpServlet {
 		 * 记得把“1008”改为adminNm
 		 * 
 		 */
-		//String adminNum = (String) session.getAttribute("adminInfo");
+		String adminNum = (String) session.getAttribute("adminInfo");
 		
-		Map<String, Object> map =new RecAdmin().getAdminInfo("1008");
+		Map<String, Object> map =new RecAdmin().getAdminInfo(adminNum);
 		
 		//发送信息给浏览器
 		JSONObject jsonObject=new JSONObject();

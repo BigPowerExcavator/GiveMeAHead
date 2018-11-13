@@ -52,6 +52,7 @@ addEventListener (clear2,'click',function(){
 });
 function Login(){
     $.getJSON('/MutualAid/AdminLogin',{"adminNum":input1.value.toString(),'pwd':input2.value.toString()},function(){
+    	window.location.href = "../manager.html"; //这里的路径我不知道要不要加上一级，你试一下
         alert('done');
     })
 }
