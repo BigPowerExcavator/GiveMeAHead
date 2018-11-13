@@ -128,8 +128,8 @@ public class RecGoods {
 		return result;
 	}
 	
-	public String[] getGoodsImgs(String goodsId) {
-		String[] url=null;
+	public String getGoodsImgs(String goodsId) {
+		String url=null;
 		try {
 			ct=C3p0Utils.getConnection();
 			String sql="select goodsImg from idlegoods where goodsId=?";
@@ -137,13 +137,51 @@ public class RecGoods {
 			ps.setString(1, goodsId);
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				url=rs.getString(1).split("###");
+				url=rs.getString(1);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}finally {
 			C3p0Utils.close(ct, ps, rs);
 		}
 		return url;
+	}
+	
+	public boolean changeGoodsImgs(String goodsId,String url) {
+		boolean result=false;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="update idlegoods set goodsImg=? where goodsId=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, url);
+			ps.setString(2, goodsId);
+			ps.executeUpdate();
+			result=true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return result;
+	}
+	
+	public boolean deleteGoodCard(String goodsId) {
+		boolean result=false;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="delete from idlegoods where goodsId=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, goodsId);
+			ps.executeUpdate();
+			result=true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return result;
 	}
 }
