@@ -42,11 +42,10 @@ public class AdminChangeStateServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		//接受浏览器发来的信息
-		JSONObject json=JsonReader.receivePost(request);
-		String formId=(String)json.get("formId");
-		String state=(String)json.get("state");
-		String afterState=(String)json.get("afterState");
-		JSONObject jsonObject=new JSONObject();
+		//JSONObject json=JsonReader.receivePost(request);
+		String formId=(String)request.getParameter("formId");
+		String state=(String)request.getParameter("state");
+		String afterState=(String)request.getParameter("afterState");
 		//检查操作规范并修改数据库
 		int result=new RepairImp().checkRepairState(state, afterState, formId);
 		System.out.println(result);

@@ -70,12 +70,39 @@ function cardshow(data) {
         }
         
         $('.card-wrap').append(text);
-
+        stateButton(state);
     }
+}
+/****************************这是对应的按键的方法**************************** */
+function stateButton(state){
+   let url = '/MutualAid/AdminChangeStateServlet'; //因为都是同一个url，所以你改这个就好了哈
+   $($(`.card-wrap .state${state}`).on('click', function (e) {
+       $this = $(this);
+       let $target = $(e.target);
+       let name = $this.attr('name');
+       console.log($target.attr('class'));
+       let  hide = function(after){
+           $.getJSON(url,{"formId":`${name}`,"state":`${state}`,"afterState":`${after}`});
+          $this.slideUp(500);
+          setTimeout(() => {
+              $this.remove();
+          }, 500);
+       }
+       if($target.attr('class') == "button-l add"){
+           hide("2");
+       }else if($target.attr('class') == "button-r special"){
+           hide("3");
+       }else if($target.attr('class') == "button-l handle"){
+           hide("1");
+       }else if($target.attr('class') == "button-m handle"){
+           hide("1");
+       }
+       e.stopPropagation();
+   }))
 }
 /****************************这是页面刚开始加载卡片*************************** */
 $(
-    $.getJSON('url', function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', function (data) {
         data = {
             "card1": {
                 "dormtory": " 1234#55",
@@ -128,7 +155,7 @@ $(
 )
 /****************************这是页面加载未处理的卡片 ***********************/
 $('.content-r .fix').on('click',function(){
-    $.getJSON('url', {"state":"0"},function (data) {
+    $.getJSON('/MutualAid/AdminCetRepairCards', {"state":"0"},function (data) {
     //     data = {
     //         "card1": {
     //             "dormtory": " 1234#55",

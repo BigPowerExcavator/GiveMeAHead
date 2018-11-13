@@ -17,7 +17,15 @@ public class AdminGetCardService {
 	
 	public ArrayList<Map<String, String>> getRepairCards(String state){
 		cards=new ArrayList<Map<String, String>>();
-		ArrayList<RepairBean> cardList=repairFormImp.getAllCard(state);
+		ArrayList<RepairBean> cardList;
+		if(state!=null) {
+			cardList=repairFormImp.getAllCard(state);
+		}else {
+			cardList=repairFormImp.getAllCard("0");
+			cardList.addAll(repairFormImp.getAllCard("1"));
+			cardList.addAll(repairFormImp.getAllCard("2"));
+			cardList.addAll(repairFormImp.getAllCard("3"));
+		}		
 		//System.out.println(state+"   "+cardList.size());
 		for(int i=0;i<cardList.size();i++) {
 			RepairBean repairBean=cardList.get(i);
