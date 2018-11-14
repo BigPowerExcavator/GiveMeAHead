@@ -42,7 +42,7 @@ public class GetGoodsCards extends HttpServlet {
 		String sort=request.getParameter("sort");
 		String beginNum="0";
 		GoodsManageService goodsManageService=new GoodsManageService();
-		Map<String, Object> cards=goodsManageService.getGoodsCard(beginNum, "12", type, sort);
+		Map<String, Object> cards=goodsManageService.getGoodsCard(beginNum, "30", type, sort);
 		cards.put("count", goodsManageService.getLimitCardsCount(type, sort));
 		
 		System.out.println(cards.toString());

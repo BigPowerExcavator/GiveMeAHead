@@ -48,57 +48,6 @@ $(".body .shop-nav").on('click',function(e){
 }
 //*********************** */ 这是发送请求的方法*****************************/
 function getCard (){
-	let data = {
-		"card1": {
-			"goodsImg": "",
-			"stuNum": "",
-			"goodsId": "1",
-			"goodsIntro": "",
-			"goodsPrice": "",
-			"time": "",
-			"title": "一个耳机",
-			"userName": "",
-			"goodsName": "",
-			"goodsType": ""
-		},
-		"card2": {
-			"goodsImg": "",
-			"stuNum": "",
-			"goodsId": "2",
-			"goodsIntro": "",
-			"goodsPrice": "",
-			"time": "",
-			"title": "macBook",
-			"userName": "",
-			"goodsName": "",
-			"goodsType": ""
-		},
-		"count": 4,
-		"card3": {
-			"goodsImg": "",
-			"stuNum": "",
-			"goodsId": "4",
-			"goodsIntro": "",
-			"goodsPrice": "",
-			"time": "",
-			"title": "能踩的那种",
-			"userName": "",
-			"goodsName": "",
-			"goodsType": ""
-		},
-		"card4": {
-			"goodsImg": "",
-			"stuNum": "",
-			"goodsId": "6",
-			"goodsIntro": "",
-			"goodsPrice": "",
-			"time": "",
-			"title": "9成新",
-			"userName": "",
-			"goodsName": "",
-			"goodsType": ""
-		}
-	}
 	let type = $(".body .tag-nav li.clicked").index()+"";
 	let sort = $(".body .sort-nav li.clicked").index()+"";
 	switch(sort){
@@ -117,8 +66,10 @@ function getCard (){
 
 	}
 	console.log({"type":type,"sort":sort})
-	showCard(data);
-	// $.getJSON("url",{"type":type,"sort":sort},showCard(data))
+	$.getJSON("/MutualAid/GetGoodsCards",{"type":type,"sort":sort},function(data){
+		showCard(data);
+	})
+
 }
 /***************************这是每次点击加载卡片的方法 **********************/
 function showCard(data){

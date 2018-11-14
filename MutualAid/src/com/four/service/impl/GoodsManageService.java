@@ -150,11 +150,13 @@ public class GoodsManageService {
 			}
 			good.put("title", goodBean.getTitle());
 			good.put("userName", goodBean.getUserName());
+			System.out.println(goodBean.getGoodsPrice());
 			if(goodBean.getGoodsPrice()==null) {
 				good.put("goodsPrice", "");
 			}else {
 				good.put("goodsPrice", Float.parseFloat(goodBean.getGoodsPrice()+"")+"");
-			}			
+			}
+			good.put("formId", goodBean.getGoodsId());
 			cards.put("card"+(j+1), good);
 		}
 		return cards;

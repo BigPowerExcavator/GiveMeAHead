@@ -20,12 +20,19 @@ public class RecGoods {
 	public ArrayList<GoodBean> getAllGoodsCards(String beginNum,String num,String type,String sort){
 		ArrayList<GoodBean> cards=new ArrayList<GoodBean>();
 		try {
+			int index=0;
 			ct=C3p0Utils.getConnection();
-			String sql="select title,goodsImg,userName,goodsId from idlegoods where goodsType=? "+sort+" limit ?,?";
-			ps=ct.prepareStatement(sql);
-			ps.setString(1, type);
-			ps.setInt(2, Integer.parseInt(beginNum));
-			ps.setInt(3, Integer.parseInt(num));
+			String sql="select title,goodsImg,userName,goodsId,goodsPrice from idlegoods ";			
+			if(("0").equals(type)) {
+				sql+="where goodsType in('1','2','3','4','5','6','7') "+sort+" limit ?,?";
+				ps=ct.prepareStatement(sql);
+			}else {
+				sql+="where goodsType =? "+sort+" limit ?,?";
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, type);
+			}
+			ps.setInt(++index, Integer.parseInt(beginNum));
+			ps.setInt(++index, Integer.parseInt(num));
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				GoodBean goodBean=new GoodBean();
@@ -33,6 +40,7 @@ public class RecGoods {
 				goodBean.setGoodsImg(rs.getString(2));
 				goodBean.setUserName(rs.getString(3));
 				goodBean.setGoodsId(rs.getString(4));
+				goodBean.setGoodsPrice(rs.getString(5));
 				cards.add(goodBean);
 			}
 		} catch (Exception e) {
@@ -51,10 +59,17 @@ public class RecGoods {
 	public int getLimitCardCount(String type,String sort) {
 		int count=-1;
 		try {
+			int index=0;
 			ct=C3p0Utils.getConnection();
-			String sql="select count(*) from idlegoods where goodsType=? "+sort;
-			ps=ct.prepareStatement(sql);
-			ps.setString(1, type);
+			String sql="select count(*) from idlegoods ";
+			if(("0").equals(type)) {
+				sql+="where goodsType in('1','2','3','4','5','6','7') "+sort;
+				ps=ct.prepareStatement(sql);
+			}else {
+				sql+="where goodsType =? "+sort;
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, type);
+			}
 			rs=ps.executeQuery();
 			if(rs.next()) {
 				count=rs.getInt(1);
@@ -269,13 +284,21 @@ public class RecGoods {
 	public ArrayList<GoodBean> titleFindCards(String addSql,String beginNum,String num,String type,String sort){
 		ArrayList<GoodBean> cards=new ArrayList<GoodBean>();
 		try {
+			int index=0;
 			ct=C3p0Utils.getConnection();
-			String sql="select title,goodsImg,userName,goodsId from idlegoods where title like ? and goodsType=?"+sort+" limit ?,?";
-			ps=ct.prepareStatement(sql);
-			ps.setString(1, addSql);
-			ps.setString(2, type);
-			ps.setInt(3, Integer.parseInt(beginNum));
-			ps.setInt(4, Integer.parseInt(num));
+			String sql="select title,goodsImg,userName,goodsId from idlegoods where title like ? ";
+			if(("0").equals(type)) {
+				sql+="and goodsType in('1','2','3','4','5','6','7') "+sort+" limit ?,?";
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, addSql);
+			}else {
+				sql+="and goodsType =? "+sort+" limit ?,?";
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, addSql);
+				ps.setString(++index, type);
+			}
+			ps.setInt(++index, Integer.parseInt(beginNum));
+			ps.setInt(++index, Integer.parseInt(num));
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				GoodBean goodBean=new GoodBean();
@@ -297,11 +320,19 @@ public class RecGoods {
 	public int titleFindCardsCount(String addSql,String type,String sort) {
 		int count=-1;
 		try {
+			int index=0;
 			ct=C3p0Utils.getConnection();
-			String sql="select count(*) from idlegoods where title like ? and goodsType=?"+sort;
-			ps=ct.prepareStatement(sql);
-			ps.setString(1, addSql);
-			ps.setString(2, type);
+			String sql="select count(*) from idlegoods where title like ? ";
+			if(("0").equals(type)) {
+				sql+="and goodsType in('1','2','3','4','5','6','7') "+sort;
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, addSql);
+			}else {
+				sql+="and goodsType =? "+sort;
+				ps=ct.prepareStatement(sql);
+				ps.setString(++index, addSql);
+				ps.setString(++index, type);
+			}
 			rs=ps.executeQuery();
 			if(rs.next()) {
 				count=rs.getInt(1);
