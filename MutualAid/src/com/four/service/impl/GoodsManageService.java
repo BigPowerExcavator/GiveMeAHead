@@ -9,7 +9,10 @@ import com.four.javaBean.GoodBean;
 
 public class GoodsManageService {
 	
-	RecGoods recGoods=new RecGoods();;
+	RecGoods recGoods=new RecGoods();
+	
+	//每页显示的卡片数
+	int pageCount=12;
 	
 	public boolean writeGoodsCard(GoodBean goodBean) {
 		boolean result=false;
@@ -70,25 +73,35 @@ public class GoodsManageService {
 		for(int i=0;i<tempInfo.length;i++) {
 			addSql+=tempInfo[i]+"%";
 		}
-		int count=recGoods.titleFindCardsCount(addSql);
+		//int count=recGoods.titleFindCardsCount(addSql);
 		ArrayList<GoodBean> arrayList=recGoods.titleFindCards(addSql,beginNum,num);
 		Map<String, Object> cards=new HashMap<String,Object>();
-		cards.put("count", count);
+		//cards.put("count", count);
 		for(int j=0;j<arrayList.size();j++) {			
 			cards.put("cards"+(j+1), arrayList.get(j));
 		}
 		return cards;
 	}
 	
+	public Map<String ,Object> findGoodsCard(String info,String beginNum){
+		return this.findGoodsCard(info, beginNum, pageCount+"");
+	}
+	
 	public Map<String ,Object> getGoodsCard(String beginNum,String num){
-		int count=recGoods.getAllGoodsCardsCount();
+		//int count=recGoods.getAllGoodsCardsCount();
 		ArrayList<GoodBean> arrayList=recGoods.getAllGoodsCards(beginNum, num);
 		Map<String, Object> cards=new HashMap<String,Object>();
-		cards.put("count", count);
+		//cards.put("count", count);
 		for(int j=0;j<arrayList.size();j++) {			
 			cards.put("cards"+(j+1), arrayList.get(j));
 		}
 		return cards;
 	}
+	
+	public Map<String ,Object> getGoodsCard(String beginNum){
+		return this.getGoodsCard(beginNum, pageCount+"");
+	}
+	
+	
 	
 }

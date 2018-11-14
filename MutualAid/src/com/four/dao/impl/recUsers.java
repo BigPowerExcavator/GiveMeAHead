@@ -214,5 +214,25 @@ public class recUsers implements Users{
 		}	
 		return map;
 	}
+	
+	public String getUserImg(String stuNum) {
+		String url=null;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select userImg from users where stuNum=?";
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, stuNum);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				url=rs.getString(1);
+			}		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return url;
+	}
 
 }

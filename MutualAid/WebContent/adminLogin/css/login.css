@@ -15,7 +15,7 @@ html,body{
     width: 100%;
     height:100%;
     background-size: cover;
-    background-image: url('../img/bg-img.jpg');
+    background-image: url('../img/bg-img.png');
     overflow: hidden;
     background-repeat: no-repeat;
 }
@@ -36,10 +36,10 @@ html,body{
 }
 .top .top-l{
     float: left;
-    width: 252px;
-    height: 100px;
-    background-image: url('../img/icon-qzone.png');
-    background-size: contain;
+    width: 200px;
+    height: 200px;
+    background: url('../img/icon.png') no-repeat;
+    background-size: 100%;
     cursor: pointer;
 }
 
