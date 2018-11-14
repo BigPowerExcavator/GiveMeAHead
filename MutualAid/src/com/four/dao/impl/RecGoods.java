@@ -116,6 +116,7 @@ public class RecGoods {
 		return goodBean;
 	}
 	
+	
 	public boolean changeGoodsInfo(GoodBean goodBean) {
 		boolean result=false;
 		try {
@@ -162,6 +163,43 @@ public class RecGoods {
 			ps.setString(9, goodBean.getUserName());
 			ps.executeUpdate();
 			result=true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return result;
+	}
+	/*
+	 * @jinner
+	 * 修改添加闲置卡片
+	 * 加上的
+	 * */
+	public boolean ApplyIdleCard(String stuNum,String goodsName,String goodsImg,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String userName) {
+		boolean result=false;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,userName)"
+					+ "values(?,?,?,?,?,?,?,?,?)";
+			ps=ct.prepareStatement(sql);
+			int index=0;
+			ps.setString(++index,stuNum);
+			ps.setString(++index, goodsName);
+			ps.setString(++index, goodsImg);
+			ps.setString(++index, goodsType);
+			ps.setString(++index, goodsPrice);
+			ps.setString(++index, title);
+			ps.setString(++index, time);
+			ps.setString(++index, goodsIntro);
+			ps.setString(++index,userName);
+			ps.executeUpdate();
+			//加判断
+			int num=ps.executeUpdate();
+			if(num==1) {
+				result = true;
+			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -296,4 +334,6 @@ public class RecGoods {
 		}
 		return count;
 	}
+	
+	
 }
