@@ -48,7 +48,6 @@ public class AdminChangeStateServlet extends HttpServlet {
 		String afterState=(String)request.getParameter("afterState");
 		//检查操作规范并修改数据库
 		int result=new RepairImp().checkRepairState(state, afterState, formId);
-		System.out.println(result);
 		/*switch (result) {
 		case 0:
 			jsonObject.put("status", "1502");
