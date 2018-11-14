@@ -1,4 +1,4 @@
-package com.four.servlet.contral;
+ package com.four.servlet.contral;
 
 import java.io.IOException;
 import java.io.PrintWriter;

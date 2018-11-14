@@ -17,14 +17,15 @@ public class RecGoods {
 	private ResultSet rs=null;
 	private CallableStatement cs=null;
 	
-	public ArrayList<GoodBean> getAllGoodsCards(String beginNum,String num){
+	public ArrayList<GoodBean> getAllGoodsCards(String beginNum,String num,String type,String sort){
 		ArrayList<GoodBean> cards=new ArrayList<GoodBean>();
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="select title,goodsImg,userName,goodsId from idlegoods order by time DESC limit ?,?";
+			String sql="select title,goodsImg,userName,goodsId from idlegoods where goodsType=? "+sort+" limit ?,?";
 			ps=ct.prepareStatement(sql);
-			ps.setString(1, beginNum);
-			ps.setString(2, num);
+			ps.setString(1, type);
+			ps.setInt(2, Integer.parseInt(beginNum));
+			ps.setInt(3, Integer.parseInt(num));
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				GoodBean goodBean=new GoodBean();
@@ -41,6 +42,30 @@ public class RecGoods {
 			C3p0Utils.close(ct, ps, rs);
 		}
 		return cards;
+	}
+	
+	public ArrayList<GoodBean> getAllGoodsCards(String beginNum,String num,String sort){
+		return this.getAllGoodsCards(beginNum, beginNum, null, sort);
+	}
+	
+	public int getLimitCardCount(String type,String sort) {
+		int count=-1;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select count(*) from idlegoods where goodsType=? "+sort;
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, type);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return count;
 	}
 	
 	public int getAllGoodsCardsCount() {
@@ -131,8 +156,7 @@ public class RecGoods {
 			ps.setString(4, goodBean.getGoodsType());
 			ps.setString(5, goodBean.getGoodsPrice());
 			ps.setString(6, goodBean.getTitle());
-			@SuppressWarnings("deprecation")
-			Timestamp t = new Timestamp(new Long(goodBean.getTime()));
+			Timestamp t = new Timestamp(Long.parseLong(goodBean.getTime()));
 			ps.setTimestamp(7, t);
 			ps.setString(8, goodBean.getGoodsIntro());
 			ps.setString(9, goodBean.getUserName());
@@ -204,15 +228,16 @@ public class RecGoods {
 		return result;
 	}
 	
-	public ArrayList<GoodBean> titleFindCards(String addSql,String beginNum,String num){
+	public ArrayList<GoodBean> titleFindCards(String addSql,String beginNum,String num,String type,String sort){
 		ArrayList<GoodBean> cards=new ArrayList<GoodBean>();
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="select title,goodsImg,userName,goodsId from idlegoods where title like ? order by time DESC limit ?,?";
+			String sql="select title,goodsImg,userName,goodsId from idlegoods where title like ? and goodsType=?"+sort+" limit ?,?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, addSql);
-			ps.setString(2, beginNum);
-			ps.setString(3, num);
+			ps.setString(2, type);
+			ps.setInt(3, Integer.parseInt(beginNum));
+			ps.setInt(4, Integer.parseInt(num));
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				GoodBean goodBean=new GoodBean();
@@ -229,6 +254,27 @@ public class RecGoods {
 			C3p0Utils.close(ct, ps, rs);
 		}
 		return cards;
+	}
+	
+	public int titleFindCardsCount(String addSql,String type,String sort) {
+		int count=-1;
+		try {
+			ct=C3p0Utils.getConnection();
+			String sql="select count(*) from idlegoods where title like ? and goodsType=?"+sort;
+			ps=ct.prepareStatement(sql);
+			ps.setString(1, addSql);
+			ps.setString(2, type);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				count=rs.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			C3p0Utils.close(ct, ps, rs);
+		}
+		return count;
 	}
 	
 	public int titleFindCardsCount(String addSql) {
