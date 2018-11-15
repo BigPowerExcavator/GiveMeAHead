@@ -220,3 +220,146 @@ $('main .content-r .sum ul').on('click', function (e) {
         "background-color": "white"
     })
 })
+/************************************************ */
+/***************************这是修改信息的弹窗************************ */
+$(".change-btn").on('click', function () {
+	$(".change").show().on('click', function (e) {
+		$(this).hide();
+	}).find('.window').on('click', function (e) {
+		e.stopPropagation();
+	})
+})
+/*************************这是修改密码的弹窗**************************** */
+$(".change-pwd-btn").on('click', function () {
+	$(".change-pwd").show().on('click', function (e) {
+		$(this).hide();
+	}).find('.window').on('click', function (e) {
+		e.stopPropagation();
+	})
+})
+/****************************这是修改信息的按钮************************** */
+let keyEnter = (obj, fn) => {
+	$(obj).on("keyup", function (e) {
+		if (e.which == '13') {
+			fn();
+		}
+	})
+};
+$('.change .button').on('click', register);
+keyEnter(".change input:last", register)
+
+function register() {
+	let registerId = $('.change input').eq(0).val();
+	let nickName = $('.change input').eq(1).val();
+	let registerName = $('.change input').eq(2).val();
+	let registerTel = $('.change input').eq(3).val();
+	let regId = /^\d{9}$/;
+	let regTel = /^\d{11}$/;
+	if (regId.test(registerId)) {
+		if (regTel.test(registerTel)) {
+			if (registerName == '') {
+				layer.msg('名字不能为空')
+				//名字为空
+			} else {
+				let user = {
+					stuNum: registerId,
+					userName: nickName,
+					trueName: registerName,
+					sex: "女",
+					phone: registerTel
+				}
+				$.ajax({
+					url: 'url',   //这是修改信息的url
+					data: JSON.stringify(user),
+					dataType: 'json',
+					method: 'POST',
+					success: function (data) {
+						if (data['changeUser'] == 'true') {
+							window.location.reload();
+						}else{
+							layer.msg('请稍后重试');
+						}
+					},
+					error: function () {
+						alert('error');
+					}
+				})
+			}
+		} else {
+			layer.msg('手机必须为11位数字');
+			// 手机必须为11位数字
+		}
+	} else {
+		layer.msg('提示账号必须为9位数得学号');
+		//提示账号必须为9位数得学号
+	}
+}
+/*************************只是修改密码确认按钮******************** */
+{
+let [x,y,z] = [1,1,1];
+
+$('.change-pwd .button').on('click', changePwd);
+keyEnter(".change-pwd input:last", changePwd);
+let $input = $('.change-pwd input');
+$input.eq(0).on('blur',function(){
+	let oldpwd = {"flag":"false","oldPasswd": $input.eq(0).val()};
+	console.log(oldpwd);
+		$.getJSON('url',oldpwd,function(data){     //这是失去焦点验证原密码的url
+			console.log(data['state']);
+			if(data['state'] != 'true'){
+				layer.msg('原密码输入有误');
+				x = 0;
+			}
+		})
+	})
+	$input.eq(1).on('blur',function(){
+		// 验证新密码是否符合格式
+		let regPwd = /^[^\s]+$/
+		if(!regPwd.test($(this).val())){
+			layer.msg('请输入正确的密码格式')
+			x = 0;
+		}
+	})
+	$input.eq(2).on('blur',function(){
+		// 验证源密码是否正确
+		if($input.eq(2).val()!=$input.eq(1).val()){
+			layer.msg('前后密码不一致');
+			x = 0;
+		}
+	})
+function changePwd(){
+	if(x == 1){
+		if(y == 1){
+			if(z == 1){
+				let newpwd = {"flag":"true","newPasswd":$input.eq(1).val()};
+				$.getJSON("url",newpwd,function(data){     //这是修改密码的url
+					if(data['newState'] = true){
+						window.location.reload();
+					}else{
+						layer.msg('服务器错误');
+					}
+				})
+			}else{
+				layer.msg('前后密码不一致');
+			}
+		}else{
+			layer.msg('请输入正确的密码格式')
+		}
+	}else{
+	layer.msg('原密码输入有误');
+	}
+}
+}
+/***************************这是信息初始加载********************************** */
+$(
+    $.getJSON('url', function (data) {    //这里填加载信息的url
+		$('main .content-l .name-r').html(`${data.trueName}`);
+		$('main .content-l .tel-r').html(`${data.phone}`);
+		$('main .content-l .domc-r').html(`${data.userDomc}`);
+		$('.change input').eq(0).val(data.stuNum);
+		$('.change input').eq(1).val(data.userName);
+		$('.change input').eq(2).val(data.trueName);
+		$('.change input').eq(3).val(data.phone);
+        $('.change input').eq(4).val(data.dormitory);
+    })
+)

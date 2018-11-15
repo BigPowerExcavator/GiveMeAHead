@@ -180,6 +180,9 @@ font-size: 24px;
     border-left-color: #a8d2ba;
 }
 /*******************下面的标签页***********************/
+.left .sort-nav{
+    margin-top: 35px;
+}
 .left .sort-nav li.hide{
     overflow: hidden;
     width: 0;
@@ -239,6 +242,7 @@ font-size: 24px;
     height: 1300px;
 }
 .right .shop{
+    color: #707070;
     height: 100%;
     width: 100%;
 }
