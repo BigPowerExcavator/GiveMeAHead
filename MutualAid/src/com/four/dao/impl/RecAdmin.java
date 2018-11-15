@@ -61,7 +61,7 @@ public class RecAdmin implements admin {
 	public Map<String, Object> getAdminInfo(String adminNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			ct = jdbcUtils.getConnection();
+			ct = C3p0Utils.getConnection();
 			String sql = "select adminNum,trueName,adminName,sex,phone from admin where adminNum=?";
 			ps = ct.prepareStatement(sql);
 			ps.setString(1, adminNum);
@@ -88,7 +88,7 @@ public class RecAdmin implements admin {
 		boolean flag = false;
 		int adminSum = 0; // 用于记录数据库中有没该用户
 		try {
-			ct = jdbcUtils.getConnection();
+			ct = C3p0Utils.getConnection();
 			String sql = "select count(*) from admin where adminNum=?";
 			ps = ct.prepareStatement(sql);
 			ps.setString(1, adminNum);
@@ -96,6 +96,7 @@ public class RecAdmin implements admin {
 			if (rs.next()) {
 				adminSum = rs.getInt(1);
 			}
+			//System.out.println(adminSum);
 			if (adminSum == 0) {
 				// 可以注册 或 可以修改
 				flag = true;
