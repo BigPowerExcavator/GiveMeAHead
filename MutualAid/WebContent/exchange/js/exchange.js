@@ -48,7 +48,6 @@ $(".body .shop-nav").on('click',function(e){
 }
 //*********************** */ 这是发送请求的方法*****************************/
 function getCard (){
-<<<<<<< HEAD
 	let data = {
 		"card1": {
 			"goodsImg": "../img/bg.jpg",
@@ -100,8 +99,6 @@ function getCard (){
 			"goodsType": ""
 		}
 	}
-=======
->>>>>>> 95f214de69e23335654bc4f36f84e6000f551cc4
 	let type = $(".body .tag-nav li.clicked").index()+"";
 	let sort = $(".body .sort-nav li.clicked").index()+"";
 	switch(sort){
@@ -119,16 +116,8 @@ function getCard (){
 			break;
 
 	}
-<<<<<<< HEAD
 	showCard(data);
 	$.getJSON("url",{"type":type,"sort":sort},showCard(data))
-=======
-	console.log({"type":type,"sort":sort})
-	$.getJSON("/MutualAid/GetGoodsCards",{"type":type,"sort":sort},function(data){
-		showCard(data);
-	})
-
->>>>>>> 95f214de69e23335654bc4f36f84e6000f551cc4
 }
 /***************************这是每次点击加载卡片的方法 **********************/
 function showCard(data){
