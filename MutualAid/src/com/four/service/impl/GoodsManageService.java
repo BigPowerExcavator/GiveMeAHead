@@ -67,41 +67,150 @@ public class GoodsManageService {
 		return goodBean;
 	}
 	
-	public Map<String ,Object> findGoodsCard(String info,String beginNum,String num){
+	public Map<String ,Object> findGoodsCard(String info,String beginNum,String num,String type,String sort){
 		String[] tempInfo=info.split("");
 		String addSql="%";
 		for(int i=0;i<tempInfo.length;i++) {
 			addSql+=tempInfo[i]+"%";
 		}
+		String addSort=null;
+		switch (sort) {
+		case "timeUp":
+			addSort="order by time DESC";
+			break;
+		case "timeDown":
+			addSort="order by time";
+			break;
+		case "priceUp":
+			addSort="order by goodsPrice DESC";
+			break;
+		case "priceDown":
+			addSort="order by goodsPrice";
+			break;
+		default:
+			break;
+		}
 		//int count=recGoods.titleFindCardsCount(addSql);
-		ArrayList<GoodBean> arrayList=recGoods.titleFindCards(addSql,beginNum,num);
+		ArrayList<GoodBean> arrayList=recGoods.titleFindCards(addSql,beginNum,num,type,addSort);
 		Map<String, Object> cards=new HashMap<String,Object>();
 		//cards.put("count", count);
-		for(int j=0;j<arrayList.size();j++) {			
-			cards.put("cards"+(j+1), arrayList.get(j));
+		for(int j=0;j<arrayList.size();j++) {	
+			GoodBean goodBean=arrayList.get(j);
+			Map<String, String> good=new HashMap<String ,String>();
+			if(goodBean.getGoodsImg()==null) {
+				good.put("goodsImg", "");
+			}else {
+				good.put("goodsImg", (goodBean.getGoodsImg()).split("###")[0]);
+			}
+			good.put("title", goodBean.getTitle());
+			good.put("userName", goodBean.getUserName());
+			if(goodBean.getGoodsPrice()==null) {
+				good.put("goodsPrice", "");
+			}else {
+				good.put("goodsPrice", Float.parseFloat(goodBean.getGoodsPrice()+"")+"");
+			}
+			cards.put("card"+(j+1), good);
 		}
 		return cards;
 	}
 	
 	public Map<String ,Object> findGoodsCard(String info,String beginNum){
-		return this.findGoodsCard(info, beginNum, pageCount+"");
+		return this.findGoodsCard(info, beginNum, pageCount+"",null,null);
 	}
 	
-	public Map<String ,Object> getGoodsCard(String beginNum,String num){
+	public Map<String ,Object> getGoodsCard(String beginNum,String num,String type,String sort){
 		//int count=recGoods.getAllGoodsCardsCount();
-		ArrayList<GoodBean> arrayList=recGoods.getAllGoodsCards(beginNum, num);
+		String addSort=null;
+		switch (sort) {
+		case "timeUp":
+			addSort="order by time DESC";
+			break;
+		case "timeDown":
+			addSort="order by time";
+			break;
+		case "priceUp":
+			addSort="order by goodsPrice DESC";
+			break;
+		case "priceDown":
+			addSort="order by goodsPrice";
+			break;
+		default:
+			break;
+		}
+		ArrayList<GoodBean> arrayList=recGoods.getAllGoodsCards(beginNum, num,type,addSort);
 		Map<String, Object> cards=new HashMap<String,Object>();
 		//cards.put("count", count);
-		for(int j=0;j<arrayList.size();j++) {			
-			cards.put("cards"+(j+1), arrayList.get(j));
+		for(int j=0;j<arrayList.size();j++) {	
+			GoodBean goodBean=arrayList.get(j);
+			Map<String, String> good=new HashMap<String ,String>();
+			if(goodBean.getGoodsImg()==null) {
+				good.put("goodsImg", "");
+			}else {
+				good.put("goodsImg", (goodBean.getGoodsImg()).split("###")[0]);
+			}
+			good.put("title", goodBean.getTitle());
+			good.put("userName", goodBean.getUserName());
+			System.out.println(goodBean.getGoodsPrice());
+			if(goodBean.getGoodsPrice()==null) {
+				good.put("goodsPrice", "");
+			}else {
+				good.put("goodsPrice", Float.parseFloat(goodBean.getGoodsPrice()+"")+"");
+			}
+			good.put("formId", goodBean.getGoodsId());
+			cards.put("card"+(j+1), good);
 		}
 		return cards;
 	}
 	
 	public Map<String ,Object> getGoodsCard(String beginNum){
-		return this.getGoodsCard(beginNum, pageCount+"");
+		return this.getGoodsCard(beginNum, pageCount+"",null,null);
 	}
 	
+	public int getLimitCardsCount(String type,String sort) {
+		String addSort=null;
+		switch (sort) {
+		case "timeUp":
+			addSort="order by time DESC";
+			break;
+		case "timeDown":
+			addSort="order by time";
+			break;
+		case "priceUp":
+			addSort="order by goodsPrice DESC";
+			break;
+		case "priceDown":
+			addSort="order by goodsPrice";
+			break;
+		default:
+			break;
+		}
+		return recGoods.getLimitCardCount(type, addSort);
+	}
 	
+	public int getTitleCardsCount(String info,String type,String sort) {
+		String[] tempInfo=info.split("");
+		String addSql="%";
+		for(int i=0;i<tempInfo.length;i++) {
+			addSql+=tempInfo[i]+"%";
+		}
+		String addSort=null;
+		switch (sort) {
+		case "timeUp":
+			addSort="order by time DESC";
+			break;
+		case "timeDown":
+			addSort="order by time";
+			break;
+		case "priceUp":
+			addSort="order by goodsPrice DESC";
+			break;
+		case "priceDown":
+			addSort="order by goodsPrice";
+			break;
+		default:
+			break;
+		}
+		return recGoods.titleFindCardsCount(addSql,type,addSort);
+	}
 	
 }
