@@ -50,51 +50,51 @@ $(".body .shop-nav").on('click',function(e){
 function getCard (){
 	let data = {
 		"card1": {
-			"goodsImg": "",
+			"goodsImg": "../img/bg.jpg",
 			"stuNum": "",
 			"goodsId": "1",
 			"goodsIntro": "",
-			"goodsPrice": "",
+			"goodsPrice": "12",
 			"time": "",
 			"title": "一个耳机",
-			"userName": "",
+			"userName": "杨1",
 			"goodsName": "",
 			"goodsType": ""
 		},
 		"card2": {
-			"goodsImg": "",
+			"goodsImg": "../img/bg.jpg",
 			"stuNum": "",
 			"goodsId": "2",
 			"goodsIntro": "",
-			"goodsPrice": "",
+			"goodsPrice": "123",
 			"time": "",
 			"title": "macBook",
-			"userName": "",
+			"userName": "杨12",
 			"goodsName": "",
 			"goodsType": ""
 		},
 		"count": 4,
 		"card3": {
-			"goodsImg": "",
+			"goodsImg": "../img/bg.jpg",
 			"stuNum": "",
 			"goodsId": "4",
 			"goodsIntro": "",
-			"goodsPrice": "",
+			"goodsPrice": "1324",
 			"time": "",
 			"title": "能踩的那种",
-			"userName": "",
+			"userName": "杨13",
 			"goodsName": "",
 			"goodsType": ""
 		},
 		"card4": {
-			"goodsImg": "",
+			"goodsImg": "../img/bg.jpg",
 			"stuNum": "",
 			"goodsId": "6",
 			"goodsIntro": "",
-			"goodsPrice": "",
+			"goodsPrice": "1237",
 			"time": "",
 			"title": "9成新",
-			"userName": "",
+			"userName": "杨14",
 			"goodsName": "",
 			"goodsType": ""
 		}
@@ -116,9 +116,8 @@ function getCard (){
 			break;
 
 	}
-	console.log({"type":type,"sort":sort})
 	showCard(data);
-	// $.getJSON("url",{"type":type,"sort":sort},showCard(data))
+	$.getJSON("url",{"type":type,"sort":sort},showCard(data))
 }
 /***************************这是每次点击加载卡片的方法 **********************/
 function showCard(data){
@@ -138,7 +137,7 @@ function showCard(data){
         "goodsName":goodsName,
         "goodsType":goodsType
 		} = obj;
-		let text = `<li><div class="pic"><img src="${goodsImg}" alt="这是物品帅照"></div><div class="title">${title}</div><div class="bottom"><div class="name">${userName}</div><div class="price">${goodsPrice}</div></div></li>`
+		let text = `<li><div class="pic"><img src="${goodsImg}" alt="这是物品帅照"></div><div class="title">${title}</div><div class="bottom"><div class="name">用户：${userName}</div><div class="price">RMB：${goodsPrice}</div></div></li>`
 		$('.right .shop').append(text);
 	}
 }
