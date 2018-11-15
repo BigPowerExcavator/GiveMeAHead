@@ -262,19 +262,19 @@ function register() {
 				//名字为空
 			} else {
 				let user = {
-					stuNum: registerId,
-					userName: nickName,
+					adminNum: registerId,
+					adminName: nickName,
 					trueName: registerName,
 					sex: "女",
 					phone: registerTel
 				}
 				$.ajax({
-					url: 'url',   //这是修改信息的url
+					url: '/MutualAid/UpdateAdminInfo',   //这是修改信息的url
 					data: JSON.stringify(user),
 					dataType: 'json',
 					method: 'POST',
 					success: function (data) {
-						if (data['changeUser'] == 'true') {
+						if (data['changeAdmin'] == "true") {
 							window.location.reload();
 						}else{
 							layer.msg('请稍后重试');
@@ -304,9 +304,9 @@ let $input = $('.change-pwd input');
 $input.eq(0).on('blur',function(){
 	let oldpwd = {"flag":"false","oldPasswd": $input.eq(0).val()};
 	console.log(oldpwd);
-		$.getJSON('url',oldpwd,function(data){     //这是失去焦点验证原密码的url
+		$.getJSON('/MutualAid/UpdatePassword',oldpwd,function(data){     //这是失去焦点验证原密码的url
 			console.log(data['state']);
-			if(data['state'] != 'true'){
+			if(data['state'] != "true"){
 				layer.msg('原密码输入有误');
 				x = 0;
 			}
@@ -332,7 +332,7 @@ function changePwd(){
 		if(y == 1){
 			if(z == 1){
 				let newpwd = {"flag":"true","newPasswd":$input.eq(1).val()};
-				$.getJSON("url",newpwd,function(data){     //这是修改密码的url
+				$.getJSON("/MutualAid/UpdatePassword",newpwd,function(data){     //这是修改密码的url
 					if(data['newState'] = true){
 						window.location.reload();
 					}else{
@@ -352,12 +352,12 @@ function changePwd(){
 }
 /***************************这是信息初始加载********************************** */
 $(
-    $.getJSON('url', function (data) {    //这里填加载信息的url
-		$('main .content-l .name-r').html(`${data.trueName}`);
+    $.getJSON('/MutualAid/AdminCenter', function (data) {    //这里填加载信息的url
+		$('main .content-l .name-r').html(`${data.adminName}`);
 		$('main .content-l .tel-r').html(`${data.phone}`);
-		$('main .content-l .domc-r').html(`${data.userDomc}`);
-		$('.change input').eq(0).val(data.stuNum);
-		$('.change input').eq(1).val(data.userName);
+		$('main .content-l .domc-r').html(`${data.adminNum}`);
+		$('.change input').eq(0).val(data.adminNum);
+		$('.change input').eq(1).val(data.adminName);
 		$('.change input').eq(2).val(data.trueName);
 		$('.change input').eq(3).val(data.phone);
         $('.change input').eq(4).val(data.dormitory);
