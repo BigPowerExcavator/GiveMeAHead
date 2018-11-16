@@ -7,7 +7,7 @@ $(".body .tag-nav").on('click',function(e){
         $target.addClass('clicked').siblings().removeAttr('class');
 	}
 	getCard();
-})
+})//
 /***************************这是排序标签*********************** */
 $(" .body .sort-nav").on('click',function(e){
     let $target = $(e.target);
