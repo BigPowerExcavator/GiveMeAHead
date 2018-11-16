@@ -70,6 +70,7 @@ function getCard (){
 	$.getJSON("/MutualAid/GetGoodsCards",{"type":type,"sort":sort},function(data){
 		showCard(data);
 	})
+}
 /***************************这是每次点击加载卡片的方法 **********************/
 function showCard(data){
 	$('.right .shop').html('');
