@@ -48,7 +48,7 @@ public class GetGoodCardInfo extends HttpServlet {
 		map.put("title", goodBean.getTitle());
 		map.put("price", goodBean.getGoodsPrice());
 		map.put("type", new GetTrueGoodType().getGoodType(goodBean.getGoodsType()));
-		map.put("contect", goodBean.getGoodsIntro());
+		map.put("content", goodBean.getGoodsIntro());
 		map.put("userName", goodBean.getUserName());
 		map.put("time", new StringToTime().GetTime(goodBean.getTime(), "yyyy-MM-dd"));
 		map.put("formId", formId);
