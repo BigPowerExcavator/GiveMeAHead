@@ -12,7 +12,7 @@ body{
     background-size: cover;
     background-attachment: fixed;
 }
-/*****************************杩欐槸椤堕儴鏍�*******************************/
+/*****************************这是顶部栏*******************************/
 
 header{
     width: 100%;
@@ -88,7 +88,7 @@ header .user-btn div:nth-child(2){
     background: url(../img/exit-icon.png) center center no-repeat;
     background-size: 40%;
 }
-/**************************鐢宠鍗�*******************************/
+/**************************申请单*******************************/
 .container{
     background: url(../../img/side-bar.png) 1730px 70px no-repeat;
     z-index: 600;
@@ -194,7 +194,7 @@ input::-webkit-inner-spin-button {
 input[type="number"]{
     -moz-appearance: textfield;
 }
-/******************鍥剧墖************************************/
+/******************图片************************************/
 .pic-wrapper{
     width: 700px;
     min-height: 230px;
@@ -235,6 +235,7 @@ input[type="number"]{
     background: url('../img/delete.png');
     background-size: contain;
 }
+
 .pic-wrap img{
     height: 100%;
     width: 100%;

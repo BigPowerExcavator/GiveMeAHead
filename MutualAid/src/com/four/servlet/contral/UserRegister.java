@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 
+import com.four.dao.impl.recUsers;
 import com.four.javaBean.UserLoginBean;
 import com.four.javaBean.UserRegisterBean;
 import com.four.service.impl.UserImpl;
@@ -69,7 +70,7 @@ public class UserRegister extends HttpServlet {
 		JSONObject jsonObject=new JSONObject() ;
 		if(codeString!=null&&user.getCode().equals(codeString)) {
 			UserImpl userRegister=new UserImpl();
-			if(userRegister.cheakRegisterRename(user.getName())) {
+			if(!new recUsers().ProveUser(Integer.parseInt(user.getStuId()))) {
 				jsonObject.put("status", "1102");
 			}else {
 				if(userRegister.userRegister(user)) {

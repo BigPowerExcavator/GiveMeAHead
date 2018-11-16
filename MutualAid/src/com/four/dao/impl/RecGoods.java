@@ -169,6 +169,7 @@ public class RecGoods {
 			ct=C3p0Utils.getConnection();
 			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,userName)"
 					+ "values(?,?,?,?,?,?,?,?,?)";
+			System.out.println("这里再再次被调用了");
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, goodBean.getStuNum());
 			ps.setString(2, goodBean.getGoodsName());
@@ -200,6 +201,7 @@ public class RecGoods {
 		try {
 			ct=C3p0Utils.getConnection();
 			String sql="insert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)values(?,?,?,?,?,?,?,?,?,?)";
+			System.out.println("这里再次被调用了");
 			ps=ct.prepareStatement(sql);
 			int index=0;
 			ps.setString(++index,stuNum);
@@ -212,7 +214,6 @@ public class RecGoods {
 			ps.setString(++index, goodsIntro);
 			ps.setString(++index, phone);
 			ps.setString(++index,userName);
-			ps.executeUpdate();
 			//加判断
 			int num=ps.executeUpdate();
 			if(num==1) {

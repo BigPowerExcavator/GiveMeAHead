@@ -81,6 +81,7 @@ public class ApplyIdleCard extends HttpServlet {
 		//根据学号获取用户名
 		String userName = new recUsers().getName(stuNum);
 		JSONObject jsonObject=new JSONObject();
+		System.out.println("这里被调用了");
 		if(new RecGoods().ApplyIdleCard(stuNum, goodsName, imgUrl, goodsType, goodsPrice, title, time, goodsIntro, phone, userName)) {
 				jsonObject.put("status",true);
 				out.write(jsonObject.toString());
