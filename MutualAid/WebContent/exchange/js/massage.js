@@ -1,7 +1,7 @@
 let name = window.location.href.split("\?")[1];
 $(
-    $.getJSON('url',{"formId":name} ,function (data) {
-        let data = {
+    $.getJSON('/MutualAid/GetGoodCardInfo',{"formId":name} ,function (data) {
+        /*let data = {
             formId: "formId",
             content: "我不是",
             price: "123",
@@ -14,11 +14,11 @@ $(
             img2: '../img/bg.jpg',
             img3: '../img/bg.jpg',
             time: '2018-22-2'
-        }
+        }*/
         $('.title').html(data.title);
         $('.price').html(data.price);
         $('.type').html(data.type);
-        $('.tel').html(data.tel);
+        $('.tel').html(data.phone);
         $('.time').html(data.time);
         $('.userName').html(data.userName);
         $('span.content').html(data.content);

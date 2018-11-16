@@ -124,6 +124,7 @@ public class RecGoods {
 				goodBean.setTime(t.getTime()+"");
 				goodBean.setGoodsIntro(rs.getString(9));
 				goodBean.setUserName(rs.getString(10));
+				goodBean.setPhone(rs.getString(11));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -139,7 +140,7 @@ public class RecGoods {
 		boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="update idlegoods set goodsId=?,stuNum=?,goodsName=?,goodsImg=?,goodsType=?,goodsPrice=?,titile=?,time=?,goodsIntro=?,userName=?";
+			String sql="update idlegoods set goodsId=?,stuNum=?,goodsName=?,goodsImg=?,goodsType=?,goodsPrice=?,titile=?,time=?,goodsIntro=?,userName=?,phone=?";
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, goodBean.getGoodsId());
 			ps.setString(2, goodBean.getStuNum());
@@ -152,6 +153,7 @@ public class RecGoods {
 			ps.setTimestamp(8, t);
 			ps.setString(9, goodBean.getGoodsIntro());
 			ps.setString(10, goodBean.getUserName());
+			ps.setString(11, goodBean.getPhone());
 			ps.executeUpdate();
 			result=true;
 		} catch (Exception e) {
