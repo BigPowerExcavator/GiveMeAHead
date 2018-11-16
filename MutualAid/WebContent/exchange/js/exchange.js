@@ -65,11 +65,18 @@ function getCard (){
 			break;
 
 	}
+<<<<<<< HEAD
+=======
+	//showCard(data);
+>>>>>>> dcb94282b3e848ee955c99fa73be139322e2405a
 	console.log({"type":type,"sort":sort})
 	$.getJSON("/MutualAid/GetGoodsCards",{"type":type,"sort":sort},function(data){
 		showCard(data);
 	})
+<<<<<<< HEAD
 
+=======
+>>>>>>> dcb94282b3e848ee955c99fa73be139322e2405a
 }
 /***************************这是每次点击加载卡片的方法 **********************/
 function showCard(data){

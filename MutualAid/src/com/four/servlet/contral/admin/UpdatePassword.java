@@ -57,13 +57,13 @@ public class UpdatePassword extends HttpServlet {
 		/**
 		 * 接收原密码和flag
 		 */
-		JSONObject json = JsonReader.receivePost(request);
-		String flag = json.getString("flag");
-		//String flag = request.getParameter("flag");
+		//JSONObject json = JsonReader.receivePost(request);
+		//String flag = json.getString("flag");
+		String flag = request.getParameter("flag");
 		JSONObject jsonObject = new JSONObject();
 		if (flag.equals("true")) {
-			String newPasswd = json.getString("newPasswd");
-			//String newPasswd = request.getParameter("newPasswd");
+			//String newPasswd = json.getString("newPasswd");
+			String newPasswd = request.getParameter("newPasswd");
 			if (new RecAdmin().UpdatePasswd(adminNum, newPasswd)) {
 				jsonObject.put("newState", "true");
 				out.write(jsonObject.toString());
@@ -72,8 +72,8 @@ public class UpdatePassword extends HttpServlet {
 				out.write(jsonObject.toString());
 			}
 		} else if (flag.equals("false")) {
-			 String oldPasswd = json.getString("oldPasswd");
-			//String oldPasswd = request.getParameter("oldPasswd");
+			// String oldPasswd = json.getString("oldPasswd");
+			String oldPasswd = request.getParameter("oldPasswd");
 			if (new RecAdmin().LoginIn(adminNum, oldPasswd)) {
 
 				jsonObject.put("state", "true");

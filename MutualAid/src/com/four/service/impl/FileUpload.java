@@ -11,7 +11,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
 
 import com.four.util.ProduceFileName;
 
@@ -27,9 +26,9 @@ public class FileUpload {
 		file = new File(savePath);
 		//判断上传文件的保存目录是否存在
 		if (!file.exists() && !file.isDirectory()) {
-		System.out.println(savePath+"目录不存在，需要创建");
-		//创建目录
-		file.mkdir();
+			System.out.println(savePath+"目录不存在，需要创建");
+			//创建目录
+			file.mkdir();
 		}
 		try{
 			//使用Apache文件上传组件处理文件上传步骤：
@@ -46,7 +45,8 @@ public class FileUpload {
 				return null;
 			}
 			//4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
-			List<FileItem> list = upload.parseRequest(new ServletRequestContext(request));
+			List<FileItem> list = upload.parseRequest(request);
+			System.out.println("size="+list.size());
 			for(FileItem item : list){
 				//如果fileitem中封装的是普通输入项的数据
 				if(item.isFormField()){
@@ -64,9 +64,10 @@ public class FileUpload {
 					}
 					//注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
 					//处理获取到的上传文件的文件名的路径部分，只保留文件名部分
-					filename = filename.substring(filename.lastIndexOf("\\")+1);
+					filename = filename.substring(filename.lastIndexOf(".")+1);
+					System.out.println(filename+" 5656");
 					//使用随机生成的UUID作为文件名
-					filename=new ProduceFileName().getUUID();
+					filename=new ProduceFileName().getUUID()+"."+filename;
 					//获取item中的上传文件的输入流
 					InputStream in = item.getInputStream();
 					//创建一个文件输出流

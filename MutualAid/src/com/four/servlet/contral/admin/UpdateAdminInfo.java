@@ -61,25 +61,27 @@ public class UpdateAdminInfo extends HttpServlet {
 		// 需要修改的学号
 		String adminNum = json.getString("adminNum");
 		String adminName = json.getString("adminName");
-		String trueName=json.getString("trueName");
+		String trueName = json.getString("trueName");
 		String sex = json.getString("sex");
-		String grade = json.getString("grade");
-		String phone= json.getString("phone");
+		// String grade = json.getString("grade");
+		String phone = json.getString("phone");
 		JSONObject jsonObject = new JSONObject();
-		if (new RecAdmin().ProveAdmin(adminNum)) {
-			jsonObject.put("changeAdmin", "false");
-			out.write(jsonObject.toString());
-		} else {
-			if (new RecAdmin().upadteAdminInfo(adminNum, adminName, trueName, sex,phone, adminId)) {
+		if (new RecAdmin().ProveAdmin(adminNum) || adminNum.equals(adminId)) {
+			if (new RecAdmin().upadteAdminInfo(adminNum, adminName, trueName, sex, phone, adminId)) {
+				System.out.println("修改成功！");
 				jsonObject.put("changeAdmin", "true");
 				out.write(jsonObject.toString());
 			} else {
+				System.out.println("修改失败！");
 				jsonObject.put("changeAdmin", "false");
 				out.write(jsonObject.toString());
 			}
+		} else {
+			System.out.println("学号存在了");
+			jsonObject.put("changeAdmin", "false");
+			out.write(jsonObject.toString());
 		}
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
