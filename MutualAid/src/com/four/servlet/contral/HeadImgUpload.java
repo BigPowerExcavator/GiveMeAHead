@@ -1,16 +1,19 @@
 package com.four.servlet.contral;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.four.dao.impl.recUsers;
 import com.four.javaBean.UserLoginBean;
 import com.four.service.impl.FileUpload;
@@ -22,7 +25,6 @@ import net.sf.json.JSONObject;
  * 上传用户头像
  */
 @WebServlet("/HeadImgUpload")
-@MultipartConfig
 public class HeadImgUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,18 +40,19 @@ public class HeadImgUpload extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		JSONObject jsonObject=new JSONObject();
 		PrintWriter outPrint = response.getWriter();
+		// TODO Auto-generated method stub
 		//存储路径
-		String savePath = request.getServletContext().getRealPath("/img/head");
+		String savePath = this.getServletConfig().getServletContext().getRealPath("/img/head");
+		System.out.println(savePath);
 		FileUpload upload=new FileUpload();
 		String filename=upload.saveFile(savePath,request);
 		if(filename!=null) {
 			//把路径输入数据库
 			 HttpSession session=request.getSession(false);
 			UserLoginBean user = (UserLoginBean)session.getAttribute("userInfo");
-			if(new recUsers().changeUserHeadImg(savePath + "\\" + filename, user.getStuId())) {
+			if(new recUsers().changeUserHeadImg(request.getContextPath() + "/img/head\\" + filename, user.getStuId())) {
 				System.out.println("文件路径已存入数据库");
 				jsonObject.put("", "");
 			}else {
@@ -63,29 +66,32 @@ public class HeadImgUpload extends HttpServlet {
 			outPrint.write(jsonObject.toString());
 		}
 		outPrint.write(jsonObject.toString());
-		/*File file = new File(savePath);
-		//判断上传文件的保存目录是否存在
-		if (!file.exists() && !file.isDirectory()) {
-		System.out.println(savePath+"目录不存在，需要创建");
-		//创建目录
-		file.mkdir();
-		}
-		try{
-			//使用Apache文件上传组件处理文件上传步骤：
-			//1、创建一个DiskFileItemFactory工厂
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			//2、创建一个文件上传解析器
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			//解决上传文件名的中文乱码
-			upload.setHeaderEncoding("UTF-8"); 
-			//3、判断提交上来的数据是否是上传表单的数据\
-			if(!ServletFileUpload.isMultipartContent(request)){
-				//按照传统方式获取数据
-				System.out.println("非MultipartContent");
-				return;
-			}
-			//4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
-			List<FileItem> list = upload.parseRequest(new ServletRequestContext(request));
+		/*System.out.println(savePath);
+        File file = new File(savePath);
+        //判断上传文件的保存目录是否存在
+        if (!file.exists() && !file.isDirectory()) {
+            System.out.println(savePath+"目录不存在，需要创建");
+            //创建目录
+            file.mkdir();
+        }
+        //消息提示
+        String message = "";
+        try{
+            //使用Apache文件上传组件处理文件上传步骤：
+            //1、创建一个DiskFileItemFactory工厂
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            //2、创建一个文件上传解析器
+            ServletFileUpload upload = new ServletFileUpload(factory);
+             //解决上传文件名的中文乱码
+            upload.setHeaderEncoding("UTF-8"); 
+            //3、判断提交上来的数据是否是上传表单的数据
+            if(!ServletFileUpload.isMultipartContent(request)){
+                //按照传统方式获取数据
+                return;
+            }
+            //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
+            List<FileItem> list = upload.parseRequest(request);
+            System.out.println(list.size());
 			for(FileItem item : list){
 				//如果fileitem中封装的是普通输入项的数据
 				if(item.isFormField()){

@@ -13,5 +13,6 @@
     <br/><br/>
     <input type="submit" value="上传" />
 </form>
+<img src="/MutualAid/img/head\e7be9a81-2cf0-49dd-9a91-452bb6cdea6c.png"/>
 </body>
 </html>
