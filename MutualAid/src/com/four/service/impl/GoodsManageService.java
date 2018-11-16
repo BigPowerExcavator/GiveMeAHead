@@ -170,16 +170,16 @@ public class GoodsManageService {
 		String addSort=null;
 		switch (sort) {
 		case "timeUp":
-			addSort="order by time DESC";
-			break;
-		case "timeDown":
 			addSort="order by time";
 			break;
+		case "timeDown":
+			addSort="order by time DESC";
+			break;
 		case "priceUp":
-			addSort="order by goodsPrice DESC";
+			addSort="order by goodsPrice";
 			break;
 		case "priceDown":
-			addSort="order by goodsPrice";
+			addSort="order by goodsPrice DESC";
 			break;
 		default:
 			break;

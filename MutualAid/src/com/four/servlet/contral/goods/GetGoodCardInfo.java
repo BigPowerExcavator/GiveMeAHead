@@ -54,12 +54,14 @@ public class GetGoodCardInfo extends HttpServlet {
 		map.put("userName", goodBean.getUserName());
 		map.put("time", new StringToTime().GetTime(goodBean.getTime(), "yyyy-MM-dd"));
 		map.put("formId", formId);
+		map.put("phone", goodBean.getPhone());
 		String[] imgSet=goodBean.getGoodsImg().split("###");
-		Map<String, String>imgMap=new HashMap<String,String>();
+		//Map<String, String>imgMap=new HashMap<String,String>();
 		for(int i=0;i<imgSet.length;i++) {
-			imgMap.put("img"+(i+1), imgSet[i]);
+			//imgMap.put("img"+(i+1), imgSet[i]);
+			map.put("img"+(i+1), imgSet[i]);
 		}
-		map.put("img", imgMap);
+		//map.put("img", imgMap);
 		map.put("count", imgSet.length);
 		JSONObject jsonObject=new JSONObject();
 		jsonObject=JSONObject.fromObject(map);
