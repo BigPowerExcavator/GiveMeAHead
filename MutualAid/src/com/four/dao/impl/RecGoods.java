@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.four.javaBean.GoodBean;
 import com.four.util.C3p0Utils;
 
+
 public class RecGoods {
 	
 	private Connection ct=null;
@@ -192,17 +193,16 @@ public class RecGoods {
 	 * 修改添加闲置卡片
 	 * 加上的
 	 * */
-	public boolean ApplyIdleCard(String stuNum,String goodsName,String goodsImg,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String phone,String userName) {
+	public boolean ApplyIdleCard(String stuNum,String goodsName,String imgUrl,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String phone,String userName) {
 		boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)"
-					+ "values(?,?,?,?,?,?,?,?,?,?)";
+			String sql="insert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)values(?,?,?,?,?,?,?,?,?,?)";
 			ps=ct.prepareStatement(sql);
 			int index=0;
 			ps.setString(++index,stuNum);
 			ps.setString(++index, goodsName);
-			ps.setString(++index, goodsImg);
+			ps.setString(++index, imgUrl);
 			ps.setString(++index, goodsType);
 			ps.setString(++index, goodsPrice);
 			ps.setString(++index, title);

@@ -3,12 +3,7 @@ package com.four.servlet.contral;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +16,6 @@ import com.four.javaBean.UserLoginBean;
 import com.four.service.impl.UserImpl;
 import com.four.util.JsonReader;
 import com.lxj.TestSend;
-
 
 import net.sf.json.JSONObject;
 
@@ -64,13 +58,7 @@ public class UserLogin extends HttpServlet {
 		UserImpl checkUser=new UserImpl();
 		JsonBean jsonBean=new JsonBean();
 		JSONObject jsonObject=new JSONObject();
-		ServletContext application = this.getServletContext();
-		@SuppressWarnings("unchecked")
-		Set<String> userList=(Set<String>)application.getAttribute("userList");
-		if(userList==null) {
-			userList=new HashSet<String>();
-		}
-		if(checkUser.checkLogin(user)&&!userList.contains(user.getStuId())) {
+		if(checkUser.checkLogin(user)) {
 			jsonBean.setStatus("1001");
 			//jsonBean.setData(new TestSend().test());
 			jsonObject=JSONObject.fromObject(jsonBean);
@@ -80,8 +68,6 @@ public class UserLogin extends HttpServlet {
 			//如果登录成功，就把用户的学号和密码寸在session中
 			HttpSession session=request.getSession(true);
 			session.setAttribute("userInfo", user);
-			userList.add(user.getStuId());
-			application.setAttribute("userList", userList);
 		}else {
 			jsonBean.setStatus("1002");
 			jsonObject=JSONObject.fromObject(jsonBean);

@@ -1,84 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        input{
-        height: 300px;
-        width: 300px;
-        border: 1px solid black;
+    .father{
+        height: 500px;
+        width: 500px;
+        border: 1px solid #000;
     }
-    .btn{
-        height: 50px;
-        width: 50px;
-        background-color: aqua;
-    }
-    img{
-        height: 200px;
-        width: 200px;
-        border: 1px solid black;
+    .son{
+        height: 100px;
+        width: 100px;
+        background-color: #aaa;
     }
     </style>
-
+    
 </head>
-
 <body>
-    <input type="file" webkitRelativePath>
-    <div class="btn">按钮</div>
-    <img src="" alt="我是杨大砬子">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script>
-        let input = document.querySelector('input');
-        input.onchange = function (e) {
-            let file = e.target.files[0];
-            let reader = new FileReader();
-            reader.onloadend = function () {
-                let dataurl = reader.result;
-                // console.log(dataurl)
-                document.querySelector('img').src = dataurl;
-                console.log(dataURItoBlob(dataurl))
-                var fd = new FormData();
-                var blob = dataURItoBlob(dataurl);
-                fd.append('file', file);
-                console.log(file)
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/MutualAid/HeadImgUpload',
-                    data: fd,
-                    processData: false, // 不会将 data 参数序列化字符串
-                    contentType: false, // 根据表单 input 提交的数据使用其默认的 contentType
-                    xhr: function () {
-                        var xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function (evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = evt.loaded / evt.total;
-                                console.log('进度', percentComplete);
-                            }
-                        }, false);
-
-                        return xhr;
-                    }
-                })
-            }
-            reader.readAsDataURL(file)
-        }
-        function dataURItoBlob(dataurl) {
-            var byteString = atob(dataurl.split(',')[1]);
-            var mimeString = dataurl.split(',')[0].split(':')[1].split(';')[0];
-            var ab = new ArrayBuffer(byteString.length);
-            var ia = new Uint8Array(ab);
-            for (var i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-            return new Blob([ab], { type: mimeString });
-        }
-
+    let fa = $('.father');
+    fa.on('mouseenter',function(){
+        console.log(1);
+    })
+    fa.on('mouseover',function(){
+        console.log(2);
+    })
     </script>
 </body>
-
 </html>

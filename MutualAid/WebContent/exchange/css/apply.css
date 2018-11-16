@@ -148,30 +148,6 @@ header .user-btn div:nth-child(2){
     text-indent: 30px;
     text-align: left;
 }
-.container .type-wrap{
-        height: 100%;
-    width: 500px;
-    float: right;
-    position: relative;
-    cursor: pointer;
-}
-.container .type{
-    background-color: #e5e5e5;  
-}
-.container .type-wrap>ul{
-    position: absolute;
-    background-color: #eeeeee;
-    height: 270px;
-    overflow-y: scroll;
-    display: none;
-}
-.container .type-wrap>ul li{
-    transition: 0.3s;
-    width: 500px;
-}
-.container .type-wrap>ul li:hover{
-    background-color: #e5e5e5;  
-}
 .container input{
     font-size: 24px;
     color: rgb(98, 98, 98);
@@ -224,7 +200,7 @@ input[type="number"]{
     width: 100%;
     opacity: 0;
 }
-.pic-wrap .after{
+.pic-wrap::after{
     display: block;
     content: '';
     height: 30px;
@@ -235,7 +211,10 @@ input[type="number"]{
     background: url('../img/delete.png');
     background-size: contain;
 }
-
+.pic-wrap:last-child::after{
+    height: 0;
+    width: 0;
+}
 .pic-wrap img{
     height: 100%;
     width: 100%;
