@@ -22,25 +22,36 @@ $('.container .return').on('click', function () {
 })
 /*********************这是添加图片************************** */
 var inputBox = document.querySelector(".add-input");
-inputBox.addEventListener("change", function () {
+inputBox.addEventListener("change", function (e) {
+    let file = e.target.files[0];
     var reader = new FileReader();
-    reader.readAsDataURL(inputBox.files[0]);//发起异步请求
+    reader.readAsDataURL(file);//发起异步请求
     reader.onload = function (e) {
         //读取完成后，数据保存在对象的result属性中
         let text = `<div class="pic-wrap"><img src="${this.result}" alt="我是物品帅照"></div>`
         $('.pic-wrap:last-child').before(text);
-        console.log(inputBox.files[0].name);
+        let fd = new FormData();
+        // console.log(inputBox.files[0].name);
+        fd.append('file',file);
         $.ajax({
-            type: "POST",
-            url: "url",
-            data: { "src": this.result },
-            dataType: "json",
-            success: function (data) {
-                alert('done');
-            },
-            error:
-                console.log()
-        });
+            type: 'POST',
+            url: '/MutualAid/HeadImgUpload',
+            data: fd,
+            processData: false, // 不会将 data 参数序列化字符串
+            contentType: false, // 根据表单 input 提交的数据使用其默认的 contentType
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log('进度', percentComplete);
+                    }
+                }, false);
+
+                return xhr;
+            }
+        })
+
     }
 })
 /*********************这是提交按钮******************************** */
