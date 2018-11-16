@@ -35,7 +35,6 @@ inputBox.addEventListener("change", function (e) {
             $(this).parent().remove();
         })
         let fd = new FormData();
-        // console.log(inputBox.files[0].name);
         fd.append('file', file);
         $.ajax({
             type: 'POST',
@@ -48,7 +47,6 @@ inputBox.addEventListener("change", function (e) {
                 xhr.upload.addEventListener("progress", function (evt) {
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
-                        console.log('进度', percentComplete);
                     }
                 }, false);
                 return xhr;
@@ -61,13 +59,7 @@ inputBox.addEventListener("change", function (e) {
 $('.commit').on('click', function () {
     let $input = $('.input-wrap input');
     let [title, type, massage, price, tel] = [$input.eq(0).val(),$('.type-wrap li.clicked').index()+1+'' ,$input.eq(1).val(), $input.eq(2).val(), $input.eq(3).val()    ]
-    console.log({
-        "title": title,
-        "type": type,
-        "massage": massage,
-        "price": price,
-        "tel": tel
-    })
+    
     $.getJSON('url', {
         "title": title,
         "type": type,

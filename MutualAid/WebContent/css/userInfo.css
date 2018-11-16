@@ -401,22 +401,24 @@ outline: none;
     color: #a8d2ba;
     box-shadow:  2px 2px #a8d2ba inset,-2px -2px #a8d2ba inset;
 }
-.change-pwd .input-wrap .sex,
 .change .input-wrap .sex{
-    position: absolute;
+    cursor: pointer;
     width: 100%;
-    z-index: 100;
-    right: -2px;
-    top: -2px;
+    height: 50px;
+    position: relative;
+}
+.change .input-wrap .sex-wrap{
+    z-index: 1000;
     background-color: #fff;
     border: 2px solid #a8d2ba;
-    transition: 0.5s;
-    height: 50px;
-    /* border-left: none; */
-    overflow: hidden;
+    left: -2px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 50px;
+    display: none;
 }
-.change-pwd .input-wrap .sex div:hover,
-.change .input-wrap .sex div:hover{
+.change .input-wrap .sex-wrap div:hover{
     background-color: #a8d2ba;
-
+    cursor: pointer;
 }

@@ -112,7 +112,6 @@ function enter() {
                 stuId: loginId,
                 password: loginPwd
             }
-            console.log(JSON.stringify(user));
             $.ajax({
                 url: '/MutualAid/UserLogin',
                 status: '',
@@ -189,7 +188,6 @@ function register() {
                                 tel: registerTel,
                                 code: registerCode
                             }
-                            console.log(JSON.stringify(user));
                             $.ajax({
                                 url: '/MutualAid/UserRegister',
                                 data: JSON.stringify(user),

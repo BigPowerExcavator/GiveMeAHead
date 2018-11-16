@@ -48,6 +48,22 @@ $(".body .shop-nav").on('click',function(e){
 }
 //*********************** */ 这是发送请求的方法*****************************/
 function getCard (){
+	data = {
+		"card1":{
+			"formId": "80",
+			"img": {
+				"img1": "/MutualAid/img/goods/手表.jpg"
+			},
+			"price": "140",
+			"count": 1,
+			"time": "2018-11-11",
+			"title": "手表",
+			"type": "数码用品",
+			"userName": "杨大力",
+			"content": "Apple Watch 4手表"
+		},
+		"count":1
+	}
 	let type = $(".body .tag-nav li.clicked").index()+"";
 	let sort = $(".body .sort-nav li.clicked").index()+"";
 	switch(sort){
@@ -65,8 +81,7 @@ function getCard (){
 			break;
 
 	}
-	//showCard(data);
-	console.log({"type":type,"sort":sort})
+	// showCard(data);
 	$.getJSON("/MutualAid/GetGoodsCards",{"type":type,"sort":sort},function(data){
 		showCard(data);
 	})
@@ -89,7 +104,36 @@ function showCard(data){
         "goodsName":goodsName,
         "goodsType":goodsType
 		} = obj;
-		let text = `<li><div class="pic"><img src="${goodsImg}" alt="这是物品帅照"></div><div class="title">${title}</div><div class="bottom"><div class="name">用户：${userName}</div><div class="price">RMB：${goodsPrice}</div></div></li>`
+		let text = `<li name="${goodsId}"><div class="pic"><img src="${goodsImg}" alt="这是物品帅照"></div><div class="title">${title}</div><div class="bottom"><div class="name">用户：${userName}</div><div class="price">RMB：${goodsPrice}</div></div></li>`
 		$('.right .shop').append(text);
 	}
+	$('.shop li').on('click',function(){
+		let name = $(this).attr('name');
+		window.location.href = `massage.html?${name}`;
+	})
 }
+/**************************这是申请闲置************************* */
+$(".apply").on('click', function () {
+    window.location.href = "apply.html";
+})
+/******************************这是顶部栏****************************** */
+$("header .index").on('click', function () {
+    window.location.href = "../index.html";
+})
+$("header .fix").on('click', function () {
+    window.location.href = "../fix.html";
+})
+$("header .exchange").on('click', function () {
+    window.location.href = "index.html";
+})
+$("header .userInfo-icon").on('click', function () {
+    window.location.href = "../userInfo.html";
+})
+$(".back").on('click', function () {
+    window.location.href = "index.html";
+})
+/*************************这是退出按钮***************************** */
+$('header .exit-icon').on('click', function () {
+	sessionStorage.setItem('status', 'no');
+	window.location.href = "../index.html";
+})

@@ -90,7 +90,6 @@ header .user-btn div:nth-child(2){
 }
 /**************************申请单*******************************/
 .container{
-    background: url(../../img/side-bar.png) 1730px 70px no-repeat;
     z-index: 600;
     min-width: 1000px;
     text-align: center;

@@ -108,14 +108,14 @@ $('.application-shadow .commit').on('click', function () {
             date: new Date().getTime() + ''
 
         }
-        console.log(JSON.stringify(fix));
+    
         $.ajax({
             url: '/MutualAid/WriteRepairCard',
             data: JSON.stringify(fix),
             dataType: 'json',
             method: 'POST',
             success: function (data) {
-                console.log(data);
+               
                 if (data['status'] == '1301') {
                     layer.msg('保修成功');
                 } else {
@@ -140,8 +140,7 @@ $('.application-shadow .return').on('click', function () {
 })
 /************************这是提交完成后的按钮***************************** */
 $('.complete-shadow .return').on('click', function () {
-    $('.complete-shadow').css('display', 'none');
-    $('.fix-shadow').css('display', 'block');
+    window.location.reload();
 });
 $('.complete-shadow .commit').on('click', function () {
     $('.complete-shadow').hide();
@@ -159,6 +158,14 @@ $("header .index").on('click', function () {
 $("header .fix").on('click', function () {
     window.location.href = "fix.html";
 })
+$("header .exchange").on('click', function () {
+    window.location.href = "exchange/index.html";
+})
 $("header .userInfo-icon").on('click', function () {
     window.location.href = "userInfo.html";
+})
+/*************************这是退出按钮***************************** */
+$('header .exit-icon').on('click', function () {
+	sessionStorage.setItem('status', 'no');
+	window.location.href = "index.html";
 })

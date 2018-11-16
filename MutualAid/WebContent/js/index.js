@@ -1,34 +1,4 @@
-// $('.button').on('click',function(){
-//   let stuId = $('.top input').val();
-//   let password = ('.bottom input').val();
-//     console.log(x);
-//     if(stuId != '' && password != ''){
-//        
-//     }
-// })
-// let id = $('.input-wrapper .top input').val();
-// let pwd = $('.input-wrapper .bottom input').val();
-// let regId = /^[0-9]{9,9}$/; 
-// if(regId.test(id)){
-//     console.log(1)
-// }else{
-//     console.log(2)
-// }
-// $('.input-wrapper .button').on('click',function(){
-//   let id = $('.input-wrapper .top input').val();
-//   let pwd = $('.input-wrapper .bottom input').val();
-//   let regId = /^\d{9}$/;
-//   let regPwd = /[\s]+/;
-//     if(regId.test(id)){
-//         if(regPwd.test(pwd)){
-//             //发送请求
-//         }else{
-//             //提升密码必须为字母数字标点符号组合
-//         }
-//     }else{
-//             //提示账号必须为9位数得学号
-//     }
-// })
+
 /********************************************这是登录弹出按钮****************************************** */
 $('header .user-btn').on('click', function () {
     let $shadow = $('div.shadow');
@@ -87,7 +57,6 @@ $('.input-wrapper .button').on('click', function () {
                 stuId:loginId,
                 password:loginPwd
             }
-            console.log(JSON.stringify(user));
             $.ajax({
                 url: '/MutualAid/UserLogin',
                 status:'',
@@ -147,7 +116,6 @@ $('.register-wrapper .button').on('click', function () {
                             tel: registerTel,
                             code: registerCode
                         }
-                        console.log(JSON.stringify(user));
                         $.ajax({
                             url: '/MutualAid/UserRegister',
                             data:JSON.stringify(user),
@@ -194,7 +162,6 @@ $('.code-img').on('click',function(){
     let img = $(this).find('img')
     let date = new Date().getTime();
     img.attr('src','/MutualAid/GetRegisterCode?='+date);
-    console.log(img.attr('src'));
 })
 /***************************************这是保修时间的按钮************************ */
 $('.application-shadow .fix-time').on('click',function(e){
@@ -226,7 +193,6 @@ $('.application-shadow .commit').on('click',function(){
     let $day = $('.application-shadow .day>li').index($('.application-shadow .day>li.show'));
     let $time = $('.application-shadow .time>li').index($('.application-shadow .time>li.show'))+1;
     let $num = $day*10 + $time;
-    console.log($num)
     let $domc = $input.eq(0).val();
     let $name = $input.eq(1).val();
     let $tel = $input.eq(2).val();
@@ -245,7 +211,6 @@ $('.application-shadow .commit').on('click',function(){
                                 e.stopPropagation();
                               });
                         }else{
-                            console.log($num)
                             layer.msg('请选择正确上门日期');
                         }
                     }else{
@@ -270,16 +235,14 @@ $('.application-shadow .commit').on('click',function(){
             date:new Date().getTime()+''
             
         }
-        console.log(JSON.stringify(fix));
         $.ajax({
             url:'/MutualAid/WriteRepairCard',
             data:JSON.stringify(fix),
             dataType: 'json',
             method: 'POST',
             success: function (data) {
-            	console.log(data);
                 if(data['status'] == '1301'){
-                    layer.msg('保修成功');
+                    layer.msg('报修成功');
                 }else{
                     layer.msg('服务器出错，注册无法完成')
                 }

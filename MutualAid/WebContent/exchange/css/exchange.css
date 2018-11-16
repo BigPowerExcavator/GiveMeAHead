@@ -13,6 +13,7 @@ body {
 }
 body{
     background-color: #c1dde3;
+    background: url("../img/bg.png");
     background-size: cover;
     background-attachment: fixed;
     overflow-y:scroll; 
@@ -204,6 +205,37 @@ font-size: 24px;
     margin-left: 300px;
     float: left;
     width: 1200px;
+    position: relative;
+}
+.right .apply{
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 10px;
+    margin-left: 2px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 24px;
+    line-height: 40px;
+    text-align: center;
+    height: 40px;
+    width: 170px;
+    background-color: #a8d2ba;
+    transition: 0.5s;
+}
+.right .apply:hover{
+    width: 200px;
+}
+.right .apply::before{
+    position: absolute;
+    left:  -40px;
+    top: 0;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-right-color: #a8d2ba;
 }
 .right .shop-nav{
     background-color: #fff;

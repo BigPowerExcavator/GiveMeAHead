@@ -116,40 +116,14 @@ $('header .exit-icon').on('click', function () {
 	window.location.href = "index.html";
 })
 /***************************这是选择性别************************** */
-// {
-// 	function slidedown(){
-// 		$this = $('.change .sex');
-// 		$this.css({
-// 			'height':'100px'
-// 		}).unbind().children().css({
-// 			'display':'block'
-// 		});
-// 		$this.find('div').on('click',function(){
-// 				$this.css({
-// 					'height':'50px'
-// 				});
-// 				$(this).siblings().css({
-// 					'display':'none'
-// 				});
-// 				setTimeout(() => {
-// 					$this.on('click',slidedown)
-// 				}, 100);
-
-// 		})
-// 	}
-// 	$('.change .sex').on('click',slidedown);
-// }
-let sex = document.querySelector('.change .sex');
-sex.addEventListener('click', slidedown, true);
-function slidedown() {
-	$this = $('.change .sex');
-	$this.css({
-		'height': '100px'
-	}).unbind().children().css({
-		'display': 'block'
-	});
-	sex.removeEventListener('click', slidedown, true)
-}
+$('.sex').on('click',function(){
+	$('.sex-wrap').slideToggle();
+	$('.sex-wrap div').on('click',function(){
+		$('.sex-wrap').slideUp();
+		let $this = $(this);
+		$('.sex').html($this.html());
+	})
+})
 /***************************这是修改信息的弹窗************************ */
 $(".change-btn").on('click', function () {
 	$(".change").show().on('click', function (e) {
@@ -176,35 +150,17 @@ $("header .fix").on('click', function () {
 $("header .userInfo-icon").on('click', function () {
 	window.location.href = "userInfo.html";
 })
+$("header .exchange").on('click', function () {
+    window.location.href = "exchange/index.html";
+})
 $(".exit-icon").on("click", function () {
-	console.log(1)
 	sessionStorage.setItem('status', "no");
 	window.location.href = "index.html";
 	$userInfo.remove();
 	$login = $("<div class = 'btn login'>登录</div>");
 	$(".header .right").prepend($login);
 })
-/******************************个人信息初始化**************************** */
-// let data1 = {
-// 	"stuNum": "171543441",
-// 	"userName": "meme",
-// 	"trueName": "jiayu",
-// 	"dormitory": "1012#11",
-// 	"sex": "nv",
-// 	"phone": "13060670964"
-// }
-// $('.change input').eq(0).val(data1.stuNum);
-// $('.change input').eq(1).val(data1.userName);
-// $('.change input').eq(2).val(data1.trueName);
-// $('.change input').eq(3).val(data1.phone);
-// $('.change input').eq(4).val(data1.dormitory);
-// $.get("url", function (data) {
-// 	$('.change input').eq(0).val(data.stuNum);
-// 	$('.change input').eq(1).val(data.userName);
-// 	$('.change input').eq(2).val(data.trueName);
-// 	$('.change input').eq(3).val(data.phone);
-// 	$('.change input').eq(4).val(data.dormitory);
-// })
+
 /****************************这是修改信息的按钮************************** */
 let keyEnter = (obj, fn) => {
 	$(obj).on("keyup", function (e) {
@@ -222,6 +178,7 @@ function register() {
 	let registerName = $('.change input').eq(2).val();
 	let registerTel = $('.change input').eq(3).val();
 	let registerDomc = $('.change input').eq(4).val();
+	let registerSex = $('.input-wrap .sex').html();
 	let regId = /^\d{9}$/;
 	let regTel = /^\d{11}$/;
 	if (regId.test(registerId)) {
@@ -235,7 +192,7 @@ function register() {
 					userName: nickName,
 					trueName: registerName,
 					dormitory: registerDomc,
-					sex: "女",
+					sex: registerSex,
 					phone: registerTel
 				}
 				$.ajax({
@@ -273,9 +230,9 @@ keyEnter(".change-pwd input:last", changePwd);
 let $input = $('.change-pwd input');
 $input.eq(0).on('blur',function(){
 	let oldpwd = {"flag":"false","oldPasswd": $input.eq(0).val()};
-	console.log(oldpwd);
+
 		$.getJSON('/MutualAid/UpdatePasswd',oldpwd,function(data){
-			console.log(data['state']);
+
 			if(data['state'] != 'true'){
 				layer.msg('原密码输入有误');
 				x = 0;

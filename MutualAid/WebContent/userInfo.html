@@ -116,7 +116,7 @@
                     <div class="tip">学号</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <input type="text">
+                        <input type="number" oninput="if(value.length >9) value = value.slice(0,9)">
                     </div>
                 </div>
                 <div class="input-wrapper">
@@ -139,9 +139,11 @@
                     <div class="tip">性别</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <div class="sex">
-                            <div class="man">男</div>
-                            <div class="woman">女</div>
+                        <div class="sex">男</div>
+                            <div class="sex-wrap">
+                                <div class="man">男</div>
+                                <div class="woman">女</div>
+                            
                         </div>
                     </div>
 
@@ -150,7 +152,7 @@
                     <div class="tip">电话</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <input type="text">
+                        <input type="number" oninput="if(value.length >11) value = value.slice(0,11)">
                     </div>
 
                 </div>
@@ -177,7 +179,7 @@
                     <div class="tip">原密码</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <input type="text">
+                        <input type="password" maxlength="20">
                     </div>
 
                 </div>
@@ -185,7 +187,7 @@
                     <div class="tip">新密码</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <input type="text">
+                        <input type="password" maxlength="20">
                     </div>
 
                 </div>
@@ -193,7 +195,7 @@
                     <div class="tip">新密码</div>
                     <div class="splite"></div>
                     <div class="input-wrap">
-                        <input type="text">
+                        <input type="password" maxlength="20">
                     </div>
 
                 </div>

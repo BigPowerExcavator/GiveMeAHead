@@ -123,12 +123,12 @@
                         <div class="input-tip">学号</div>
                         <span class="split">
                         </span>
-                        <input type="text">
+                        <input type="number" oninput="if(value.length >9) value = value.slice(0,9)">
                     </div>
                     <div class="input-wrap bottom">
                         <div class="input-tip">密码</div>
                         <span class="split"></span>
-                        <input type="password">
+                        <input type="password" maxlength="20">
                     </div>
                     <div class="massage">
                         <div>
@@ -145,17 +145,17 @@
                         <div class="input-tip">学号</div>
                         <span class="split">
                         </span>
-                        <input type="text">
+                        <input type="number" oninput="if(value.length >9) value = value.slice(0,9)">
                     </div>
                     <div class="input-wrap bottom">
                         <div class="input-tip">密码</div>
                         <span class="split"></span>
-                        <input type="password">
+                        <input type="password" maxlength="20">
                     </div>
                     <div class="input-wrap bottom">
                         <div class="input-tip">密码</div>
                         <span class="split"></span>
-                        <input type="password" placeholder="请再确认一遍">
+                        <input type="password" maxlength="20" placeholder="请再确认一遍">
                     </div>
                     <div class="input-wrap bottom">
                         <div class="input-tip">姓名</div>
@@ -165,7 +165,7 @@
                     <div class="input-wrap bottom">
                         <div class="input-tip">手机</div>
                         <span class="split"></span>
-                        <input type="text">
+                        <input type="number" oninput="if(value.length >11) value = value.slice(0,11)">
                     </div>
                     <div class="input-wrap bottom code">
                         <div class="code-wrap">

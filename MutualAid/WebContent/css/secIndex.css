@@ -354,6 +354,13 @@ div.shadow {
     text-align: center;
     border: none;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
 .shadow .massage {
     margin: 5px auto;
     width: 560px;

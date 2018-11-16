@@ -80,7 +80,6 @@ function stateButton(state){
        $this = $(this);
        let $target = $(e.target);
        let name = $this.attr('name');
-       console.log($target.attr('class'));
        let  hide = function(after){
            $.getJSON(url,{"formId":`${name}`,"state":`${state}`,"afterState":`${after}`});
           $this.slideUp(500);
@@ -303,9 +302,7 @@ keyEnter(".change-pwd input:last", changePwd);
 let $input = $('.change-pwd input');
 $input.eq(0).on('blur',function(){
 	let oldpwd = {"flag":"false","oldPasswd": $input.eq(0).val()};
-	console.log(oldpwd);
-		$.getJSON('/MutualAid/UpdatePassword',oldpwd,function(data){     //这是失去焦点验证原密码的url
-			console.log(data['state']);
+		$.getJSON('/MutualAid/UpdatePassword',oldpwd,function(data){ 
 			if(data['state'] != "true"){
 				layer.msg('原密码输入有误');
 				x = 0;
