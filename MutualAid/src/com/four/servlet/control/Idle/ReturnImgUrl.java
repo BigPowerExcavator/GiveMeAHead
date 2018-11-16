@@ -1,20 +1,29 @@
 package com.four.servlet.control.Idle;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 import java.util.List;
+import java.util.Base64.Decoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.four.service.impl.FileUpload;
+import com.four.util.JsonReader;
+
+import Decoder.BASE64Decoder;
 import net.sf.json.JSONObject;
+
 
 /**
  * Servlet implementation class ReturnImgUrl
@@ -39,32 +48,27 @@ public class ReturnImgUrl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");	
 		response.setContentType("text/json;charset=utf-8");
-		
 		PrintWriter out = response.getWriter();
-		//使用文件上传组件
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			upload.setHeaderEncoding("utf-8");
-		try {
-			//解析请求信息
-			List<FileItem> list = upload.parseRequest(request);
-			for(FileItem item : list) {
-				//处理上传文件的保存名称
-				String imgUrl = item.getName();
-				System.out.println(imgUrl);
-				JSONObject jsonObject=new JSONObject();
-				if(imgUrl!=null) {
-					
-					jsonObject.put("url", imgUrl);
-					out.write(jsonObject.toString());
-				}else {
-					jsonObject.put("url","null");
-					out.write(jsonObject.toString());
-				}
-			}
-			}catch(Exception e) {
-					e.printStackTrace();		
-			}
+		
+		
+		//存储路径
+		String savePath = this.getServletConfig().getServletContext().getRealPath("/img/goods");
+		System.out.println(savePath);
+		//存储图片
+		FileUpload upload=new FileUpload();
+		String imgUrl=upload.saveFile(savePath,request);
+		System.out.println(imgUrl);
+		imgUrl=request.getContextPath() + "/img/goods/" + imgUrl;
+		HttpSession session=request.getSession(true);
+		String url = (String) session.getAttribute("imgUrl");
+		if(url==null || url.equals("")) {
+			session.setAttribute("imgUrl",imgUrl);
+		}else {
+			 imgUrl=url+"###"+imgUrl;
+			 session.removeAttribute("imgUrl");
+			 session.setAttribute("imgUrl",imgUrl);
+			 System.out.println(imgUrl);
+		}
 	}
 
 	/**

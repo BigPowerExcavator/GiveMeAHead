@@ -65,7 +65,6 @@ public class FileUpload {
 					//注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
 					//处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 					filename = filename.substring(filename.lastIndexOf(".")+1);
-					System.out.println(filename+" 5656");
 					//使用随机生成的UUID作为文件名
 					filename=new ProduceFileName().getUUID()+"."+filename;
 					//获取item中的上传文件的输入流
@@ -101,11 +100,4 @@ public class FileUpload {
 		}
 		return filename;
 	}
-	
-	//删除文件
-	public void deleteFile(String path){
-        File file=new File(path);
-        if(file.exists()&&file.isFile())
-            file.delete();
-    }
 }
