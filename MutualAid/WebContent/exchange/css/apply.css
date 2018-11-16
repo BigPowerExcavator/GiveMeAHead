@@ -1,0 +1,246 @@
+*{
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+body{
+    background: url("../img/bg.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+/*****************************这是顶部栏*******************************/
+
+header{
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+header{
+    background-color:#a8d2ba;
+}
+header .nav {
+    height: 50px;
+    width: 600px;
+    min-width: 600px;
+    margin: 0 auto;
+}
+header .nav li {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    line-height: 50px;
+    float: left;
+    height: 50px;
+    width: 120px;
+    position: relative;
+}
+
+header .nav li::after {
+    transition: 0.3s;
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    width: 0;
+    left: 120px;
+    border-bottom: 2px white solid;
+}
+
+header .nav li:hover::after {
+    width: 120px;
+    left: 0px;
+}
+
+header .nav li:hover~li::after {
+    left: 0;
+}
+
+header .user-btn {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 24px;
+    color: #88abda;
+    line-height: 50px;
+    height: 50px;
+    width: 160px;
+    margin-right: 50px;
+    cursor: pointer;
+}
+header .user-btn div{
+    float: left;
+    height: 48px;
+    width: 50%;
+}
+header .user-btn div:hover{
+    border-bottom: 2px #fff solid;
+}
+header .user-btn div:nth-child(1){
+    background: url(../img/userInfo-icon.png) center center no-repeat;
+    background-size: 40%;
+}
+header .user-btn div:nth-child(2){
+    background: url(../img/exit-icon.png) center center no-repeat;
+    background-size: 40%;
+}
+/**************************申请单*******************************/
+.container{
+    background: url(../../img/side-bar.png) 1730px 70px no-repeat;
+    z-index: 600;
+    min-width: 1000px;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.5);
+}
+.container .window{
+    width: 900px;
+    height: 780px;
+    margin: 0 auto;
+    margin-top: 100px;
+    color: rgb(98,98,98);
+}
+.container .head{
+    color: #fff;
+    background-color: #a8d2ba;
+    box-shadow: 15px 7px 2px rgba(0, 0, 0, 0.1);
+    height: 90px;
+    margin: 0 auto;
+    width: 700px;
+    line-height: 90px;
+    font-size: 30px;
+}
+.container .main{
+    margin-top: 20px;
+    width: 100%;
+    min-height: 670px;
+    background-color: #fff;
+    box-shadow: 15px 7px 2px rgba(0, 0, 0, 0.1);
+    padding-bottom: 100px;
+    margin-bottom: 150px;
+}
+.container .input-wrap{
+    width: 700px;
+    height: 70px;
+    margin: 0px auto;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+.container form{
+    padding-top: 60px;
+    color: rgb(98, 98, 98);
+    font-size: 24px;
+    line-height:70px;
+    margin-bottom: 50px;
+}
+.container .input-tip{
+    height: 100%;
+    width: 200px;
+    float: left;
+    text-indent: 30px;
+    text-align: left;
+}
+.container input{
+    font-size: 24px;
+    color: rgb(98, 98, 98);
+    height: 100%;
+    width: 500px;
+    outline: none;
+    border: none;
+    background-color: #e5e5e5;
+    float: right;
+    text-align: center;
+}
+.container input.massage{
+    min-height: 70px;
+    height: auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+/******************图片************************************/
+.pic-wrapper{
+    width: 700px;
+    min-height: 230px;
+    max-height: 700px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.pic-wrap{
+    float: left;
+    height: 200px;
+    width: 200px;
+    margin: 15px;
+    position: relative;
+    background-color: #e5e5e5;
+    cursor: pointer;
+}
+.pic-wrap .add{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: url('../img/add.png') no-repeat;
+    background-size: 67%;
+    background-position: center center;
+}
+.pic-wrap .add .add-input{
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+.pic-wrap::after{
+    display: block;
+    content: '';
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: url('../img/delete.png');
+    background-size: contain;
+}
+.pic-wrap:last-child::after{
+    height: 0;
+    width: 0;
+}
+.pic-wrap img{
+    height: 100%;
+    width: 100%;
+}
+.container .btn-wrap{
+    width: 700px;
+    height: 70px;
+    margin: 0px auto;
+}
+.container .btn-wrap div{
+    width: 250px;
+    height: 70px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    font-size: 30px;
+    letter-spacing: 6px;
+    cursor: pointer;
+}
+.container .return{
+    margin-left: 60px;
+    float: left;
+    background-color: rgb(136, 171, 218); 
+}
+.container .commit{
+    background-color: #a8d2ba;
+    margin-right: 60px;
+    float: right;
+}
