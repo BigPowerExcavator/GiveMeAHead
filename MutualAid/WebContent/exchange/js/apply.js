@@ -25,14 +25,18 @@ var inputBox = document.querySelector(".add-input");
 inputBox.addEventListener("change", function (e) {
     let file = e.target.files[0];
     var reader = new FileReader();
-    reader.readAsDataURL(file);//发起异步请求
+    reader.readAsDataURL(file); //发起异步请求
     reader.onload = function (e) {
         //读取完成后，数据保存在对象的result属性中
-        let text = `<div class="pic-wrap"><img src="${this.result}" alt="我是物品帅照"></div>`
+        let text = `<div class="pic-wrap"><img src="${this.result}" alt="我是物品帅照"><div class="after"></div></div>`
         $('.pic-wrap:last-child').before(text);
+        /**********************这是清除图片****************************** */
+        $('.pic-wrap .after').on("click", function () {
+            $(this).parent().remove();
+        })
         let fd = new FormData();
         // console.log(inputBox.files[0].name);
-        fd.append('file',file);
+        fd.append('file', file);
         $.ajax({
             type: 'POST',
             url: '/MutualAid/HeadImgUpload',
@@ -47,7 +51,6 @@ inputBox.addEventListener("change", function (e) {
                         console.log('进度', percentComplete);
                     }
                 }, false);
-
                 return xhr;
             }
         })
@@ -55,23 +58,32 @@ inputBox.addEventListener("change", function (e) {
     }
 })
 /*********************这是提交按钮******************************** */
-$('.commit').on('click',function(){
-    let $input=$('.input-wrap input');
-    let [title,type,massage,price,tel] = [$input.eq(0).val(),$input.eq(1).val(),$input.eq(2).val(),$input.eq(3).val(),$input.eq(4).val()]
+$('.commit').on('click', function () {
+    let $input = $('.input-wrap input');
+    let [title, type, massage, price, tel] = [$input.eq(0).val(),$('.type-wrap li.clicked').index()+1+'' ,$input.eq(1).val(), $input.eq(2).val(), $input.eq(3).val()    ]
     console.log({
-        "title":title,
-        "type":type,
-        "massage":massage,
-        "price":price,
-        "tel":tel
+        "title": title,
+        "type": type,
+        "massage": massage,
+        "price": price,
+        "tel": tel
     })
-    $.getJSON('url',{
-        "title":title,
-        "type":type,
-        "massage":massage,
-        "price":price,
-        "tel":tel
-    },function(){
-        alert(ok);
+    $.getJSON('url', {
+        "title": title,
+        "type": type,
+        "massage": massage,
+        "price": price,
+        "tel": tel
+    }, function () {
+        window.location.href = "index.html";
     })
+})
+/****************************这是选择类型******************** */
+$('.container .type').on('click',function(e){
+    $('.container .type-wrap>ul').slideToggle(500).children().on('click',function(){
+        let $this = $(this);  
+        $(this).addClass('clicked').siblings().removeClass('clicked');
+        $(this).parent().slideUp(500);
+        $('.container .type').html($this.html());
+    });
 })
