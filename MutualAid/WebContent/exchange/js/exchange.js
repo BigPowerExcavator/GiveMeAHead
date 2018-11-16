@@ -106,6 +106,7 @@ function showCard(data){
 		} = obj;
 		let text = `<li name="${goodsId}"><div class="pic"><img src="${goodsImg}" alt="这是物品帅照"></div><div class="title">${title}</div><div class="bottom"><div class="name">用户：${userName}</div><div class="price">RMB：${goodsPrice}</div></div></li>`
 		$('.right .shop').append(text);
+		
 	}
 	$('.shop li').on('click',function(){
 		let name = $(this).attr('name');

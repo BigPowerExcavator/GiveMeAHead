@@ -46,7 +46,7 @@ public class FileUpload {
 			}
 			//4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
 			List<FileItem> list = upload.parseRequest(request);
-			System.out.println("size="+list.size());
+			//System.out.println("size="+list.size());
 			for(FileItem item : list){
 				//如果fileitem中封装的是普通输入项的数据
 				if(item.isFormField()){
@@ -58,21 +58,20 @@ public class FileUpload {
 				}else{//如果fileitem中封装的是上传文件
 					//得到上传的文件名称，
 					filename = item.getName();
-					System.out.println(filename);
+					//System.out.println(filename);
 					if(filename==null || filename.trim().equals("")){
 						continue;
 					}
 					//注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
 					//处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 					filename = filename.substring(filename.lastIndexOf(".")+1);
-					System.out.println(filename+" 5656");
 					//使用随机生成的UUID作为文件名
 					filename=new ProduceFileName().getUUID()+"."+filename;
 					//获取item中的上传文件的输入流
 					InputStream in = item.getInputStream();
 					//创建一个文件输出流
 					FileOutputStream out = new FileOutputStream(savePath + "\\" + filename);
-					System.out.println(savePath + "\\" + filename);
+					//System.out.println(savePath + "\\" + filename);
 					//创建一个缓冲区
 					byte buffer[] = new byte[1024];
 					//判断输入流中的数据是否已经读完的标识
@@ -101,4 +100,12 @@ public class FileUpload {
 		}
 		return filename;
 	}
+	
+
+	//删除文件
+	public void deleteFile(String path){
+        File file=new File(path);
+        if(file.exists()&&file.isFile())
+            file.delete();
+    }
 }

@@ -1,4 +1,4 @@
-package com.four.servlet.contral;
+           package com.four.servlet.contral;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,7 +52,7 @@ public class HeadImgUpload extends HttpServlet {
 			//把路径输入数据库
 			 HttpSession session=request.getSession(false);
 			UserLoginBean user = (UserLoginBean)session.getAttribute("userInfo");
-			if(new recUsers().changeUserHeadImg(request.getContextPath() + "/img/head\\" + filename, user.getStuId())) {
+			if(new recUsers().changeUserHeadImg(request.getContextPath() + "/img/head/" + filename, user.getStuId())) {
 				System.out.println("文件路径已存入数据库");
 				jsonObject.put("", "");
 			}else {

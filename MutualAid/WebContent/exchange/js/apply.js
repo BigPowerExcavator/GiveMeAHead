@@ -38,7 +38,7 @@ inputBox.addEventListener("change", function (e) {
         fd.append('file', file);
         $.ajax({
             type: 'POST',
-            url: '/MutualAid/HeadImgUpload',
+            url: '/MutualAid/ReturnImgUrl',
             data: fd,
             processData: false, // 不会将 data 参数序列化字符串
             contentType: false, // 根据表单 input 提交的数据使用其默认的 contentType

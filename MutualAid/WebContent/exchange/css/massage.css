@@ -222,8 +222,7 @@ header .user-btn div:nth-child(2) {
 }
 .content-r ul li:last-child{
     height: 150px;
-    /* overflow-y: scroll; */
-    overflow: hidden;
+    overflow-y: scroll;
 }
 .content-r .time-wrap{
     font-size: 24px;

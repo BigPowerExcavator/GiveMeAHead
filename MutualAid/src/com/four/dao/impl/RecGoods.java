@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.four.javaBean.GoodBean;
 import com.four.util.C3p0Utils;
 
+
 public class RecGoods {
 	
 	private Connection ct=null;
@@ -119,7 +120,8 @@ public class RecGoods {
 				goodBean.setGoodsType(rs.getString(5));
 				goodBean.setGoodsPrice(rs.getString(6));
 				goodBean.setTitle(rs.getString(7));
-				goodBean.setTime(rs.getString(8));
+				Timestamp t = rs.getTimestamp(8);
+				goodBean.setTime(t.getTime()+"");
 				goodBean.setGoodsIntro(rs.getString(9));
 				goodBean.setUserName(rs.getString(10));
 			}
@@ -146,7 +148,8 @@ public class RecGoods {
 			ps.setString(5, goodBean.getGoodsType());
 			ps.setString(6, goodBean.getGoodsPrice());
 			ps.setString(7, goodBean.getTitle());
-			ps.setString(8, goodBean.getTime());
+			Timestamp t = new Timestamp(Long.parseLong(goodBean.getTime()));
+			ps.setTimestamp(8, t);
 			ps.setString(9, goodBean.getGoodsIntro());
 			ps.setString(10, goodBean.getUserName());
 			ps.executeUpdate();
@@ -166,6 +169,7 @@ public class RecGoods {
 			ct=C3p0Utils.getConnection();
 			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,userName)"
 					+ "values(?,?,?,?,?,?,?,?,?)";
+			System.out.println("这里再再次被调用了");
 			ps=ct.prepareStatement(sql);
 			ps.setString(1, goodBean.getStuNum());
 			ps.setString(2, goodBean.getGoodsName());
@@ -192,17 +196,17 @@ public class RecGoods {
 	 * 修改添加闲置卡片
 	 * 加上的
 	 * */
-	public boolean ApplyIdleCard(String stuNum,String goodsName,String goodsImg,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String phone,String userName) {
+	public boolean ApplyIdleCard(String stuNum,String goodsName,String imgUrl,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String phone,String userName) {
 		boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)"
-					+ "values(?,?,?,?,?,?,?,?,?,?)";
+			String sql="insert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)values(?,?,?,?,?,?,?,?,?,?)";
+			System.out.println("这里再次被调用了");
 			ps=ct.prepareStatement(sql);
 			int index=0;
 			ps.setString(++index,stuNum);
 			ps.setString(++index, goodsName);
-			ps.setString(++index, goodsImg);
+			ps.setString(++index, imgUrl);
 			ps.setString(++index, goodsType);
 			ps.setString(++index, goodsPrice);
 			ps.setString(++index, title);
@@ -210,7 +214,6 @@ public class RecGoods {
 			ps.setString(++index, goodsIntro);
 			ps.setString(++index, phone);
 			ps.setString(++index,userName);
-			ps.executeUpdate();
 			//加判断
 			int num=ps.executeUpdate();
 			if(num==1) {

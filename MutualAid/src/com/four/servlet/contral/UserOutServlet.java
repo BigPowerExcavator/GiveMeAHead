@@ -1,6 +1,9 @@
 package com.four.servlet.contral;
 
 import java.io.IOException;
+import java.util.Set;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +33,13 @@ public class UserOutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		ServletContext application = this.getServletContext();
+		@SuppressWarnings("unchecked")
+		Set<String> userSet=(Set<String>)application.getAttribute("userList");
 		HttpSession session=request.getSession(false);
+		UserLoginBean user=(UserLoginBean)session.getAttribute("userInfo");
+		userSet.remove(user.getStuId());
 		//从session中获取用户信息
 		session.removeAttribute("userInfo");
 	}

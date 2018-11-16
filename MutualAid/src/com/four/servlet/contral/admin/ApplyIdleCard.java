@@ -47,11 +47,14 @@ public class ApplyIdleCard extends HttpServlet {
 		HttpSession session=request.getSession(false);
 		UserLoginBean person = (UserLoginBean)session.getAttribute("userInfo");
 		String stuNum = person.getStuId();
+		
+		//获取图片的总url
+		String imgUrl = (String)session.getAttribute("imgUrl");
 		/**
 		 * 接收申请闲置的内容
 		 * 
 		 * @parm  goodsName
-		 * @parm  goodsImg
+		 * 
 		 * @parm  goodsType
 		 * @parm  goodsPrice
 		 * @parm  title
@@ -61,13 +64,14 @@ public class ApplyIdleCard extends HttpServlet {
 		 */
 		
 		String goodsName = request.getParameter("title");
-		
+		System.out.println(goodsName);
 		//类型
 		String goodsType = request.getParameter("type");
 		//价格
 		String goodsPrice = request.getParameter("price");
 		//标题
 		String title = request.getParameter("title");
+		System.out.println(title);
 		//时间---获取当前系统时间
 		String time = new GetTime().getTime();
 		//详细信息
@@ -76,21 +80,18 @@ public class ApplyIdleCard extends HttpServlet {
 		String phone =request.getParameter("tel");
 		//根据学号获取用户名
 		String userName = new recUsers().getName(stuNum);
-		//获取图片url
-		String goodsImg  = request.getParameter("img");
-		/**
-		 * 
-		 * 
-		 * 
-		 */
 		JSONObject jsonObject=new JSONObject();
-		if(new RecGoods().ApplyIdleCard(stuNum, goodsName, goodsImg, goodsType, goodsPrice, title, time, goodsIntro, phone,userName)) {
+		System.out.println("这里被调用了");
+		if(new RecGoods().ApplyIdleCard(stuNum, goodsName, imgUrl, goodsType, goodsPrice, title, time, goodsIntro, phone, userName)) {
 				jsonObject.put("status",true);
 				out.write(jsonObject.toString());
 		}else {
 				jsonObject.put("status",false);
 				out.write(jsonObject.toString());
 		}
+		//删除session中临时存放的图片地址
+		session.removeAttribute("imgUrl");
+		session.removeAttribute("urlMap");
 	}
 
 	/**

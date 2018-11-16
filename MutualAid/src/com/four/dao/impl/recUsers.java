@@ -154,6 +154,7 @@ public class recUsers implements Users{
 			}
 			if(numUser==0){
 				//可以注册 或  可以修改
+				System.out.println("可以注册");
 				flag=true;								
 			}			
 		}catch(Exception ex) {
