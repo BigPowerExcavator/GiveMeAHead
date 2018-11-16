@@ -152,12 +152,12 @@ public class RecGoods {
 	 * 修改添加闲置卡片
 	 * 加上的
 	 * */
-	public boolean ApplyIdleCard(String stuNum,String goodsName,String goodsImg,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String userName) {
+	public boolean ApplyIdleCard(String stuNum,String goodsName,String goodsImg,String goodsType,String goodsPrice,String title,String time,String goodsIntro,String phone,String userName) {
 		boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
-			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,userName)"
-					+ "values(?,?,?,?,?,?,?,?,?)";
+			String sql="intsert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)"
+					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			ps=ct.prepareStatement(sql);
 			int index=0;
 			ps.setString(++index,stuNum);
@@ -168,6 +168,7 @@ public class RecGoods {
 			ps.setString(++index, title);
 			ps.setString(++index, time);
 			ps.setString(++index, goodsIntro);
+			ps.setString(++index, phone);
 			ps.setString(++index,userName);
 			ps.executeUpdate();
 			//加判断
