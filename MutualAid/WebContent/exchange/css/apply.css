@@ -12,7 +12,7 @@ body{
     background-size: cover;
     background-attachment: fixed;
 }
-/*****************************这是顶部栏*******************************/
+/*****************************杩欐槸椤堕儴鏍�*******************************/
 
 header{
     width: 100%;
@@ -88,7 +88,7 @@ header .user-btn div:nth-child(2){
     background: url(../img/exit-icon.png) center center no-repeat;
     background-size: 40%;
 }
-/**************************申请单*******************************/
+/**************************鐢宠鍗�*******************************/
 .container{
     background: url(../../img/side-bar.png) 1730px 70px no-repeat;
     z-index: 600;
@@ -148,6 +148,30 @@ header .user-btn div:nth-child(2){
     text-indent: 30px;
     text-align: left;
 }
+.container .type-wrap{
+        height: 100%;
+    width: 500px;
+    float: right;
+    position: relative;
+    cursor: pointer;
+}
+.container .type{
+    background-color: #e5e5e5;  
+}
+.container .type-wrap>ul{
+    position: absolute;
+    background-color: #eeeeee;
+    height: 270px;
+    overflow-y: scroll;
+    display: none;
+}
+.container .type-wrap>ul li{
+    transition: 0.3s;
+    width: 500px;
+}
+.container .type-wrap>ul li:hover{
+    background-color: #e5e5e5;  
+}
 .container input{
     font-size: 24px;
     color: rgb(98, 98, 98);
@@ -170,7 +194,7 @@ input::-webkit-inner-spin-button {
 input[type="number"]{
     -moz-appearance: textfield;
 }
-/******************图片************************************/
+/******************鍥剧墖************************************/
 .pic-wrapper{
     width: 700px;
     min-height: 230px;
@@ -200,7 +224,7 @@ input[type="number"]{
     width: 100%;
     opacity: 0;
 }
-.pic-wrap::after{
+.pic-wrap .after{
     display: block;
     content: '';
     height: 30px;
@@ -210,10 +234,6 @@ input[type="number"]{
     right: -15px;
     background: url('../img/delete.png');
     background-size: contain;
-}
-.pic-wrap:last-child::after{
-    height: 0;
-    width: 0;
 }
 .pic-wrap img{
     height: 100%;

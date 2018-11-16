@@ -88,6 +88,9 @@ public class ApplyIdleCard extends HttpServlet {
 				jsonObject.put("status",false);
 				out.write(jsonObject.toString());
 		}
+		//删除session中临时存放的图片地址
+		session.removeAttribute("imgUrl");
+		session.removeAttribute("urlMap");
 	}
 
 	/**
