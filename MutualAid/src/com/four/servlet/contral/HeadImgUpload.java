@@ -53,6 +53,7 @@ public class HeadImgUpload extends HttpServlet {
 			 HttpSession session=request.getSession(false);
 			UserLoginBean user = (UserLoginBean)session.getAttribute("userInfo");
 			if(new recUsers().changeUserHeadImg(request.getContextPath() + "/img/head\\" + filename, user.getStuId())) {
+				System.out.println(request.getContextPath() + "/img/head\\" + filename);
 				System.out.println("文件路径已存入数据库");
 				jsonObject.put("", "");
 			}else {

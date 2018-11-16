@@ -101,4 +101,11 @@ public class FileUpload {
 		}
 		return filename;
 	}
+	
+	//É¾³ýÎÄ¼þ
+	public void deleteFile(String path){
+        File file=new File(path);
+        if(file.exists()&&file.isFile())
+            file.delete();
+    }
 }
