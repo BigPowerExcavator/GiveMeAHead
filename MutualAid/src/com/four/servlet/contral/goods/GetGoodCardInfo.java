@@ -39,9 +39,11 @@ public class GetGoodCardInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/json;charset=utf-8");
 		response.setCharacterEncoding("utf-8" );
 		
 		String formId=request.getParameter("formId");
+		System.out.println(formId);
 		GoodsManageService goodsManageService=new GoodsManageService();
 		GoodBean goodBean=goodsManageService.getGoodInfo(formId);
 		Map<String,Object> map=new HashMap<String, Object>();
@@ -52,7 +54,13 @@ public class GetGoodCardInfo extends HttpServlet {
 		map.put("userName", goodBean.getUserName());
 		map.put("time", new StringToTime().GetTime(goodBean.getTime(), "yyyy-MM-dd"));
 		map.put("formId", formId);
-		map.put("img", goodBean.getGoodsImg().split("###"));
+		String[] imgSet=goodBean.getGoodsImg().split("###");
+		Map<String, String>imgMap=new HashMap<String,String>();
+		for(int i=0;i<imgSet.length;i++) {
+			imgMap.put("img"+(i+1), imgSet[i]);
+		}
+		map.put("img", imgMap);
+		map.put("count", imgSet.length);
 		JSONObject jsonObject=new JSONObject();
 		jsonObject=JSONObject.fromObject(map);
 		PrintWriter out = response.getWriter();

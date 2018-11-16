@@ -8,6 +8,7 @@ public class StringToTime {
 	public String GetTime(String time,String format) {
 		String trueTime="";
 		SimpleDateFormat d = new SimpleDateFormat(format);
+		System.out.println("time="+time);
         Date date = new Date(Long.parseLong(time));
 		trueTime=d.format(date);		
 		return trueTime;

@@ -120,7 +120,8 @@ public class RecGoods {
 				goodBean.setGoodsType(rs.getString(5));
 				goodBean.setGoodsPrice(rs.getString(6));
 				goodBean.setTitle(rs.getString(7));
-				goodBean.setTime(rs.getString(8));
+				Timestamp t = rs.getTimestamp(8);
+				goodBean.setTime(t.getTime()+"");
 				goodBean.setGoodsIntro(rs.getString(9));
 				goodBean.setUserName(rs.getString(10));
 			}
@@ -147,7 +148,8 @@ public class RecGoods {
 			ps.setString(5, goodBean.getGoodsType());
 			ps.setString(6, goodBean.getGoodsPrice());
 			ps.setString(7, goodBean.getTitle());
-			ps.setString(8, goodBean.getTime());
+			Timestamp t = new Timestamp(Long.parseLong(goodBean.getTime()));
+			ps.setTimestamp(8, t);
 			ps.setString(9, goodBean.getGoodsIntro());
 			ps.setString(10, goodBean.getUserName());
 			ps.executeUpdate();
