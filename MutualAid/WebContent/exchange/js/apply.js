@@ -60,7 +60,7 @@ $('.commit').on('click', function () {
     let $input = $('.input-wrap input');
     let [title, type, massage, price, tel] = [$input.eq(0).val(),$('.type-wrap li.clicked').index()+1+'' ,$input.eq(1).val(), $input.eq(2).val(), $input.eq(3).val()    ]
     
-    $.getJSON('url', {
+    $.getJSON('/MutualAid/ApplyIdleCard', {
         "title": title,
         "type": type,
         "massage": massage,

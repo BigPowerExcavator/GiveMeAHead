@@ -85,7 +85,26 @@ public class CenterGetCards {
 			
 			map.put("content", card.getContent());
 			map.put("date", card.getRepairDate().getTime()+"");
-			map.put("state", card.getState());
+			String state="";
+			String stateNum=card.getState();
+			switch (stateNum) {
+			case "0":
+				state="排队中";
+				break;
+			case "1":
+				state="已修理";
+				break;
+			case "2":
+				state="处理中";
+				break;
+			case "3":
+				state="优先处理中";
+				break;
+			default:
+				break;
+			}
+			System.out.println(state);
+			map.put("state", state);
 			map.put("formId", card.getFormId());
 			map.put("type", "fix");
 			repairCards.add(map);

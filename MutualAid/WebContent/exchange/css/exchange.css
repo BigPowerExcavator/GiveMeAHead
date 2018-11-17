@@ -93,7 +93,7 @@ header .user-btn div:nth-child(2){
     background: url(../img/exit-icon.png) center center no-repeat;
     background-size: 40%;
 }
-/*************************这是内容*************************************/
+/*************************杩欐槸鍐呭*************************************/
 .container-wrap{
     width: 100%;
     padding-top: 120px;
@@ -137,7 +137,7 @@ font-size: 24px;
     width: 0;
     border: 1px solid #a8d2ba;
 }
-/******************左侧导航栏**************************/
+/******************宸︿晶瀵艰埅鏍�**************************/
 .left{
     padding-top: 10px;
     width: 300px;
@@ -182,7 +182,7 @@ font-size: 24px;
 .left li.clicked::after{
     border-left-color: #a8d2ba;
 }
-/*******************下面的标签页***********************/
+/*******************涓嬮潰鐨勬爣绛鹃〉***********************/
 .left .sort-nav{
     margin-top: 35px;
 }
@@ -202,7 +202,7 @@ font-size: 24px;
 .left .sort-nav li:nth-child(4){
     transition: 0.8s;
 }
-/**************************右侧内容*****************************/
+/**************************鍙充晶鍐呭*****************************/
 .right{
     margin-left: 300px;
     float: left;
@@ -319,7 +319,7 @@ font-size: 24px;
 }
 .right .shop>li .bottom .price{
     text-align: right;
-    width: 100px;
+    width: 110px;
     float: right;
 }
 /************************搜索框***************************/

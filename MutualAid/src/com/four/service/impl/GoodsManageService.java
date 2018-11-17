@@ -154,7 +154,7 @@ public class GoodsManageService {
 			if(goodBean.getGoodsPrice()==null) {
 				good.put("goodsPrice", "");
 			}else {
-				good.put("goodsPrice", Float.parseFloat(goodBean.getGoodsPrice()+"")+"");
+				good.put("goodsPrice", Math.round(Double.parseDouble((goodBean.getGoodsPrice()+"")))+"");
 			}
 			good.put("goodsId", goodBean.getGoodsId());
 			cards.put("card"+(j+1), good);

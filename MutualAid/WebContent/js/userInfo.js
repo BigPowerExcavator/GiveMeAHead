@@ -281,7 +281,7 @@ function changePwd(){
 }
 }
 /**************************调试用的***********************************/
-let data = {
+/*let data = {
 	card1: {
 		date: 1,
 		state: 1,
@@ -346,7 +346,7 @@ let data = {
 
 	},
 	"count": 9
-};
+};*/
 function a(data) {
 	let fix = 0,
 		exchange = 0,
