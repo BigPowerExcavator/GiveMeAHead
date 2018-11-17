@@ -103,11 +103,13 @@ $('main .content-r .sum ul').on('click', function (e) {
 			if (!$info.attr('id')) {
 				$info.attr('id', "info-wrap-fixed");
 			}
+			gotop();
 		}
 		else if ($(this).scrollTop() < top) {
 			if ($info.attr('id')) {
 				$info.removeAttr('id', '"info-wrap-fixed"');
 			}
+			$('.toTop').remove();
 		}
 	});
 }
@@ -389,3 +391,34 @@ function a(data) {
 
 }
 a(data);
+/****************************这是回到顶部**************************** */
+function gotop(){
+	if (!$("body").find('.toTop').attr('class')) {
+		let toTop = '<div class="toTop"></div>'
+		$("body").prepend(toTop);
+	
+	$('.toTop').css({
+		"background-image":"url('img/goTop.png')",
+		"background-size":" 100%" ,
+		"border": "2px solid #fff",
+		"height": "0px",
+		"width": "0px",
+		"border-radius":" 50%" ,
+		"position": "fixed",
+		"right": "100px",
+		"bottom": "100px",
+		"transition": "0.5s"
+	})
+}
+	
+		$('.toTop').css({
+			"height": "100px",
+			"width": "100px",
+			"right": "50px",
+			"bottom": "50px"
+		})
+
+	$('.toTop').on('click', function () {
+		window.scrollTo(0, 0);
+	})
+}
