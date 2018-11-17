@@ -202,6 +202,7 @@ public class RecGoods {
 		boolean result=false;
 		try {
 			ct=C3p0Utils.getConnection();
+			System.out.println("goodsImg"+imgUrl);
 			String sql="insert into idlegoods(stuNum,goodsName,goodsImg,goodsType,goodsPrice,title,time,goodsIntro,phone,userName)values(?,?,?,?,?,?,?,?,?,?)";
 			System.out.println("这里再次被调用了");
 			ps=ct.prepareStatement(sql);
@@ -293,7 +294,7 @@ public class RecGoods {
 		try {
 			int index=0;
 			ct=C3p0Utils.getConnection();
-			String sql="select title,goodsImg,userName,goodsId from idlegoods where title like ? ";
+			String sql="select title,goodsImg,userName,goodsId,goodsPrice from idlegoods where title like ? ";
 			if(("0").equals(type)) {
 				sql+="and goodsType in('1','2','3','4','5','6','7') "+sort+" limit ?,?";
 				ps=ct.prepareStatement(sql);
@@ -313,6 +314,7 @@ public class RecGoods {
 				goodBean.setGoodsImg(rs.getString(2));
 				goodBean.setUserName(rs.getString(3));
 				goodBean.setGoodsId(rs.getString(4));
+				goodBean.setGoodsPrice(rs.getString(5));
 				cards.add(goodBean);
 			}
 		} catch (Exception e) {

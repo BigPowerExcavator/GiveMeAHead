@@ -40,13 +40,14 @@ public class GetFindGoodsCards extends HttpServlet {
 		
 		String type=request.getParameter("type");
 		String sort=request.getParameter("sort");
-		String find=request.getParameter("find");
+		String find=request.getParameter("search");
+		System.out.println("find"+find);
 		String beginNum="0";
 		GoodsManageService goodsManageService=new GoodsManageService();
 		Map<String, Object> cards=goodsManageService.findGoodsCard(find, beginNum, 12+"", type, sort);
 		cards.put("count", goodsManageService.getTitleCardsCount(find, type, sort));
 		
-		System.out.println(cards.toString());
+		//System.out.println(cards.toString());
 		
 		PrintWriter out = response.getWriter();
 		JSONObject jsonObject=new JSONObject();

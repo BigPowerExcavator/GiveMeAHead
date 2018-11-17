@@ -115,7 +115,7 @@ function getCard() {
 	}
 	let search = $(".input-wrap input").val();
 	if(search){
-		$.getJSON("url", {
+		$.getJSON("/MutualAid/GetFindGoodsCards", {
 			"type": type,
 			"sort": sort,
 			"search":search

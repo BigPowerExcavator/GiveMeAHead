@@ -103,7 +103,6 @@ public class CenterGetCards {
 			default:
 				break;
 			}
-			System.out.println(state);
 			map.put("state", state);
 			map.put("formId", card.getFormId());
 			map.put("type", "fix");
