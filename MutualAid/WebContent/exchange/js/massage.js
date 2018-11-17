@@ -1,20 +1,20 @@
 let name = window.location.href.split("\?")[1];
 $(
     $.getJSON('/MutualAid/GetGoodCardInfo',{"formId":name} ,function (data) {
-        /*let data = {
-            formId: "formId",
-            content: "我不是",
-            price: "123",
-            tel: "13060679064",
-            title: "我是压力是多得",
-            userName: "jiayu",
-            type: "1",
-            count: 3,
-            img1: '../img/bg.jpg',
-            img2: '../img/bg.jpg',
-            img3: '../img/bg.jpg',
-            time: '2018-22-2'
-        }*/
+        // let data = {
+        //     formId: "formId",
+        //     content: "我不是",
+        //     price: "123",
+        //     tel: "13060679064",
+        //     title: "我是压力是多得",
+        //     userName: "jiayu",
+        //     type: "1",
+        //     count: 3,
+        //     img1: '../img/bg.jpg',
+        //     img2: '../img/header-bg.png',
+        //     img3: '../img/fix-pic.png',
+        //     time: '2018-22-2'
+        // }
         $('.title').html(data.title);
         $('.price').html(data.price);
         $('.type').html(data.type);
