@@ -26,6 +26,14 @@ $(".body .shop-nav").on('click', function (e) {
 	}
 	getCard();
 })
+/*********************这是同步***************************** */
+$(".search-nav").on('click', function (e) {
+	let $target = $(e.target);
+	if (e.target.tagName == 'LI') {
+		$target.addClass('clicked').siblings().removeClass('clicked');
+		$(" .body .tag-nav").children().eq($target.index()).addClass('clicked').siblings().removeClass('clicked');
+	}
+})
 /***********************这是左侧固定*********************************** */
 {
 	let $info = $(".body .left")
