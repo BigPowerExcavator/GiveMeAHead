@@ -211,7 +211,7 @@ header .user-btn div:nth-child(2) {
     text-indent: 2em;
     font-weight: bold;
     letter-spacing: 5px;
-    font-size: 30px;
+    font-size: 40px;
 }
 .content-r ul{
     margin-left: 150px;
@@ -222,7 +222,7 @@ header .user-btn div:nth-child(2) {
 }
 .content-r ul li:last-child{
     height: 150px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 .content-r .time-wrap{
     font-size: 24px;
@@ -240,4 +240,5 @@ header .user-btn div:nth-child(2) {
 }
 .price{
     font-weight: bold;
+    font-size: 40px;
 }

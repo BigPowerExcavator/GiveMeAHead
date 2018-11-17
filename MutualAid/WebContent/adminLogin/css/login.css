@@ -6,6 +6,7 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     border-radius: 5px;
+    
 }
 html,body{
     width: 100%;
@@ -47,7 +48,7 @@ html,body{
     float: right;
     width: 418px;
     height: 316px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 5px;
     position: relative;
 }

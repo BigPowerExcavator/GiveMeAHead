@@ -256,12 +256,19 @@ function fixClick() {
         loginWindow();
     }
 }
+$(".content-r li").eq(3).on('click', exchangeClick);
+$(".content-l li").eq(3).on('click', exchangeClick);
+function exchangeClick() {
+    if (sessionStorage.getItem('status') == "yes") {
+        window.location.href = "exchange";
+    } else {
+        loginWindow();
+    }
+}
 $(".content-r li").eq(2).on('click', unClick);
-$(".content-r li").eq(3).on('click', unClick);
+$(".content-l li").eq(2).on('click', unClick);
 $(".content-r li").eq(4).on('click', unClick);
 $(".content-r li").eq(5).on('click', unClick);
-$(".content-l li").eq(2).on('click', unClick);
-$(".content-l li").eq(3).on('click', unClick);
 $(".content-l li").eq(4).on('click', unClick);
 $(".content-l li").eq(5).on('click', unClick);
 
