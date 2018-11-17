@@ -204,3 +204,12 @@ $('.search-type').on('click',function(e){
 $('.search-icon').on('click',function(){
 	getCard();
 })
+/***********************回车搜索**************** */
+let keyEnter = (obj, fn) => {
+	$(obj).on("keyup", function (e) {
+		if (e.which == '13') {
+			fn();
+        }
+    })
+};
+keyEnter('.input-wrap input',getCard)
