@@ -365,6 +365,7 @@ font-size: 24px;
     float: right;
 }
 .input-wrap input{
+    text-indent: 1em;
     font-size: 24px;
     color: white;
     width: 310px;

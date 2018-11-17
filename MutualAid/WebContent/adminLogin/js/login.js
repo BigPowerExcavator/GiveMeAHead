@@ -9,22 +9,7 @@ var login = document.getElementsByTagName('input')[2];
 var checked = document.getElementsByTagName('input')[3];
 var newCount = document.getElementsByClassName('newCount')[0];
 var iframe = document.getElementById('iframe1');
-addEventListener(checked,'click',function(){
-    if(checked.hasAttribute('checked')){
-        checked.removeAttribute('checked');
-    }else{
-        checked.setAttribute('checked','checked');
-    }
-})
-addEventListener(close,'click',function(){
-    loginWrap.style.display = 'none';
-    if(checked.hasAttribute('checked')){
-        input2.value = '';
-    }else{
-        input1.value = '';
-        input2.value = '';
-    }
-});
+
 addEventListener(open,'click',function(){
     loginWrap.style.display = 'block';
 })
