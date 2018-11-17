@@ -67,16 +67,16 @@ function getCard (){
 	let type = $(".body .tag-nav li.clicked").index()+"";
 	let sort = $(".body .sort-nav li.clicked").index()+"";
 	switch(sort){
-		case "0" :
+		case "1" :
 			sort = "timeUp";
 			break;
-		case "1" :
+		case "0" :
 			sort = "timeDown";
 			break;
-		case "2" :
+		case "3" :
 			sort = "priceUp";
 			break;
-		case "3" :
+		case "2" :
 			sort = "priceDown";
 			break;
 
